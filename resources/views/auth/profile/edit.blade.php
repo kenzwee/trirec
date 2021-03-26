@@ -21,58 +21,58 @@
                     <div class="form-group row">
                         <label class="col-md-2">ユーザー名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="username" value="{{ old('username') }}">
+                            <input type="text" class="form-control" name="username" value="{{ $profile_form->username }}">
                         </div>
                     </div>  
                     
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="4">{{ old('introduction') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="4">{{ $profile_form->introduction }}</textarea>
                         </div>
                     </div>   
                     
                     <div class="form-group row">
                         <label class="col-md-2">行きたい国</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="want_to_travel_world" rows="4">{{ old('want_to_travel_world') }}</textarea>
+                            <textarea class="form-control" name="want_to_travel_world" rows="4">{{ $profile_form->want_to_travel_world }}</textarea>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label class="col-md-2">行ったことある国</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="traveled_world" rows="4">{{ old('traveled_world') }}</textarea>
+                            <textarea class="form-control" name="traveled_world" rows="4">{{ $profile_form->traveled_world }}</textarea>
                         </div>
                     </div> 
                     
                     <div class="form-group row">
                         <label class="col-md-2">行きたい都道府県（日本）</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="want_to_travel_japan" rows="4">{{ old('want_to_travel_japan') }}</textarea>
+                            <textarea class="form-control" name="want_to_travel_japan" rows="4">{{ $profile_form->want_to_travel_japan }}</textarea>
                         </div>
                     </div>   
                     
                     <div class="form-group row">
                         <label class="col-md-2">行ったことある都道府県（日本）</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="traveled_japan" rows="4">{{ old('traveled_japan') }}</textarea>
+                            <textarea class="form-control" name="traveled_japan" rows="4">{{ $profile_form->traveled_japan }}</textarea>
                         </div>
                     </div> 
-                    
-                    <div class="form-group row">
-                        <label class ="col-md-2">プロフィール画像</label>
-                        <div class="col-md-10">
-                            <input type="file" class="form-control-file" name="profile_image">
-                        </div>
-                    </div>
                     
                     <div class="form-group row">
                         <label class="col-md-2" for="image">プロフィール画像</label>
                         <div class="col-md-10 ">
                             <input type="file" class="form-control-file" name="profile_image">
                             {{-- ビューに現在設定中のプロフィール画像を表示 --}}
-                            <img class = "col-md-10" src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}">
+                            @if(isset($profile->image))
+                            <img src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}" class="profile_round_image" alt="profile_image">
+                            @else
+                            <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image" alt="no_image">
+                            @endif                            
+                            
+                            
+                            {{-- <img class = "col-md-10" src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}"> --}}
                             <div class="form-text text-info">
                                 設定中: {{ $profile_form->image_path }}
                             </div>
@@ -83,6 +83,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="id" value="{{ $profile_form->id }}">
                     {{ csrf_field() }}
                         <input type="submit" class="btn btn-primary" value="更新">
                 </form>

@@ -9,8 +9,28 @@ use App\Profile;
 
 class ProfileController extends Controller
 {
+    public function index(Request $request)
+    {
+        return view('auth.profile.index');
+    }
+    
+    public function show(Request $request)
+    {
+        //Profile modelから現在ログインしているユーザーの画像データを取得
+        $profile_image = Profile::find(Auth::id());
+
+        //resourcesのviews以下のファイル：第一引数
+        //ビューに渡す変数を指定して　profile_formキー (使う時は＄つく)=> $profile変数
+        //['profile_image' => $profile_image]  profile_imageは連想配列のキー（blade.phpで表示するために作成）
+        //$profile_imageはfunction内で定義したインスタンス。要はblade.phpで表示するキーにしている作業
+        //['profile_image' => $profile_image,'a' => 100]と連組配列を追加することも出来る
+        return view('auth.profile.userpage',['profile_image' => $profile_image]);
+        
+    }
+    
     public function add()
     {
+        
         return view('auth.profile.create');
     }
     
@@ -18,7 +38,7 @@ class ProfileController extends Controller
     {
         
         //validation
-        $this->validate($request, Profile::$rules, Profile::$messages);
+        $this->validate($request, Profile::$rules, Profile::$messages,Profile::$max_rules);
         
 
         $profile = new Profile;
@@ -51,28 +71,38 @@ class ProfileController extends Controller
     
     public function edit(Request $request)
     {
-       //Profile Modelからデータを取得 $request->idでデータ取得
-        $profile = Profile::find($request->id);
+       //Profile Modelから現在ログインしているユーザーのデータを取得
+        $profile = Profile::find(Auth::id());
         if (empty($profile)) {
             abort(404);
         }
+        
         //resourcesのviews以下のファイル：第一引数
         //ビューに渡す変数を指定して　profile_formキー (使う時は＄つく)=> $profile変数
         return view('auth.profile.edit',['profile_form' => $profile]);
     }
     
-    public function update()
+    public function update(Request $request)
     {
-        //validationをかける ::→クラス変数を呼び出し
-        $this->validate($request, Profile::$updateRules, Profile::$messages);
+        //validationをかける 文字数が10文字以内
+        $this->validate($request, Profile::$max_rules);
         //Profile modelからデータを取得
         $profile = Profile::find($request->id);
         //送信されてきたフォームデータを格納
         $profile_form = $request->all();
         
+        //元々の$profileのusernameと送信されて来たusernameが一致していなければ
+        if($profile->username != $profile_form['username']){
+            //$profile_form($request)->username
+            //validationをかける 
+            $this->validate($request, Profile::$rules, Profile::$messages); 
+        }
+        
         //画像を削除した場合はimage_pathも削除する
         if($request->remove == 'ture'){
             $profile_form['image_path'] = null;
+                    dd($profile_form);
+
         //画像が更新されたら。。
         }elseif($request->file('profile_image')){
             //上はpublic/profile_imageに画像を保存
@@ -83,14 +113,14 @@ class ProfileController extends Controller
             //画像は変わってない時
             $profile_form['image_path'] = $profile->image_path;
         }
-        
-        unset($profile_form['image']);
+
+        unset($profile_form['profile_image']);
         //削除というチェックボックスからチェックを外す（初期化してる）
         unset($profile_form['remove']);
         unset($profile_form['_token']);
         
         //該当するデータを上書き保存
         $profile->fill($profile_form)->save();
-        return view('auth/profile/edit');
+        return view('auth/profile/edit', ['profile_form' => $profile]);
     }
 }

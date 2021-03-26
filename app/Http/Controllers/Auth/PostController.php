@@ -11,6 +11,21 @@ use Carbon\Carbon;
 
 class PostController extends Controller
 {
+    public function index(Request $request)
+    {   
+        $cond_title = $request->cond_title;
+        if($cond_title != ''){
+            //検索されたら検索結果を取得する
+            $posts = Post::where('title', $cond_title)->get();
+                
+        } else {
+            //それ以外は全ての投稿を取得する
+            $posts = Post::all()->sortByDesc('updated_at');
+        }
+        
+        return view('auth.post.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+    }
+    
     public function add()
     {
         return view('auth.post.create');
@@ -41,23 +56,10 @@ class PostController extends Controller
         $post->fill($form);
         $post->save();
         
-        return redirect('auth/post/create');
+        return redirect('auth/post');
     }
     
-    public function index(Request $request)
-    {   
-        $cond_title = $request->cond_title;
-        if($cond_title != ''){
-            //検索されたら検索結果を取得する
-            $posts = Post::where('title', $cond_title)->get();
-                
-        } else {
-            //それ以外は全ての投稿を取得する
-            $posts = Post::all()->sortByDesc('updated_at');
-        }
-        
-        return view('auth.post.index', ['posts' => $posts, 'cond_title' => $cond_title]);
-    }
+
     
     public function edit(Request $request)
     {

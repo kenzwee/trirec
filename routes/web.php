@@ -26,11 +26,12 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
 
 
 //ProfileController一覧
-Route::group(['prefix' => 'auth/profile', 'middleware'=> 'auth'],function(){
-    Route::get('/create', 'Auth\ProfileController@add');
-    Route::get('/edit', 'Auth\ProfileController@edit');
-    Route::post('/create', 'Auth\ProfileController@create');
-    Route::post('/edit', 'Auth\ProfileController@update');
+Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+    Route::get('profile/create', 'Auth\ProfileController@add');
+    Route::get('profile/edit', 'Auth\ProfileController@edit');
+    Route::post('profile/create', 'Auth\ProfileController@create');
+    Route::post('profile/edit', 'Auth\ProfileController@update');
+    Route::get('profile/userpage', 'Auth\ProfileController@show');
 });
 
 Auth::routes();
