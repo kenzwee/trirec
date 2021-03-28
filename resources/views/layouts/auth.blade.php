@@ -40,9 +40,11 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-
-                        </ul>
+                        <div class="navbar-nav mr-auto">
+                            <a class="nav-link active" aria-current="page" href="">Home</a>
+                            <a class="nav-link" href="">Features</a>
+                            <a class="nav-link" href="">Pricing</a>
+                        </div>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">

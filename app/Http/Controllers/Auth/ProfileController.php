@@ -17,14 +17,15 @@ class ProfileController extends Controller
     public function show(Request $request)
     {
         //Profile modelから現在ログインしているユーザーの画像データを取得
-        $profile_image = Profile::find(Auth::id());
+        $profile = Profile::find(Auth::id());
+        
 
         //resourcesのviews以下のファイル：第一引数
         //ビューに渡す変数を指定して　profile_formキー (使う時は＄つく)=> $profile変数
         //['profile_image' => $profile_image]  profile_imageは連想配列のキー（blade.phpで表示するために作成）
         //$profile_imageはfunction内で定義したインスタンス。要はblade.phpで表示するキーにしている作業
         //['profile_image' => $profile_image,'a' => 100]と連組配列を追加することも出来る
-        return view('auth.profile.userpage',['profile_image' => $profile_image]);
+        return view('auth.profile.userpage',['profile' => $profile]);
         
     }
     

@@ -36,10 +36,10 @@
                     @endif
                     <div class="card-body bg-secondary">
                         <h4 class="card-title">{{ str_limit($post->title, 70) }}</h4>
-                        <p class="card-text">{{ str_limit($post ->user->username, 20) }}</p>
+                        <p class="card-text">{{ str_limit($post ->user->profile->username, 20) }}</p>
                         <p class="card-text">{{ str_limit($post->direction, 20) }}</p>
                         <p class="card-text">{{ str_limit($post->body, 650) }}</p>
-                        <p class="card-text">{{ $post->updated_at->format('Y年m月d日 H:i') }}</p>
+                        <p class="card-text">{{ $post->updated_at }}</p>
                         
                         {{-- ログインしているユーザーと投稿者のIDが一致したら編集ボタン、削除ボタンを表示 --}}
                         @if(Auth::id() === ($post->user_id))

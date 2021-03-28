@@ -47,6 +47,9 @@ class PostController extends Controller
             $photo->image_path = null;
         }     
         
+        //Authからuser_idを取り出す
+        $post->user_id = Auth::id();
+        
         //フォームから送信されてきた_tokenを削除
         unset($form['_token']);
         //フォームから送信されてきたimageを削除
