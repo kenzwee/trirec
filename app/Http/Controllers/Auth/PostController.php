@@ -121,4 +121,10 @@ class PostController extends Controller
         $post->delete();
         return redirect('auth/post/');
     }
+    
+    public function search()
+    {
+        
+        return view('auth/post/search');
+    }
 }

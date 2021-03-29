@@ -40,9 +40,12 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-
-                        </ul>
+                        <div class="navbar-nav mr-auto">
+                            <a class="nav-link active" aria-current="page" href="{{ action('Auth\PostController@index') }}">Home</a>
+                            <a class="nav-link" href="">Search</a>
+                            <a class="nav-link" href="{{ action('Auth\PostController@create') }}">Post</a>
+                            <a class="nav-link" href="{{ action('Auth\ProfileController@show') }}">User</a>
+                        </div>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -54,7 +57,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
+                                    {{ Auth::user()->profile->username }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

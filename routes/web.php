@@ -22,6 +22,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
     Route::get('post/edit', 'Auth\PostController@edit');
     Route::post('post/edit', 'Auth\PostController@update');
     Route::get('post/delete', 'Auth\PostController@delete');
+    Route::get('post/search', 'Auth\PostController@search');
 });
 
 
