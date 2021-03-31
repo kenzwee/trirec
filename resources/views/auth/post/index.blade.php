@@ -35,7 +35,7 @@
                         <img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap">
                     @endif
                     <div class="card-body bg-secondary">
-                        <h4 class="card-title">{{ str_limit($post->title, 70) }}</h4>
+                        <h4 class="card-title">{{ str_limit($post->title, 20) }}</h4>
                         <p class="card-text">{{ str_limit($post ->user->profile->username, 20) }}</p>
                         <p class="card-text">{{ str_limit($post->direction, 20) }}</p>
                         <p class="card-text">{{ str_limit($post->body, 650) }}</p>

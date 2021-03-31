@@ -127,4 +127,12 @@ class PostController extends Controller
         
         return view('auth/post/search');
     }
+    
+    public function result(Request $request)
+    {   //第一引数は検索したいカラム名、第二引数（第三）は第一引数のカラム名に対する値
+        //$postsはコレクションインスタンス
+        $posts = Post::where('direction', $request->direction)->get();
+        
+        return view('auth/post/search_result', ['posts' => $posts]);
+    }
 }
