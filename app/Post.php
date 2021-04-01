@@ -32,6 +32,11 @@ class Post extends Model
     {
         return $this->hasMany('App\History');
     }
+    
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
 
 

@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+    
+    //UserとComment 1対多
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

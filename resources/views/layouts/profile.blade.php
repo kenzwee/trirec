@@ -42,7 +42,7 @@
                         <!-- Left Side Of Navbar -->
                         <div class="navbar-nav mr-auto">
                             <a class="nav-link active" aria-current="page" href="{{ action('Auth\PostController@index') }}">Home</a>
-                            <a class="nav-link" href="">Search</a>
+                            <a class="nav-link" href="{{ action('Auth\PostController@search') }}">Search</a>
                             <a class="nav-link" href="{{ action('Auth\PostController@create') }}">Post</a>
                             <a class="nav-link" href="{{ action('Auth\ProfileController@show') }}">User</a>
                         </div>

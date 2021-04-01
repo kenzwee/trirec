@@ -46,6 +46,7 @@
                         <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}" type="button" class="btn btn-primary">編集</a>
                         <a href="{{ action('Auth\PostController@delete',['id' => $post->id]) }}" type="button" class="btn btn-primary">削除</a>
                         @endif
+                        <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}" type="button" class="btn btn-primary">詳細</a>
                     </div>
                 </div>
             </div>

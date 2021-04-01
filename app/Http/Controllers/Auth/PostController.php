@@ -135,4 +135,14 @@ class PostController extends Controller
         
         return view('auth/post/search_result', ['posts' => $posts]);
     }
+    
+    public function show(Request $request)
+    {
+        $post = Post::find($request->id);
+        if(empty($post)){
+            abort(404);
+        }
+        
+        return view('auth.post.detail', ['post' => $post]);
+    }
 }

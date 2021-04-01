@@ -24,6 +24,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
     Route::get('post/delete', 'Auth\PostController@delete');
     Route::get('post/search', 'Auth\PostController@search');
     Route::get('post/search_result', 'Auth\PostController@result');
+    Route::get('post/detail', 'Auth\PostController@show');
 });
 
 
@@ -34,6 +35,11 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::post('profile/create', 'Auth\ProfileController@create');
     Route::post('profile/edit', 'Auth\ProfileController@update');
     Route::get('profile/userpage', 'Auth\ProfileController@show');
+});
+
+//CommentController一覧
+Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+    Route::post('commment/create', 'Auth\CommentController@create');
 });
 
 Auth::routes();
