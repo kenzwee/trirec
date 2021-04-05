@@ -18,8 +18,8 @@ class posts_table_seeder extends Seeder
                 'image_path'    =>'sample.png',
                 'title'         =>'アメリカの大荒野',
                 'body'          =>'先日アメリカに行って来ました！グランドサークル凄すぎる！',
-                'created_at' => date('2021-3-27 15:01:59'),
-                'updated_at' => date('2021-3-27 15:02:50'),
+                'created_at'    => date('2021-3-27 15:01:59'),
+                'updated_at'    => date('2021-3-27 15:02:50'),
             ],
             [
                 'user_id'       =>'1',

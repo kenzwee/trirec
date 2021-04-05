@@ -55,6 +55,7 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('messages.Login') }}</a></li>
                         {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
                         @else
+                            @if(isset(Auth::user()->profile))
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->profile->username }} <span class="caret"></span>
@@ -72,7 +73,8 @@
                                     </form>
                                 </div>
                             </li>
-                            @endguest
+                            @endif
+                        @endguest
                         </ul>
                     </div>
                 </div>

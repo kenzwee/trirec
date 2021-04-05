@@ -18,8 +18,12 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
     
-    public static $rules = array(
+    public static $rules = [
         'body' => 'required',
         'body' => 'max:50',
-        );
+        ];
+        
+    public static $messages = [
+        'body' => 'コメントは５０文字以下です。'
+        ];
 }

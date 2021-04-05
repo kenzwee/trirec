@@ -6,6 +6,11 @@
         <div class="row">
             <h2>投稿内容</h2>
         </div>
+        
+        <div class="row">
+            <p>閲覧数：{{ $post->count }}</p>
+        </div>
+        
         <div class="row">
             {{-- ビューに現在設定中の画像を表示 --}}
             <img class = "col-md-10 offset-md-1" src="{{secure_asset('storage/image/'.$post->image_path)}}">
@@ -71,14 +76,49 @@
             <div class="row col-md-4 mt-5">
                 <h2>コメント一覧</h2>
             </div>
-            
+            <h3>ユーザー名 --- コメント</h3>
+            {{-- PostController@showで定義した$postの中のcommentsからCommentControllerで定義した$commentを１つ１つ取り出してる--}}
+            @foreach($post->comments as $comment)
+                <li>{{ $comment->user->profile->username }} --- {{ $comment->body }}({{ $comment->created_at}})</li>
+                    @if(Auth::id() === ($comment->user_id))
+                        <a href="{{ action('Auth\CommentController@edit', ['id' => $comment->id]) }}" type="button" class="btn btn-primary btn-sm">編集</a>
+                        
+                        <!-- 削除選択時の警告文を表示するボタン -->
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                          削除
+                        </button>
+                        <!-- 削除選択時の警告文 -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">本当に削除しますか？</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    １度削除すると元に戻せません。
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
+                                        <a href="{{ action('Auth\CommentController@delete',['id'=>$comment->id]) }}" ><button type="button" class="btn btn-primary ">削除する</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+            @endforeach 
+            <div class="row col-md-4 mt-5">
+                <h2>コメントはこちらから！</h2>
+            </div>
             <div class="form-group row">
                 <label class="col-md-2 mt-5">ユーザー名</label>
                     <div class="col-md-10 mt-5">
                         <p>{{ Auth::user()->profile->username }}</p>
                     </div>
             </div>
-
+    
             <div class="form-group row">
                 <label class="col-md-2">本文</label>
             </div>

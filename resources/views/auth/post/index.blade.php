@@ -9,12 +9,14 @@
         <div class="row">
             <div class="col-md-4">
                 <a href="{{ action('Auth\PostController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+                <a href="{{ action('Auth\PostController@index',['type'=>'mypost']) }}" role="button" class="btn btn-primary">{{ Auth::user()->profile->username }}の投稿一覧</a>
             </div>
             <div class="col-md-8">
                 <form action="{{ action('Auth\PostController@index') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-8">
+                            <input type="hidden" class="form-control" name="type" value="search">
                             <input type="text" class="form-control" name="cond_title" value="{{ $cond_title }}">
                         </div>
                         <div class="col-md-2">
@@ -36,7 +38,7 @@
                     @endif
                     <div class="card-body bg-secondary">
                         <h4 class="card-title">{{ str_limit($post->title, 20) }}</h4>
-                        <p class="card-text">{{ str_limit($post ->user->profile->username, 20) }}</p>
+                        <p class="card-text">{{ str_limit($post ->user->profile->username, 20) }}  閲覧数：{{ $post->count }}</p>
                         <p class="card-text">{{ str_limit($post->direction, 20) }}</p>
                         <p class="card-text">{{ str_limit($post->body, 650) }}</p>
                         <p class="card-text">{{ $post->updated_at }}</p>
@@ -50,15 +52,19 @@
                     </div>
                 </div>
             </div>
-                @php $count +=1 @endphp
+            @php $count +=1 @endphp
             @if($count > 4)
-        </div>
-        <hr color="#c0c0c0">
-            <div class = "row">
+                </div>
+                <hr color="#c0c0c0">
+                <div class = "row">
                 @php $count = 1 @endphp
             @endif
-            @endforeach
-            </div>
+        @endforeach
+        </div>
+        <div class="row d-flex justify-content-center">
+        {{ $posts->links() }}
+        </div>
+        
         
     </div>
 @endsection

@@ -8,24 +8,34 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\History;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {   
         $cond_title = $request->cond_title;
-        if($cond_title != ''){
-            //検索されたら検索結果を取得する
-            $posts = Post::where('title', $cond_title)->get();
-                
-        } else {
-            //それ以外は全ての投稿を取得する
-            $posts = Post::all()->sortByDesc('updated_at');
+        $type = $request->type;
+        if($type == 'search'){
+            //検索されたら検索結果を取得する 完全一致
+            $posts = Post::where('title', $cond_title)->paginate(20);
+        //Authは（）をつける　idメソッド
+        }elseif($type == 'mypost'){
+            $posts = Auth::user()->posts()->paginate(4);
+            // $posts = Post::where('user_id', Auth::id())->paginate(4);
+            
+        }else {
+            //検索しなかったそれ以外は全ての投稿を取得する
+            $posts = Post::orderBy('updated_at', 'desc')->paginate(4);
         }
         
+
+
+    
         return view('auth.post.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
+
     public function add()
     {
         return view('auth.post.create');
@@ -142,7 +152,10 @@ class PostController extends Controller
         if(empty($post)){
             abort(404);
         }
-        
+
+        $post->count++;
+        $post->save();
+        // $post->fill($post_form)->save();
         return view('auth.post.detail', ['post' => $post]);
     }
 }

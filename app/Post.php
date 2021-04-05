@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     protected $guarded = array('id');
@@ -21,6 +22,7 @@ class Post extends Model
         'body' => 'required',
         );
         
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -33,10 +35,12 @@ class Post extends Model
         return $this->hasMany('App\History');
     }
     
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
+    
+
 }
 
 

@@ -24,9 +24,10 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
     Route::get('post/delete', 'Auth\PostController@delete');
     Route::get('post/search', 'Auth\PostController@search');
     Route::get('post/search_result', 'Auth\PostController@result');
-    Route::get('post/detail', 'Auth\PostController@show');
+    Route::get('post/detail', 'Auth\PostController@show')->name('post_detail');
 });
-
+//post フォームで送る時　何かをデータベースに追加・削除・変更する時書き込　
+//追加、get 文字列だけ、見られてもいいもの　読み出し　画面表示など
 
 //ProfileController一覧
 Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
@@ -40,6 +41,9 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
 //CommentController一覧
 Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::post('commment/create', 'Auth\CommentController@create');
+    Route::get('comment/delete', 'Auth\CommentController@delete');
+    Route::get('comment/edit', 'Auth\CommentController@edit');
+    Route::post('comment/edit', 'Auth\CommentController@update');
 });
 
 Auth::routes();
