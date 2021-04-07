@@ -126,7 +126,7 @@
                 <textarea class="form-control" name="body" rows="5">{{ old('body') }}</textarea>
             </div>
             {{ csrf_field() }}
-            <div class="row col-md-8 mx-auto mt-4">
+            <div class="row col-md-8 offset-md-2 mt-4">
                 <input type="submit" class="btn btn-primary btn-lg btn-block" value="コメントする">
             </div>
         </form>

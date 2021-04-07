@@ -52,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    
+    //UserとBring_item 1対多
+    public function item()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

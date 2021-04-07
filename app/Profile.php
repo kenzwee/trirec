@@ -14,7 +14,7 @@ class Profile extends Model
     }
     
     public static $rules = [
-        'username' => ['required','unique:profiles,username']
+        'username' => ['required','unique:profiles','username']
         ];
         
     public static $max_rules = [

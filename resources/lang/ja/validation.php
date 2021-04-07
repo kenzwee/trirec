@@ -15,14 +15,14 @@ return [
 
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
-    'after' => 'The :attribute must be a date after :date.',
-    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+    'after' => ':attributeには、:dateより後の日付を指定してください。',
+    'after_or_equal' => ':attributeには、:date以降の日付を指定してください。',
     'alpha' => 'The :attribute may only contain letters.',
     'alpha_dash' => 'The :attribute may only contain letters, numbers, dashes and underscores.',
     'alpha_num' => 'The :attribute may only contain letters and numbers.',
     'array' => 'The :attribute must be an array.',
-    'before' => 'The :attribute must be a date before :date.',
-    'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
+    'before' => ':attributeには、:dateより前の日付をご利用ください。',
+    'before_or_equal' => ':attributeには、:date以前の日付をご利用ください。',
     'between' => [
         'numeric' => 'The :attribute must be between :min and :max.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
@@ -150,7 +150,10 @@ return [
         'image' => '画像',
         'title' => 'タイトル',
         'body' => '本文',
-        'username' => 'ユーザー名'
+        'username' => 'ユーザー名',
+        'trip_title' => '旅行名',
+        'trip_start' => '旅行開始日',
+        'trip_end' => '旅行終了日'
         ],
 
 ];

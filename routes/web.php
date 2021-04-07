@@ -46,6 +46,14 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::post('comment/edit', 'Auth\CommentController@update');
 });
 
+//ItemController一覧
+Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+    Route::get('item/index', 'Auth\ItemController@index');
+    Route::get('item/detail', 'Auth\ItemController@show');
+    Route::get('item/create', 'Auth\ItemController@add');
+    Route::post('item/create', 'Auth\ItemController@create');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
