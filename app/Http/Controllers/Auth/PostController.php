@@ -16,6 +16,7 @@ class PostController extends Controller
     {   
         $cond_title = $request->cond_title;
         $type = $request->type;
+        
         if($type == 'search'){
             //検索されたら検索結果を取得する 完全一致
             $posts = Post::where('title', $cond_title)->paginate(20);

@@ -48,14 +48,16 @@ class User extends Authenticatable
     }
     
     //UserとComment 1対多
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
     
-    //UserとBring_item 1対多
-    public function item()
+    //UserとTrip 1対多
+    public function trips()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Trip::class);
     }
+    
+
 }

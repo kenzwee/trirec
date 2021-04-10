@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    public function user()
+    protected $guarded = array('id');
+
+    public function trips()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany('App\Trip');
     }
     
-    public static $create_rules = [
-        'trip_title' => ['required', 'max:20'],
-        'trip_start' => ['required','after_or_equal'],
-        'trip_end' => ['required','before_or_equal']
+
+    public static $rules = [
+        'body' => ['required', 'max:20'],
+        'importance' => ['required']
         ];
-        
+    
 
 }

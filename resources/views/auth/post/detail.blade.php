@@ -78,6 +78,8 @@
             </div>
             <h3>ユーザー名 --- コメント</h3>
             {{-- PostController@showで定義した$postの中のcommentsからCommentControllerで定義した$commentを１つ１つ取り出してる--}}
+            {{-- $postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
+            
             @foreach($post->comments as $comment)
                 <li>{{ $comment->user->profile->username }} --- {{ $comment->body }}({{ $comment->created_at}})</li>
                     @if(Auth::id() === ($comment->user_id))

@@ -46,12 +46,20 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::post('comment/edit', 'Auth\CommentController@update');
 });
 
+//TripController一覧
+Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+    Route::get('trip/index', 'Auth\TripController@index');
+    Route::get('trip/detail', 'Auth\TripController@show');
+    Route::get('trip/create', 'Auth\TripController@add');
+    Route::post('trip/create', 'Auth\TripController@create');
+    
+});
+
 //ItemController一覧
 Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
-    Route::get('item/index', 'Auth\ItemController@index');
-    Route::get('item/detail', 'Auth\ItemController@show');
-    Route::get('item/create', 'Auth\ItemController@add');
     Route::post('item/create', 'Auth\ItemController@create');
+    Route::get('item/delete', 'Auth\ItemController@delete');
+
 });
 
 Auth::routes();

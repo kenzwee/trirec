@@ -3,48 +3,42 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Auth;
+use App\Item;
 
 class ItemController extends Controller
 {
-    public function index(Request $request)
-    {   
-
-        return view('auth.item.index');
-    }
-    
-    public function add()
-    {   
-
-        return view('auth.item.create');
-    }
-    
     public function create(Request $request)
     {
         //validation
-        $this->validate($request, Item::$create_rules);
+        $this->validate($request, Item::$rules);
+        $items = new Item;
         
-
-        $item = new Item;
         $form = $request->all();
         
-        //Authからuser_idを取り出す
-        $item->user_id = Auth::id();
-        
-        //フォームから送信されてきたtokenを削除
         unset($form['_token']);
 
-        //データベースに保存する
-        $item->fill($form);
-        $item->save();
+        //データベースに保存
+        $items->fill($form);
+        $items->save();
         
-        return view('auth.item.index');
+        return redirect()->back();
     }
     
-    public function show(Request $request)
-    {   
 
-        return view('auth.item.detail');
+    
+    
+    
+    
+    public function delete(Request $request)
+    {
+        //該当するItemmodelを取得
+        $items = Item::find($request->id);
+        //削除する
+        $items->delete();
+        
+        return redirect()->back();
     }
+    
 }
