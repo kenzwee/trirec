@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Trip;
+use App\Item;
 
 
 class TripController extends Controller
@@ -30,8 +31,10 @@ class TripController extends Controller
     
     public function add()
     {   
-
-        return view('auth.trip.create');
+        //importanceで指定。
+        $defaults = Item::where('importance','1')->get();
+ 
+        return view('auth.trip.create', ['defaults' => $defaults]);
     }
     
     public function create(Request $request)
@@ -41,16 +44,25 @@ class TripController extends Controller
         
         $trip = new Trip;
         $form = $request->all();
-        
         //Authからuser_idを取り出す
         $trip->user_id = Auth::id();
         
         //フォームから送信されてきたtokenを削除
         unset($form['_token']);
-
+        
+        //item_idを消す
+        unset($form['item_id']);
+        
         //データベースに保存する
         $trip->fill($form);
         $trip->save();
+        
+        //create.viewで送ったidを取り出し、foreachで回す
+        //配列でデータが送られてくる為
+        foreach($request->item_id as $item){
+            //attachメソッドで中間テーブルに保存
+            $trip->items()->attach($item);
+        }
 
         return redirect('auth/trip/index');   
         // return view('auth.trip.index');
@@ -62,8 +74,6 @@ class TripController extends Controller
         if(empty($trip)){
             abort(404);
         }
-        
-        
 
         return view('auth.trip.detail', ['trip' => $trip]);
     }

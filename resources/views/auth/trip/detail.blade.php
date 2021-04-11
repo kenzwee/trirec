@@ -96,11 +96,11 @@
                     <div class="dropdown col-md-4">
                         <select name="importance" id="importance-select">
                             <option value="">--重要度を選んでください--</option>
-                            <option value="1">S</option>
-                            <option value="2">A</option>
-                            <option value="3">B</option>
-                            <option value="4">C</option>
-                            <option value="5">D</option>
+                            <option value="2">S</option>
+                            <option value="3">A</option>
+                            <option value="4">B</option>
+                            <option value="5">C</option>
+                            <option value="6">D</option>
                         </select>
                     </div>
                     <div class="col-md-8">
