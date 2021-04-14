@@ -59,5 +59,10 @@ class User extends Authenticatable
         return $this->hasMany(Trip::class);
     }
     
+    //UserとItem 1対多
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 
 }

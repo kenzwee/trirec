@@ -13,27 +13,33 @@ class items_table_seeder extends Seeder
     {
         DB::table('items')->insert([
             [
-                'body'        =>'パスポート',
+                'user_id'     => '1',
+                'goods'        =>'パスポート',
                 'importance'  =>'1',
             ],
             [
-                'body'        =>'査証',
+                'user_id'     => '1',
+                'goods'        =>'査証',
                 'importance'  =>'1',
             ],
             [
-                'body'        =>'航空券',
+                'user_id'     => '1',
+                'goods'        =>'航空券',
                 'importance'  =>'1',
             ],
             [
-                'body'        =>'現金',
+                'user_id'     => '1',
+                'goods'        =>'現金',
                 'importance'  =>'1',
             ],
             [
-                'body'        =>'海外旅行保険 保険証',
+                'user_id'     => '1',
+                'goods'        =>'海外旅行保険 保険証',
                 'importance'  =>'1',
             ],
             [
-                'body'        =>'クレジットカード',
+                'user_id'     => '1',
+                'goods'        =>'クレジットカード',
                 'importance'  =>'1',
             ],
         ]);

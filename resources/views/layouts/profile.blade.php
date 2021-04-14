@@ -45,6 +45,7 @@
                             <a class="nav-link" href="{{ action('Auth\PostController@search') }}">Search</a>
                             <a class="nav-link" href="{{ action('Auth\PostController@create') }}">Post</a>
                             <a class="nav-link" href="{{ action('Auth\ProfileController@show') }}">User</a>
+                            <a class="nav-link" href="{{ action('Auth\TripController@index') }}">Item</a>
                         </div>
 
                         <!-- Right Side Of Navbar -->

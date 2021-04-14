@@ -10,14 +10,23 @@ class Item extends Model
 
     public function trips()
     {
-        return $this->belongsToMany('App\Trip');
+        return $this->belongsToMany(Trip::class)->using(ItemTrip::class)->withPivot(['memo']);
     }
     
-
+    
+    //UserとItem 1対多
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    
+    
     public static $rules = [
-        'body' => ['required', 'max:20'],
+        'goods' => ['required', 'max:20'],
         'importance' => ['required']
         ];
-    
+
+
 
 }

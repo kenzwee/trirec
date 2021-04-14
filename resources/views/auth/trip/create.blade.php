@@ -30,26 +30,21 @@
                                 <input type="date" id="trip_end" name="trip_end" value="2021-05-01" min="2021-05-01" max="2025-12-31">
                             </div>
                     </div> 
-                    
-                    
                     <div class="form-group row">
                         <label class = "col-md-2" for="trip_start">持ち物候補</label>
                     </div>
-                    @foreach($defaults as $default)
-                    <div class="form-check row">
-                            <div class="col-md-6 mx-auto">
-                                    <input type="checkbox" name="item_id[]" class="default_item"  value="{{ $default->id }}">
-                                    <label class="defualt-item-label" for="customCheck1">{{ $default->body }}</label>
-                            </div>
-                    </div>  
-                    
+                    @foreach($defaults as $default)  
+                        {{-- seederで初期登録してあるitemとログインしてるユーザーが登録したitemを表示 --}}
+                        @if(Auth::id() === ($default->user_id) || $default->user_id === 1)
+                            <div class="form-check row">
+                                    <div class="col-md-4">
+                                            {{--name属性を配列にすれば、Controllerに配列でデータを送れる　TripController@create--}}
+                                            <input type="checkbox" name="item_id[]" class="default_item"  value="{{ $default->id }}">
+                                            <label class="defualt-item-label" for="customCheck1">{{ $default->goods }}</label>
+                                    </div>
+                            </div>  
+                        @endif
                     @endforeach
-                    
-                    
-
-
-                    
-
                     {{ csrf_field() }}
                     <div class="row mx-auto">
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}"> 

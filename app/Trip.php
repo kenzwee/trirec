@@ -15,7 +15,7 @@ class Trip extends Model
     
      public function items()
     {
-        return $this->belongsToMany('App\Item');
+        return $this->belongsToMany(Item::class)->using(ItemTrip::class)->withPivot(['memo']);
     }
     
     public static $create_rules = [

@@ -30,3 +30,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+
+$('.delete-confirm').click(function(){
+    $('#deletebtn').val( $(this).val() );
+});
+
+

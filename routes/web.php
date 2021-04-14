@@ -11,9 +11,12 @@
 |
 */
 
+// トップ画面を表示
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
+
+
 //PostController一覧
 Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
     Route::get('post/create', 'Auth\PostController@add');
@@ -52,6 +55,8 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::get('trip/detail', 'Auth\TripController@show');
     Route::get('trip/create', 'Auth\TripController@add');
     Route::post('trip/create', 'Auth\TripController@create');
+    Route::get('trip/edit', 'Auth\TripController@edit');
+    Route::post('trip/edit', 'Auth\TripController@update');
     
 });
 

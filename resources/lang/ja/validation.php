@@ -153,7 +153,9 @@ return [
         'username' => 'ユーザー名',
         'trip_title' => '旅行名',
         'trip_start' => '旅行開始日',
-        'trip_end' => '旅行終了日'
+        'trip_end' => '旅行終了日',
+        'goods' => '持っていく物',
+        'importance' => '重要度'
         ],
 
 ];

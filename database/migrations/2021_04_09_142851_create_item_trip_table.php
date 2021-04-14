@@ -18,6 +18,7 @@ class CreateItemTripTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('trip_id');
             $table->unsignedBigInteger('item_id');
+            $table->string('memo')->nullable();
             //指定したカラムに外部キー制約を定義
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
