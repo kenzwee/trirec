@@ -55,7 +55,7 @@
                     </label>
                 </div>
                 <div class="col-md-3 d-flex align-items-center border border-danger">
-                    <button type="button" class="delete-confirm btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" value="['id'=>$item->id]">
+                    <button type="button" class="delete-confirm btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" value="['id'=>{{ $item->id }}]">
                       削除
                     </button>
                 </div>

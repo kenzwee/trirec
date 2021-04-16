@@ -47,6 +47,7 @@ class ItemController extends Controller
     {
         //該当するItemmodelを取得
         $items = Item::find($request->id);
+        
         //削除する
         // $items->delete();
         $trip = $request->trip_id;

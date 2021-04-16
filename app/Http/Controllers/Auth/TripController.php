@@ -83,39 +83,35 @@ class TripController extends Controller
     {
         //validationをかける ::→クラス変数を呼び出し
         $this->validate($request, Item::$rules, Trip::$create_rules);
-        
         //Tripモデルから該当するidのデータを取得
         $trip = Trip::find($request->id);
-        //リレーションを定義しているので,$tripを介して、itemsモデルの該当するitemを取得
-        $item = $trip->items;
         
+        //edit.viewでitem（goodsやimportance）が配列で送られてくる為、for文で送られてきた配列数分だけでループする
+        for($i=0; $i< count($request->item_ids); $i++){
+            $item = Item::find($request->item_ids[$i]);
+            $item->goods = $request->goods[$i];
+            $item->importance = $request->importance[$i];
+            $item->save();
+            //updateExistingPivotで第一引数はどの中間テーブルのidを更新したいのか教えてあげる必要がある為、
+            //$trip->id(更新したい$item_idと関連付いている$trip_id)を指定、第二引数は何のデータを上書きしたいか
+            //syncでも更新可能（今回は全てのitemを更新しているから）
+            //trip_id = 1をsyncで更新しても、trip_id = 2は更新されない（上書きされない）
+            $item->trips()->updateExistingPivot($trip->id, ["memo"=>$request->memo[$i]]);
+            
+
+        }
+       
 
         //送信されてきたフォームデータを格納
         $form = $request->all();
         unset($form['_token']);
-        
-        //複数のモデルの情報を更新する場合、fillメソットは使えない
-        // $trip->title = $request->title;
-        // $trip->trip_start = $request->trip_start;
-        // $trip->trip_end = $request->trip_end;
-        //該当するデータを上書き保存
-        // $trip->fill($form)->save();
-        $trip->save();
+        unset($form['importance']);
+        unset($form['goods']);
+        unset($form['item_ids']);
+        unset($form['memo']);
 
-        
-        
-        
-        // $item->goods = $request->goods;
-        // $item->importance = $request->importance;
+        $trip->fill($form)->save();
 
-        // $trip->save();
-        // $item->save();
-        
-        
-        
-        $trip->items->sync($item,false);
-        // $item->trips->sync($trip,false);
-        
         return redirect()->back();
 
         

@@ -26,7 +26,7 @@
             @foreach($trip->items as $item)
                 <div class="form-group row">
                     <div class="dropdown col-md-3 border border-danger">
-                        <select name="importance" id="importance-select" value="{{ $item->importance }}">
+                        <select name="importance[]" id="importance-select" value="{{ $item->importance }}">
                             
                             <option value="">--重要度を選んでください--</option>
                             <option value="2" {{ (($item->importance == 1)||($item->importance == 2)) ? "selected" : "" }}>S</option>
@@ -37,10 +37,10 @@
                         </select>
                     </div>
                     <div class="col-md-3 border border-danger">
-                        <input type="text" class="form-control" name="goods" value="{{ $item->goods }}">
+                        <input type="text" class="form-control" name="goods[]" value="{{ $item->goods }}">
                     </div>
                     <div class="col-md-3 border border-danger ">
-                        <input type="text" class="form-control" name="memo" value="{{ $item->memo }}">
+                        <input type="text" class="form-control" name="memo[]" value="{{ $item->pivot->memo }}">
                     </div>
                     <div class="col-md-3 d-flex align-items-center border border-danger">
                         <button type="button" class="delete-confirm btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" value="['id'=>$item->id]">
@@ -48,6 +48,7 @@
                         </button>
                     </div>
                 </div>
+                <input type="hidden" name="item_ids[]" value="{{ $item->id }}">
             @endforeach
                 <!-- 削除選択時の警告文 -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,59 +71,65 @@
                     </div>
                 </div>
                     @csrf
+                @if (count($errors) > 0)
+                    <ul>
+                        @foreach($errors->all() as $e)
+                            <li>{{ $e }}</li>
+                        @endforeach
+                    </ul>
+                @endif
                 <div class="row d-flex justify-content-center mt-4 mb-4">
                   <button type="submit" class="btn btn-primary btn-lg">保存する</button>
                 </div>
             <input type="hidden" name="id" value="{{ $trip->id }}">
-            
         </form>
         
-                <div class="row">
-                    <h2>持ち物追加</h2>
+        <div class="row">
+            <h2>持ち物追加</h2>
+        </div>
+        <form action="{{ action('Auth\ItemController@create') }}" method="post">
+            <input type="hidden" name="trip_id" value="{{ $trip->id }}"> 
+                @if (count($errors) > 0)
+                    <ul>
+                        @foreach($errors->all() as $e)
+                            <li>{{ $e }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            <div class="row">
+                <label class ="col-md-3">重要度</label>
+                    <div class="col-md-3">
+                        <p>持っていくもの</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>メモ</p>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="dropdown col-md-3">
+                    <select name="importance" id="importance-select">
+                        <option value="">--重要度を選んでください--</option>
+                        <option value="2">S</option>
+                        <option value="3">A</option>
+                        <option value="4">B</option>
+                        <option value="5">C</option>
+                        <option value="6">D</option>
+                    </select>
                 </div>
-                <form action="{{ action('Auth\ItemController@create') }}" method="post">
-                    <input type="hidden" name="trip_id" value="{{ $trip->id }}"> 
-                        @if (count($errors) > 0)
-                            <ul>
-                                @foreach($errors->all() as $e)
-                                    <li>{{ $e }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    <div class="row">
-                        <label class ="col-md-3">重要度</label>
-                            <div class="col-md-3">
-                                <p>持っていくもの</p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>メモ</p>
-                            </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="dropdown col-md-3">
-                            <select name="importance" id="importance-select">
-                                <option value="">--重要度を選んでください--</option>
-                                <option value="2">S</option>
-                                <option value="3">A</option>
-                                <option value="4">B</option>
-                                <option value="5">C</option>
-                                <option value="6">D</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="goods" value="{{ old('goods') }}">
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" name="memo" value="{{ old('memo') }}">
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-center mt-4 mb-4">
-                        <input type="submit" class="btn btn-primary btn-lg" value="追加">
-                    </div>
-                    {{ csrf_field() }}
-                </form>
-                <div class="row d-flex justify-content-center mt-5">
-                    <a href="{{ action('Auth\TripController@index') }}"><input type="submit" class="btn btn-primary btn-lg btn-block" value="持ち物リスト一覧に戻る"></a>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="goods" value="{{ old('goods') }}">
                 </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="memo" value="{{ old('memo') }}">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-4 mb-4">
+                <input type="submit" class="btn btn-primary btn-lg" value="追加">
+            </div>
+            {{ csrf_field() }}
+        </form>
+        <div class="row d-flex justify-content-center mt-5">
+            <a href="{{ action('Auth\TripController@index') }}"><input type="submit" class="btn btn-primary btn-lg btn-block" value="持ち物リスト一覧に戻る"></a>
+        </div>
     </div>
 @endsection
