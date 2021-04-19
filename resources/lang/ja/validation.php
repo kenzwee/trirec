@@ -155,7 +155,8 @@ return [
         'trip_start' => '旅行開始日',
         'trip_end' => '旅行終了日',
         'goods' => '持っていく物',
-        'importance' => '重要度'
+        'importance' => '重要度',
+        'memo' => 'メモ'
         ],
 
 ];

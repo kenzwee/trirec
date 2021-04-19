@@ -8,7 +8,5 @@ class ItemTrip extends Pivot
 {
     protected $table = "item_trip";
     
-    public static $memo_rules = [
-        'memo' => ['required', 'max:20'],
-        ];
+
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Trip;
 use App\Item;
+use App\ItemTrip;
 
 
 class TripController extends Controller
@@ -16,15 +17,18 @@ class TripController extends Controller
         $cond_title = $request->title;
     
         $type = $request->type;
-
+        
+        //検索された場合
         if($type == 'search'){
-            $trips = Trip::where('title', $cond_title);
+            $trips = Auth::user()->trips()->where('title', 'like', "%$cond_title%")->orderBy('trip_start', 'asc')->orderBy('trip_end', 'asc')->paginate(10);
+            
+        //検索されてない場合
         }else{
             // $trip = Trip::where('user_id', Auth::id())->get();
-            $trips = Auth::user()->trips;
+            $trips = Auth::user()->trips()->orderBy('trip_start', 'asc')->orderBy('trip_end', 'asc')->paginate(10);
+            
         }
         
-
 
         return view('auth.trip.index',['trips' => $trips, 'cond_title' => $cond_title]);
     }
@@ -75,14 +79,19 @@ class TripController extends Controller
     public function edit(Request $request)
     {
         $trip = Trip::find($request->id);
-        return view('auth.trip.edit', ['trip' => $trip]);
+        $items = $trip->items()->orderBy('importance', 'asc')->get();
+
+        return view('auth.trip.edit', ['trip' => $trip , 'items' => $items]);
     }
     
     
     public function update(Request $request)
     {
+        
         //validationをかける ::→クラス変数を呼び出し
-        $this->validate($request, Item::$rules, Trip::$create_rules);
+        $trip_update_rules = array_merge(Item::$rules, Trip::$create_rules, ['memo' => 'max:20']);
+            
+        $this->validate($request, $trip_update_rules);
         //Tripモデルから該当するidのデータを取得
         $trip = Trip::find($request->id);
         
@@ -124,23 +133,19 @@ class TripController extends Controller
             abort(404);
         }
         
-        // $items = Trip::find($request->id)->items();
-        // $a = $trip->items();
-        // $trip->memoItems()->toSql();
-        // $memos = $trip->items->pivot->memo;
-     
-        // foreach($trip->items as $item){
-        //     $trip->items()->pivot->memo;
-        // }
+        $items = $trip->items()->orderBy('importance', 'asc')->get();
         
+        
+        return view('auth.trip.detail', ['trip' => $trip, 'items' => $items]);
+    }
+    
+    public function delete(Request $request)
+    {
+        $trip = Trip::find($request->id);
 
-        // foreach ($trip->items as $item) {
-        //     $a =  $item->pivot->memo;
-        // }
- 
-        
-        // $trip->items()->wherePivotIn('memo', [$request->trip_id, $request->item_id]);
-        
-        return view('auth.trip.detail', ['trip' => $trip]);
+        $trip->items()->detach();
+        $trip->delete();
+
+        return redirect('auth/trip/index');
     }
 }

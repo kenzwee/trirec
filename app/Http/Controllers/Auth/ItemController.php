@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\Trip;
+use App\ItemTrip;
 
 
 class ItemController extends Controller
@@ -47,12 +49,22 @@ class ItemController extends Controller
     {
         //該当するItemmodelを取得
         $items = Item::find($request->id);
-        
+
         //削除する
         // $items->delete();
         $trip = $request->trip_id;
         $items->trips()->detach($trip);
         
+        return redirect()->back();
+    }
+    
+    public function alldelete(Request $request)
+    
+    {
+        //viewから送られてきたtrip_idを$tripに格納
+        $trip = Trip::find($request->id);
+        $trip->items()->detach();
+
         return redirect()->back();
     }
     

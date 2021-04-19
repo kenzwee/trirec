@@ -57,13 +57,14 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::post('trip/create', 'Auth\TripController@create');
     Route::get('trip/edit', 'Auth\TripController@edit');
     Route::post('trip/edit', 'Auth\TripController@update');
-    
+    Route::get('trip/delete', 'Auth\TripController@delete');
 });
 
 //ItemController一覧
 Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::post('item/create', 'Auth\ItemController@create');
     Route::get('item/delete', 'Auth\ItemController@delete');
+    Route::get('item/all_delete', 'Auth\ItemController@alldelete');
 
 });
 

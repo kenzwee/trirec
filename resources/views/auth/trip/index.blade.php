@@ -26,26 +26,27 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            @foreach($trips as $trip)
-                @if(Auth::id() === ($trip->user_id))
-                    <div class="col-md-4 mt-4 d-flex align-items-center border border-danger">
-                        <a href="{{ action('Auth\TripController@show', ['id' => $trip->id]) }}">{{ $trip->title }}</a>
-                    </div>
-                    <div class="col-md-6 mt-4 d-flex align-items-center border border-danger">
-                        <p>{{ date("Y年m月d日", strtotime($trip->trip_start)) }}〜</p>
-                        <p>{{ date("Y年m月d日", strtotime($trip->trip_end)) }}</p>
-                    </div>
-                    <div class="col-md-2 mt-4 border border-danger">
-                        <div class="h-50 d-flex align-items-center">
-                            <p>編集編集編集</p>
+            <div class="row">
+                @foreach($trips as $trip)
+                        <div class="col-md-4 mt-4 d-flex align-items-center border border-danger">
+                            <a href="{{ action('Auth\TripController@show', ['id' => $trip->id]) }}">{{ $trip->title }}</a>
                         </div>
-                        <div class="h-50 d-flex align-items-center">
-                            <p>削除削除削除</p>
+                        <div class="col-md-6 mt-4 d-flex align-items-center border border-danger">
+                            <p>{{ date("Y年m月d日", strtotime($trip->trip_start)) }}〜</p>
+                            <p>{{ date("Y年m月d日", strtotime($trip->trip_end)) }}</p>
                         </div>
-                @endif    
-                    </div>
-            @endforeach
+                        <div class="col-md-2 mt-4 border border-danger">
+                          　<div class="d-flex justify-content-center border border-danger">
+                                <a href="{{ action('Auth\TripController@edit',['id'=>$trip->id]) }}" ><button type="button" class="btn btn-primary ">編集</button></a>
+                            </div>
+                          　<div class="d-flex justify-content-center border border-danger">
+                                <a href="{{ action('Auth\TripController@delete',['id'=>$trip->id]) }}" ><button type="button" class="btn btn-primary ">削除</button></a>
+                            </div>
+                        </div>
+                @endforeach
+            </div>
+        <div class="row d-flex justify-content-center">
+        {{ $trips->links() }}
         </div>
     </div>
 @endsection
