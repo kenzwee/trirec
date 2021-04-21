@@ -22,6 +22,10 @@ class Post extends Model
         'body' => 'required',
         );
         
+    public static $image_upload_rules = [
+        'image' => 'image', 'mimes:jpeg,jpg,png', 'max:2000'
+        ];
+        
 
     public function user()
     {

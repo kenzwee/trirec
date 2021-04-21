@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Rules\ProfileImageRule;
 
 class Profile extends Model
 {
@@ -14,7 +15,7 @@ class Profile extends Model
     }
     
     public static $rules = [
-        'username' => ['required','unique:profiles','username']
+        'username' => ['required','unique:profiles']
         ];
         
     public static $max_rules = [
@@ -24,10 +25,20 @@ class Profile extends Model
     public static $messages = [
         'username.unique' => 'このユーザー名はすでに使用されています'
         ];
- 
-
-    // public static $updateRules = [
-    //     'username' => ['required','unique:profiles,username','max:10']
+    
+    // public static $profile_image_upload_rules = [
+    //     'profile_image' => 'image', 'mimes:jpeg,jpg,png', 'max:2000', new HeicRule,
     //     ];
+
+    public static function get_my_rules()
+    {
+        return [    
+        'profile_image' => [new ProfileImageRule, 'mimes:jpeg,jpg,png', 'max:2000'],
+        ];
+    }
+        
+            
+    
+
         
 }

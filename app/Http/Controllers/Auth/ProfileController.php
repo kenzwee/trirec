@@ -5,6 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
+use App\Rules\HeicRule;
 
 
 class ProfileController extends Controller
@@ -37,9 +38,9 @@ class ProfileController extends Controller
     
     public function create(Request $request)
     {
-        
+        $profile_create_rules = array_merge(Profile::$rules, Profile::$messages, Profile::$max_rules, Profile::$profile_image_upload_rules);
         //validation
-        $this->validate($request, Profile::$rules, Profile::$messages,Profile::$max_rules);
+        $this->validate($request, $profile_create_rules);
         
 
         $profile = new Profile;
@@ -78,6 +79,7 @@ class ProfileController extends Controller
             abort(404);
         }
         
+        
         //resourcesのviews以下のファイル：第一引数
         //ビューに渡す変数を指定して　profile_formキー (使う時は＄つく)=> $profile変数
         return view('auth.profile.edit',['profile_form' => $profile]);
@@ -85,8 +87,16 @@ class ProfileController extends Controller
     
     public function update(Request $request)
     {
+        
         //validationをかける 文字数が10文字以内
-        $this->validate($request, Profile::$max_rules);
+        $rule = array_merge(Profile::get_my_rules(), Profile::$max_rules);
+        $request->validate($rule);
+        //↑こっちは下記の記載でもOK
+        // $request->validate([
+        //         'profile_image' => ['mimes:jpeg,jpg,png', 'max:2000', new ProfileImageRule],
+        // ]);
+        
+        
         //Profile modelからデータを取得
         $profile = Profile::find($request->id);
         //送信されてきたフォームデータを格納
@@ -95,24 +105,27 @@ class ProfileController extends Controller
         //元々の$profileのusernameと送信されて来たusernameが一致していなければ
         if($profile->username != $profile_form['username']){
             //$profile_form($request)->username
+            $user_name_rules = array_merge(Profile::$rules, Profile::$messages);
             //validationをかける 
-            $this->validate($request, Profile::$rules, Profile::$messages); 
+            $this->validate($request, $user_name_rules); 
         }
         
         //画像を削除した場合はimage_pathも削除する
         if($request->remove == 'ture'){
             $profile_form['image_path'] = null;
-                    dd($profile_form);
 
         //画像が更新されたら。。
         }elseif($request->file('profile_image')){
             //上はpublic/profile_imageに画像を保存
             //下はファイル名からpathを作成して(左辺)、image_pathに（右辺に）代入
             $path = $request->file('profile_image')->store('public/profile_image');
+
+            //$profile->image_path = basename($path);
             $profile_form['image_path'] = basename($path);
-        }else{
-            //画像は変わってない時
-            $profile_form['image_path'] = $profile->image_path;
+            
+        // }else{
+        //     //画像は変わってない時
+        //     $profile_form['image_path'] = $profile->image_path;
         }
 
         unset($profile_form['profile_image']);
@@ -122,6 +135,6 @@ class ProfileController extends Controller
         
         //該当するデータを上書き保存
         $profile->fill($profile_form)->save();
-        return view('auth/profile/edit', ['profile_form' => $profile]);
+        return view ('auth.profile.edit', ['profile_form' => $profile]);
     }
 }

@@ -17,7 +17,7 @@
         
         <div class="row">
             <div class="box text-center col-md-12">
-                @if(isset($profile->image))
+                @if(isset($profile->image_path))
                 <img src="{{secure_asset('storage/profile_image/'.$profile->image_path)}}" class="profile_round_image" alt="profile_image">
                 @else
                 <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image" alt="no_image">

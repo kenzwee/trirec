@@ -44,8 +44,9 @@ class PostController extends Controller
     
     public function create(Request $request)
     {
+        $post_rules = array_merge(Post::$image_upload_rules,Post::$rules);
         //validationを行う
-        $this->validate($request, Post::$rules);
+        $this->validate($request,$post_rules);
         
         $post = new Post;
         $form = $request->all();
@@ -87,8 +88,9 @@ class PostController extends Controller
     
     public function update(Request $request)
     {
+        $post_update_rules = array_merge(Post::$updateRules, Post::$image_upload_rules);
         //validationをかける ::→クラス変数を呼び出し
-        $this->validate($request, Post::$updateRules);
+        $this->validate($request, $post_update_rules);
         //Post modelからデータを取得
         $post = Post::find($request->id);
         //送信されてきたフォームデータを格納

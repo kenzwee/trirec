@@ -82,7 +82,7 @@ return [
         'string' => ':attribute は最大 :max 文字となります。',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => ':attribute は:valuesのファイル形式のみ対応してます。',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
@@ -113,9 +113,12 @@ return [
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'The :attribute failed to upload.',
+    'uploaded' => ':attribute のアップロードに失敗しました',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+
+    'profile_image' => ':attribute は非対応のファイル形式です。',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -156,7 +159,9 @@ return [
         'trip_end' => '旅行終了日',
         'goods' => '持っていく物',
         'importance' => '重要度',
-        'memo' => 'メモ'
+        'memo' => 'メモ',
+        'profile_image' => 'プロフィール画像',
+
         ],
 
 ];

@@ -65,7 +65,7 @@
                         <div class="col-md-10 ">
                             <input type="file" class="form-control-file" name="profile_image">
                             {{-- ビューに現在設定中のプロフィール画像を表示 --}}
-                            @if(isset($profile->image))
+                            @if(isset($profile_form->image_path))
                             <img src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}" class="profile_round_image" alt="profile_image">
                             @else
                             <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image" alt="no_image">
