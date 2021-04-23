@@ -5,7 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
-use App\Rules\HeicRule;
+use App\Rules\AddImageRule;
 
 
 class ProfileController extends Controller
@@ -17,10 +17,13 @@ class ProfileController extends Controller
     
     public function show(Request $request)
     {
-        //Profile modelから現在ログインしているユーザーの画像データを取得
-        $profile = Profile::find(Auth::id());
-        
+        $profile = Profile::find($request->id);
 
+        // $profile = $request->all();
+
+        //Profile modelから現在ログインしているユーザーの画像データを取得
+        // $profile = Profile::find(Auth::id());
+        
         //resourcesのviews以下のファイル：第一引数
         //ビューに渡す変数を指定して　profile_formキー (使う時は＄つく)=> $profile変数
         //['profile_image' => $profile_image]  profile_imageは連想配列のキー（blade.phpで表示するために作成）
@@ -38,10 +41,9 @@ class ProfileController extends Controller
     
     public function create(Request $request)
     {
-        $profile_create_rules = array_merge(Profile::$rules, Profile::$messages, Profile::$max_rules, Profile::$profile_image_upload_rules);
+        $profile_create_rules = array_merge(Profile::$rules, Profile::$messages, Profile::$max_rules, Profile::get_my_rules());
         //validation
         $this->validate($request, $profile_create_rules);
-        
 
         $profile = new Profile;
         $form = $request->all();
@@ -91,6 +93,8 @@ class ProfileController extends Controller
         //validationをかける 文字数が10文字以内
         $rule = array_merge(Profile::get_my_rules(), Profile::$max_rules);
         $request->validate($rule);
+        
+
         //↑こっちは下記の記載でもOK
         // $request->validate([
         //         'profile_image' => ['mimes:jpeg,jpg,png', 'max:2000', new ProfileImageRule],

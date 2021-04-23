@@ -10,6 +10,7 @@ use App\History;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
+
 class PostController extends Controller
 {
     public function index(Request $request)
@@ -22,17 +23,13 @@ class PostController extends Controller
             $posts = Post::where('title', 'like', "%$cond_title%")->orderBy('updated_at', 'desc')->paginate(20);
         //Authは（）をつける　idメソッド
         }elseif($type == 'mypost'){
-            $posts = Auth::user()->posts()->orderBy('updated_at', 'desc')->paginate(4);
-            // $posts = Post::where('user_id', Auth::id())->paginate(4);
-            
+            $posts = Auth::user()->posts()->orderBy('updated_at', 'desc')->paginate(12);
+
         }else {
             //検索しなかったそれ以外は全ての投稿を取得する
-            $posts = Post::orderBy('updated_at', 'desc')->paginate(4);
+            $posts = Post::orderBy('updated_at', 'desc')->paginate(12);
         }
         
-
-
-    
         return view('auth.post.index', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
@@ -44,9 +41,11 @@ class PostController extends Controller
     
     public function create(Request $request)
     {
-        $post_rules = array_merge(Post::$image_upload_rules,Post::$rules);
+        $post_rules = array_merge(Post::$rules, Post::get_my_rules());
+        
         //validationを行う
-        $this->validate($request,$post_rules);
+        // $this->validate($request, $post_rules);
+        $request->validate($post_rules);
         
         $post = new Post;
         $form = $request->all();
@@ -88,7 +87,7 @@ class PostController extends Controller
     
     public function update(Request $request)
     {
-        $post_update_rules = array_merge(Post::$updateRules, Post::$image_upload_rules);
+        $post_update_rules = array_merge(Post::$updateRules, Post::get_my_rules());
         //validationをかける ::→クラス変数を呼び出し
         $this->validate($request, $post_update_rules);
         //Post modelからデータを取得
@@ -132,7 +131,10 @@ class PostController extends Controller
         $post = Post::find($request->id);
         //削除する
         $post->delete();
-        return redirect('auth/post/');
+        
+        // return redirect('auth/post
+        return redirect()->back();
+
     }
     
     public function search()
@@ -142,11 +144,31 @@ class PostController extends Controller
     }
     
     public function result(Request $request)
-    {   //第一引数は検索したいカラム名、第二引数（第三）は第一引数のカラム名に対する値
-        //$postsはコレクションインスタンス
-        $posts = Post::where('direction', $request->direction)->get();
+    {
+        // dd($request);
+        // dd(Auth::user()->posts()->where('direction', $request->direction)->get());
+        $cond_title = $request->cond_title;
+        $type = $request->type;
         
-        return view('auth/post/search_result', ['posts' => $posts]);
+        if($type == 'search'){
+            //検索されたら検索結果を取得する 完全一致
+            $posts = Post::where('direction', $request->direction)->where('title', 'like', "%$cond_title%")->orderBy('updated_at', 'desc')->paginate(20);
+        //Authは（）をつける　idメソッド
+        }elseif($type == 'mypost'){
+            $posts = Auth::user()->posts()->where('direction', $request->direction)->orderBy('updated_at', 'desc')->paginate(12);
+            // $posts = Post::where('user_id', Auth::id())->paginate(4);
+            
+        }else {
+            //検索しなかったそれ以外は全ての投稿を取得する
+            $posts = Post::where('direction', $request->direction)->orderBy('updated_at', 'desc')->paginate(12);
+        }
+        
+
+        //第一引数は検索したいカラム名、第二引数（第三）は第一引数のカラム名に対する値
+        //$postsはコレクションインスタンス
+        // $posts = Post::where('direction', $request->direction)->get();
+        
+        return view('auth/post/search_result', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
     public function show(Request $request)

@@ -113,7 +113,7 @@ return [
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => 'The :attribute has already been taken.',
-    'uploaded' => ':attribute のアップロードに失敗しました',
+    'uploaded' => ':attribute のアップロードに失敗しました。（容量が大きい可能性があります）',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
 

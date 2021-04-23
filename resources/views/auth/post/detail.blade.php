@@ -81,7 +81,7 @@
             {{-- $postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
             
             @foreach($post->comments as $comment)
-                <li>{{ $comment->user->profile->username }} --- {{ $comment->body }}({{ $comment->created_at}})</li>
+                <a href="{{ action('Auth\ProfileController@show', ["id" =>$comment->user_id]) }}"><li>{{ $comment->user->profile->username }}</a>--- {{ $comment->body }}({{ $comment->created_at}})</li>
                     @if(Auth::id() === ($comment->user_id))
                         <a href="{{ action('Auth\CommentController@edit', ['id' => $comment->id]) }}" type="button" class="btn btn-primary btn-sm">編集</a>
                         

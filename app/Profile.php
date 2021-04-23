@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Rules\ProfileImageRule;
+use App\Rules\AddImageRule;
 
 class Profile extends Model
 {
@@ -33,9 +33,11 @@ class Profile extends Model
     public static function get_my_rules()
     {
         return [    
-        'profile_image' => [new ProfileImageRule, 'mimes:jpeg,jpg,png', 'max:2000'],
+        'profile_image' => [new AddImageRule, 'mimes:jpeg,jpg,png', 'max:2000'],
         ];
     }
+    
+
         
             
     

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Rules\AddImageRule;
 
 
 class Post extends Model
@@ -22,9 +23,13 @@ class Post extends Model
         'body' => 'required',
         );
         
-    public static $image_upload_rules = [
-        'image' => 'image', 'mimes:jpeg,jpg,png', 'max:2000'
+
+    public static function get_my_rules()
+    {
+        return [    
+        'image' => [new AddImageRule, 'mimes:jpeg,jpg,png', 'max:2000'],
         ];
+    }
         
 
     public function user()

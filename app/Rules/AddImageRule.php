@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ProfileImageRule implements Rule
+class AddImageRule implements Rule
 {
     /**
      * Create a new rule instance.

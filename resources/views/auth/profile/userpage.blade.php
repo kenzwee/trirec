@@ -8,7 +8,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                @if(Auth::id() === ($profile->user_id))
+                
+                @if(Auth::id() === ($profile->id))
                 <a href="{{ action('Auth\ProfileController@edit') }}" role="button" class="btn btn-primary">プロフィール編集</a>
                 @endif
             </div>
