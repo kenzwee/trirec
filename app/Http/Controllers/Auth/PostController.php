@@ -20,14 +20,14 @@ class PostController extends Controller
         
         if($type == 'search'){
             //検索されたら検索結果を取得する 完全一致
-            $posts = Post::where('title', 'like', "%$cond_title%")->orderBy('updated_at', 'desc')->paginate(20);
+            $posts = Post::where('title', 'like', "%$cond_title%")->orderBy('created_at', 'desc')->paginate(20);
         //Authは（）をつける　idメソッド
         }elseif($type == 'mypost'){
-            $posts = Auth::user()->posts()->orderBy('updated_at', 'desc')->paginate(12);
+            $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(12);
 
         }else {
             //検索しなかったそれ以外は全ての投稿を取得する
-            $posts = Post::orderBy('updated_at', 'desc')->paginate(12);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(12);
         }
         
         return view('auth.post.index', ['posts' => $posts, 'cond_title' => $cond_title]);

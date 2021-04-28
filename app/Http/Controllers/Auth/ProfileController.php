@@ -5,6 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
+use App\Post;
 use App\Rules\AddImageRule;
 
 
@@ -17,8 +18,11 @@ class ProfileController extends Controller
     
     public function show(Request $request)
     {
-        $profile = Profile::find($request->id);
 
+        $profile = Profile::find($request->id);
+        
+        $posts = Post::where('user_id', $request->id)->orderBy('created_at', 'desc')->take(6)->get();
+        
         // $profile = $request->all();
 
         //Profile modelから現在ログインしているユーザーの画像データを取得
@@ -29,7 +33,7 @@ class ProfileController extends Controller
         //['profile_image' => $profile_image]  profile_imageは連想配列のキー（blade.phpで表示するために作成）
         //$profile_imageはfunction内で定義したインスタンス。要はblade.phpで表示するキーにしている作業
         //['profile_image' => $profile_image,'a' => 100]と連組配列を追加することも出来る
-        return view('auth.profile.userpage',['profile' => $profile]);
+        return view('auth.profile.userpage',['profile' => $profile, 'posts' => $posts]);
         
     }
     

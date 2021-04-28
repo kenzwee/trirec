@@ -49632,8 +49632,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-});
+}); //$this valにitem_idを渡すdeletebtnになんかする
+
 $('.delete-confirm').click(function () {
+  //
   $('#deletebtn').val($(this).val());
 });
 

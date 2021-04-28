@@ -7,4 +7,11 @@ return [
     'Remember Me' => 'ログイン情報を記憶する',
     'Logout' => 'ログアウト',
     'Register' => '新規登録',
+    '' => '新規登録',
+    'Register' => '新規登録',
+    'Register' => '新規登録',
+    'Register' => '新規登録',
+    'Register' => '新規登録',
+
+
 ];

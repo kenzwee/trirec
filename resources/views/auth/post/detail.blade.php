@@ -7,39 +7,26 @@
             <h2>投稿内容</h2>
         </div>
         
-        <div class="row">
-            <p>閲覧数：{{ $post->count }}</p>
+        <div class="col-md-6">
+            <p class="card-text direction">{{ str_limit(config('direction.names.' . $post->direction),20) }}</p>
         </div>
-        
-        <div class="row">
+        {{-- タイトル --}}
+        <div class="row d-flex justify-content-center col-md-10 offset-md-1 mt-2 mb-3 border border-primary">
+            <h2>{{ $post->title }}<h2>
+        </div>    
+        <div class="row d-flex justify-content-center">
             {{-- ビューに現在設定中の画像を表示 --}}
-            <img class = "col-md-10 offset-md-1" src="{{secure_asset('storage/image/'.$post->image_path)}}">
-        </div>
-        <div class="row text-center">
-            <div class="col-md-6">
-                <p>{{ $post->user->profile->username }}</p>
+            <img class = "col-md-10" src="{{secure_asset('storage/image/'.$post->image_path)}}">
+            {{-- 閲覧数 --}}
+            <div class="col-md-5 text-center">
+                <img src="{{secure_asset('images/eye_icon.png') }}" class="eye_icon" alt="eye_icon_image">{{ $post->count }}
             </div>
-            <div class="col-md-6">
-                <p>{{ $post->direction }}</p>
+            {{-- ユーザー名--}}
+            <div class="col-md-5 text-center">
+                {{ $post->user->profile->username }}
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 mt-5">
-                <h2>タイトル</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="box text-center col-md-10 offset-md-1 border border-primary">
-                <p>{{ $post->title }}</p>
-            </div>    
-        </div>
-        <div class="row">
-            <div class="col-md-4 mt-5">
-                <h2>本文</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="box text-center col-md-10 offset-md-1 border border-primary">
+            {{--本文--}}
+            <div class="box text-center col-md-10 border border-primary">
                 <p>{{ $post->body }}</p>
             </div>    
         </div>
@@ -63,7 +50,7 @@
                 @endif
             </div>  
         </div>
-        
+        {{-- コメント投稿フォーム --}}
         <form action="{{ action('Auth\CommentController@create') }}" method="post">
             <input type="hidden" name="post_id" value="{{ $post->id }}"> 
                 @if (count($errors) > 0)
@@ -73,10 +60,15 @@
                         @endforeach
                     </ul>
                 @endif
+                
             <div class="row col-md-4 mt-5">
-                <h2>コメント一覧</h2>
+                <h2>Comments</h2></h2>
             </div>
-            <h3>ユーザー名 --- コメント</h3>
+            <div class="row">
+                <h3>User name</h3>
+            </div>
+            
+            Comment</h3>
             {{-- PostController@showで定義した$postの中のcommentsからCommentControllerで定義した$commentを１つ１つ取り出してる--}}
             {{-- $postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
             

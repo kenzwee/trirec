@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-4">
                 @if(Auth::id() === ($profile->id))
-                    <a href="{{ action('Auth\ProfileController@edit') }}" role="button" class="btn btn-primary">プロフィール編集</a>
+                <a href="{{ action('Auth\ProfileController@edit') }}" role="button" class="btn btn-primary">プロフィール編集</a>
                 @endif
             </div>
             {{ csrf_field() }}
@@ -59,25 +59,38 @@
     <div class="container">
         <hr class="my-0">
     </div>
+    
     <section class="u-content-space">
         <div class="container">
             <header class="text-center w-md-50 mx-auto mb-5">
                 <h2 class="h1">My Post</h2>
             </header>
-            <!-- Work Content -->
-            <div class="u-portfolio row no-gutters mb-5">
-                @foreach($posts as $post)
-                    <figure class="col-sm-6 col-md-4 u-portfolio__item">
-                        @if ($post->image_path)
-                            <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="u-portfolio__image" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Image Description"></a>
-                        @endif
-                        <figcaption class="u-portfolio__info">
-                            <h6 class="mb-0">{{ $post->title }}</h6>
-                            <small class="d-block">{{ str_limit(config('direction.names.' . $post->direction),20) }}</small>
-                        </figcaption>
-                    </figure>
-                @endforeach
-            </div>
-            <!-- End Work Content -->
-    </section>
+                    
+
+                    
+                    
+
+          <!-- Work Content -->
+         <div class="u-portfolio row no-gutters mb-6">
+        @foreach($posts as $post)
+        <div class="u-portfolio_a"> 
+            <figure class="col-sm-6 col-md-4 u-portfolio__item" data-groups="[&quot;its-illustration&quot;]">
+                @if ($post->image_path)
+                <img class="u-portfolio__image" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Image Description">
+                @endif
+                    <figcaption class="u-portfolio__info">
+                        <h6 class="mb-0">IX Project</h6>
+                        <small class="d-block">Branding</small>
+                    </figcaption>
+            </figure>
+        </div>
+
+                
+        @endforeach
+        </div>
+          <!-- End Work Content -->
+
+
+     </section>
+    
 @endsection

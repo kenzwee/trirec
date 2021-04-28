@@ -28,44 +28,50 @@
             </div>
         </div>
         <div class="row">
-        @php $count = 1 @endphp
-        
-        @foreach($posts as $post)
-            <div class="box1 col-md-3">
-                <div class="card w-100">
-                    @if ($post->image_path)
-                        <img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap">
-                    @endif
-                    <div class="card-body bg-secondary">
-                        <h4 class="card-title">{{ str_limit($post->title, 20) }}</h4>
-                        <a class="card-text" href="{{ action('Auth\ProfileController@show', ["id" =>$post->user_id]) }}"><p class="card-text">{{ str_limit($post ->user->profile->username, 20) }}</a>
-                        <p class="card-text">閲覧数：{{ $post->count }}</p>
-                        <p class="card-text">{{ str_limit($post->direction, 20) }}</p>
-                        <p class="card-text">{{ str_limit($post->body, 650) }}</p>
-                        <p class="card-text">{{ $post->updated_at }}</p>
-                        
-                        {{-- ログインしているユーザーと投稿者のIDが一致したら編集ボタン、削除ボタンを表示 --}}
-                        @if(Auth::id() === ($post->user_id))
-                        <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}" type="button" class="btn btn-primary">編集</a>
-                        <a href="{{ action('Auth\PostController@delete',['id' => $post->id]) }}" type="button" class="btn btn-primary">削除</a>
+            @php $count = 1 @endphp
+            
+            @foreach($posts as $post)
+                <div class="col-md-3">
+                    <div class="card w-100 h-100">
+                        @if ($post->image_path)
+                        {{-- 目のアイコンを画像に重ねる--}}
+                        <div class="sample">
+                            <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
+                                <div class="eye">
+                                    <p class="card-text"><img src="{{secure_asset('images/eye_icon.png') }}" class="eye_icon" alt="eye_icon_image"> {{ $post->count }}</p>
+                                </div>
+                        </div>
                         @endif
-                        <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}" type="button" class="btn btn-primary">詳細</a>
+                        <div class="card-body bg-secondary">
+                            <h4 class="card-title">{{ str_limit($post->title, 18) }}</h4>
+                            <a class="card-text" href="{{ action('Auth\ProfileController@show', ["id" =>$post->user_id]) }}"><p class="card-text-username">{{ str_limit($post ->user->profile->username, 20) }}</p></a>
+                            <p class="card-text-direction">{{ str_limit(config('direction.names.' . $post->direction),20) }}</p>
+                            <p class="card-text">投稿:{{ date("Y年m月d日 H:i", strtotime($post->created_at)) }}</p>
+                            
+
+
+                            {{-- ログインしているユーザーと投稿者のIDが一致したら編集ボタン、削除ボタンを表示 --}}
+                            @if(Auth::id() === ($post->user_id))
+                            <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}" type="button" class="btn btn-primary">編集</a>
+                            <a href="{{ action('Auth\PostController@delete',['id' => $post->id]) }}" type="button" class="btn btn-primary">削除</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            @php $count +=1 @endphp
-            @if($count > 4)
-                </div>
-                <hr color="#c0c0c0">
-                <div class = "row">
-                @php $count = 1 @endphp
-            @endif
-        @endforeach
+                @php $count +=1 @endphp
+                @if($count > 4)
+        {{-- この</div>は4つの投稿を1グループとしてここで１本線を引くためのもの--}}
         </div>
+                    <hr color="#c0c0c0">
+                    <div class = "row">
+                @php $count = 1 @endphp
+                @endif
+            @endforeach
+        </div>
+        
+        
         <div class="row d-flex justify-content-center">
         {{ $posts->links() }}
         </div>
-        
-        
     </div>
 @endsection

@@ -1,7 +1,7 @@
 body {
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #9f9;
+  background-color: #ffffff;
   color: #ccc;
 }
 
@@ -39,8 +39,80 @@ body {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.profile_round_image{
+.profile_round_image {
   border-radius: 50%;
+  border: 2px solid;
+  border-color: #53D5EB;
   width: 300px;
   height: 300px;
+}
+
+.u-content-space {
+  padding: 100px 0px;
+}
+
+.u-portfolio {
+  position: relative;
+  //ボックスの範囲内に内容が収まらない場合に、はみ出た部分の表示の仕方:収まらない部分は隠す
+  overflow: hidden;
+
+  //250ms->250ミリ秒　トランジションが始まるまでの時間　ease-out->時間関数　0s->遅延
+  transition: height 250ms ease-out 0s;
+}
+
+.u-portfolio__item {
+  //ボックスの表示（visible）・非表示（hidden）を指定する際に使用
+  visibility: visible;
+  transition: transform 250ms ease-out 0s, opacity 250ms ease-out 0s;
+  //0.0（完全に透明）～1.0（完全に不透明）の数値で指定
+  opacity: 1;
+  //要素を 3D 空間内で再配置、scale3d(数値, 数値, 数値)　3つの数値で3D縮尺比率を指定
+  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1);
+  //はみ出た要素の表示方法を指定->隠す
+  overflow: hidden;
+  //位置指定要素とその子孫要素、またはフレックスアイテムの z 順を定義(最背面から何番目か)
+  z-index: 2;
+}
+
+
+
+.u-portfolio__image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  transition: all .2s ease;
+  object-fit: cover;
+}
+
+//ユーザーがカーソル（マウスポインタ―）でu-portfolio__item要素の上をホバー（通過）させたときにこの状態になる
+.u-portfolio__item:hover .u-portfolio__image {
+  transform: translate3d(0, -60px, 0);
+}
+
+
+.u-portfolio__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3.75rem;
+  overflow: hidden;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  color: #fff;
+  background-color: #53D5EB;
+  transition: all .2s ease;
+  transform: translate3d(0, 3.75rem, 0);
+}
+
+
+.u-portfolio__info small {
+//要素の透明度を指定
+  opacity: .7;
+}
+
+.u-portfolio__item:hover .u-portfolio__info {
+  transform: translate3d(0, 0, 0);
 }

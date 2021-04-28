@@ -1,7 +1,7 @@
 body {
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #9f9;
+  background-color: #ffffff;
   color: #ccc;
 }
 
@@ -41,7 +41,66 @@ body {
 
 .profile_round_image {
   border-radius: 50%;
+  border: 2px solid;
+  border-color: #53D5EB;
   width: 300px;
   height: 300px;
+}
+
+.u-content-space {
+  padding: 100px 0px;
+}
+
+.u-portfolio {
+  position: relative;
+  overflow: hidden;
+  transition: height 250ms ease-out 0s;
+}
+
+.u-portfolio__item {
+  visibility: visible;
+  transition: transform 250ms ease-out 0s, opacity 250ms ease-out 0s;
+  opacity: 1;
+  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.u-portfolio__image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  transition: all 0.2s ease;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.u-portfolio__item:hover .u-portfolio__image {
+  transform: translate3d(0, -60px, 0);
+}
+
+.u-portfolio__info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3.75rem;
+  overflow: hidden;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  color: #fff;
+  background-color: #53D5EB;
+  transition: all 0.2s ease;
+  transform: translate3d(0, 3.75rem, 0);
+}
+
+.u-portfolio__info small {
+  opacity: 0.7;
+}
+
+.u-portfolio__item:hover .u-portfolio__info {
+  transform: translate3d(0, 0, 0);
 }
 
