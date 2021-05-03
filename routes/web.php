@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
     Route::get('post/create', 'Auth\PostController@add');
     Route::post('post/create', 'Auth\PostController@create');
-    Route::get('post', 'Auth\PostController@index');
+    Route::get('post', 'Auth\PostController@index')->name('top');
     Route::get('post/edit', 'Auth\PostController@edit');
     Route::post('post/edit', 'Auth\PostController@update');
     Route::get('post/delete', 'Auth\PostController@delete');

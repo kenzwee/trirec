@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Comment;
 use App\History;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -180,7 +181,12 @@ class PostController extends Controller
 
         $post->count++;
         $post->save();
+        
+        // post1件1件にコメントされたコメントを全て取得
+        $comments = Comment::where('post_id', $request->id)->orderBy('created_at', 'desc')->paginate(15);
+        
+
         // $post->fill($post_form)->save();
-        return view('auth.post.detail', ['post' => $post]);
+        return view('auth.post.detail', ['post' => $post, 'comments' => $comments]);
     }
 }

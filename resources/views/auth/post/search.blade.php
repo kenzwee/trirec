@@ -3,8 +3,10 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <h2>方面を選ぶ(画像をクリック！)</h2>
+        <div class="row col-md-12">
+            <div class="page_title mx-auto mt-5">
+                Search
+            </div>
         </div>
  
         <div class="row">

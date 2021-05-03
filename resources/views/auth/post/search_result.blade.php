@@ -7,11 +7,11 @@
             <h2>方面別　投稿一覧</h2>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <a href="{{ action('Auth\PostController@add') }}" role="button" class="btn btn-primary">新規作成</a>
                 <a href="{{ action('Auth\PostController@result',['type'=>'mypost', 'direction' => isset($posts[0]) ? $posts[0]->direction : ''])}}" role="button" class="btn btn-primary">{{ Auth::user()->profile->username }}の投稿一覧</a>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 mt-3">
                 <form action="{{ action('Auth\PostController@index') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>

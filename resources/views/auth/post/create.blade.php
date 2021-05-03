@@ -24,11 +24,11 @@
                     @endif
                     
                     
-                    <div class="post-create-form-group row">
-                        <label class ="col-md-2">方面</label>
-                    </div>
-                    <div class="row select_direction">
-                        <div class="dropdown col-md-12">
+                    <div class="post-create-form-group">
+                        <div class="row">
+                            <label class ="col-md-2">方面</label>
+                        </div>
+                        <div class="row select_direction">
                             <select name="direction" id="direction-select">
                                 <option value="">--方面を選んでください--</option>
                                 <option value="north_america">北アメリカ</option>

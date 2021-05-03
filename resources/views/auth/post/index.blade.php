@@ -71,7 +71,7 @@
         
         
         <div class="row d-flex justify-content-center">
-        {{ $posts->links() }}
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection
