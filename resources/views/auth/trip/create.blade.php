@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', '持ち物リスト新規作成')
+@section('title', '旅行リスト新規作成')
 
 @section('content')
     <div class="container">

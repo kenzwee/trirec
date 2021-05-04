@@ -21,10 +21,12 @@
                             @endforeach
                         </ul>
                     @endif
+                    
                     <div class="form-group row">
                         <label class="mt-2 col-form-label text-md-left">ユーザー名</label>
                         <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                     </div>  
+                    
                     <div class="form-group row">
                         <label class="col-form-label text-md-left">自己紹介</label>
                         <textarea class="form-control" name="introduction" rows="3">{{ old('introduction') }}</textarea>

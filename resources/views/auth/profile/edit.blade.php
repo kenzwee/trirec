@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="title text-center mt-5">
-                    <h2 class="page_title">Edit Profile</h2>
+                    <h2 class="page_title">Update Profile</h2>
                 </div>
                 <form action="{{ action('Auth\ProfileController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
@@ -49,12 +49,12 @@
                     </div> 
                     <div class="form-group row">
                         <label class ="col-form-label text-md-left" for="image">プロフィール画像</label>
-                        <input type="file" class="form-control-file d-flex justify-content-center " name="profile_image">
+                        <input type="file" class="form-control-file" name="profile_image">
                             {{-- ビューに現在設定中のプロフィール画像を表示 --}}
                             @if(isset($profile_form->image_path))
-                            <img src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}" class="profile_round_image mt-5" alt="profile_image">
+                            <img src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}" class="profile_round_image mt-5 mx-auto" alt="profile_image">
                             @else
-                            <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image mt-5" alt="no_image">
+                            <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image mt-5 mx-auto" alt="no_image">
                             @endif                         
                     </div>
                     {{-- <img class = "col-md-10" src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}"> --}}

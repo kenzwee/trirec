@@ -119,3 +119,29 @@ body {
   color: #fff;
   box-shadow: inset #00b5ad 0 0 0 3em;
 }
+
+//auth/trip/index.blade.php
+.index_line {
+  color: #c0c0c0;
+  border: none;
+  border-bottom:dashed  3px
+}
+
+//auth/trip/index.blade.php
+.item_delete_btn {
+  margin-left: 3px;
+}
+
+///auth/trip/detail.blade.php
+.item_line {
+  border-top: 3px double #ccc;
+}
+
+//auth/trip/detail.blade.php
+.page_title_2 {
+  font-family: impact;
+  color: black;
+  font-size: 40px;
+  
+}
+

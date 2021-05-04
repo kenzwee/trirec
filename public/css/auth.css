@@ -111,3 +111,23 @@ body {
   box-shadow: inset #00b5ad 0 0 0 3em;
 }
 
+.index_line {
+  color: #c0c0c0;
+  border: none;
+  border-bottom: dashed 3px;
+}
+
+.item_delete_btn {
+  margin-left: 3px;
+}
+
+.item_line {
+  border-top: 3px double #ccc;
+}
+
+.page_title_2 {
+  font-family: impact;
+  color: black;
+  font-size: 40px;
+}
+
