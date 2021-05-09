@@ -8,7 +8,7 @@
         </div>
         
         <div class="row">
-            <div class="col-md-6">
+            <div class="detail_direction col-md-6">
             {{ str_limit(config('direction.names.' . $post->direction),20) }}
             </div>
             <div class="col-md-5 d-flex justify-content-end">
@@ -44,28 +44,30 @@
             </div>   
         </div>
         
-        
-        
-        
-        
+
         {{-- タイトル --}}
-        <div class="row d-flex justify-content-center col-md-10 offset-md-1 mt-2 mb-3 border border-primary">
-            <h2>{{ $post->title }}<h2>
+        <div class="detail_title row d-flex justify-content-center col-md-10 offset-md-1 mt-2 mb-3">
+            {{ $post->title }}
         </div>    
         <div class="row d-flex justify-content-center">
             {{-- ビューに現在設定中の画像を表示 --}}
             <img class = "col-md-10" src="{{secure_asset('storage/image/'.$post->image_path)}}">
             {{-- 閲覧数 --}}
-            <div class="col-md-5 text-center">
-                <img src="{{secure_asset('images/eye_icon.png') }}" class="eye_icon" alt="eye_icon_image">{{ $post->count }}
+            <div class="detail_count col-md-5 d-flex align-items-center justify-content-center">
+                <img src="{{secure_asset('images/eye_icon_black.png') }}" class="eye_icon" alt="eye_icon_image">{{ $post->count }}
             </div>
             {{-- ユーザー名--}}
-            <div class="col-md-5 text-center">
-                <a href="{{ action('Auth\ProfileController@show', ["id" =>$post->user_id]) }}">{{ $post->user->profile->username }}</a>
+            <div class="detail_username col-md-5 text-center">
+                <a class="detail_username" href="{{ action('Auth\ProfileController@show', ["id" =>$post->user_id]) }}">{{ $post->user->profile->username }}</a>
             </div>
             {{--本文--}}
-            <div class="box text-center col-md-10 border border-primary">
-                <p>{{ $post->body }}</p>
+
+            
+            
+            
+            
+            <div class="detail_text text-center col-md-10">
+                {{ $post->body }}
             </div>    
         </div>
         {{-- コメント投稿フォーム --}}
@@ -89,10 +91,10 @@
             
             {{-- PostController@showで定義した$postの中のcommentsからCommentControllerで定義した$commentを１つ１つ取り出してる--}}
             {{-- $postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
+            <div class="row">
             @php $count = 0 @endphp
             {{-- @foreach($post->comments as $comment) --}}
-            @foreach($comments as $comment)
-                <div class="row">
+                @foreach($comments as $comment)
                     <div class="col-md-2">
                         <a href="{{ action('Auth\ProfileController@show', ['id' =>$comment->user->id]) }}">{{ $comment->user->profile->username }}</a>
                     </div>
@@ -107,41 +109,39 @@
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                               削除
                             </button>
+                        @endif
                     </div>
-            
-                            @php $count += 1 @endphp
-                            @if($count > 0)
-                {{-- この</div>は１つのコメントを1グループとしてここで１本線を引くためのもの--}}
-                </div>
-                                <hr color="#c0c0c0">
-                                <div class = "row">
-                            @php $count = 0 @endphp
-                            @endif
-                            
-                </div>
-                            <!-- 削除選択時の警告文 -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">本当に削除しますか？</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        １度削除すると元に戻せません。
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
-                                            <a href="{{ action('Auth\CommentController@delete',['id'=>$comment->id]) }}" ><button type="button" class="btn btn-primary ">削除する</button></a>
-                                        </div>
-                                    </div>
+                    <!-- 削除選択時の警告文 -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">本当に削除しますか？</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                １度削除すると元に戻せません。
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
+                                    <a href="{{ action('Auth\CommentController@delete',['id'=>$comment->id]) }}" ><button type="button" class="btn btn-primary ">削除する</button></a>
                                 </div>
                             </div>
-                        @endif
-                
+                        </div>
+                    </div>
+                    @php $count += 1 @endphp
+                    @if($count > 0)
+        {{-- この</div>は１つのコメントを1グループとしてここで１本線を引くためのもの--}}
+            </div>    
+                        <hr color="#c0c0c0">
+                        <div class = "row">
+                    @php $count = 0 @endphp
+                    @endif
             @endforeach 
+                </div>
+                
             {{--ページネーション  2ページ目にどのpost_idかを知らせる為にappendsを使用--}}
             <div class="row d-flex justify-content-center">
                 {{ $comments->appends(request()->query())->links() }}
@@ -149,7 +149,7 @@
                
                 
             <div class="row col-md-4 mt-5 mb-3">
-                <h2>Comment it!</h2>
+                <h2>Comment it!<span class="caution">最大50文字</span></h2>
             </div>
 
             <div class="row col-md-10 mx-auto">

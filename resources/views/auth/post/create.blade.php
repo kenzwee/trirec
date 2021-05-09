@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="title text-center mt-5">
-                    <h2>New Post</h2>
+                    <h2 class="page_title">New Post</h2>
                 </div>
                 <form action="{{ action('Auth\PostController@create') }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="user_id" value="{{ Auth::id() }}"> 
@@ -44,17 +44,17 @@
                     
                     
                     <div class="post-create-form-group row">
-                        <label class ="col-md-2 mt-2">画像</label>
+                        <label class ="col-md mt-2 col-form-label text-md-left">画像<span class="caution">jpeg・jpg・png形式</span></label>
                         <input type="file" class="form-control-file" name="image">
                     </div>
                     
                     <div class="post-create-form-group row">
-                        <label class="col-md-2 mt-2">タイトル</label>
+                        <label class="col-md mt-2 ol-form-label text-md-left">タイトル</label>
                         <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                     </div>
                     
                     <div class="post-create-form-group row">
-                        <label class="col-md-2 mt-2">本文</label>
+                        <label class="col-md mt-2 ol-form-label text-md-left">本文</label>
                         <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
                     </div>
                         {{ csrf_field() }}

@@ -8,8 +8,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                @if(Auth::id() === ($profile->id))
-                    <a href="{{ action('Auth\ProfileController@edit') }}" role="button" class="btn btn-primary">プロフィール編集</a>
+                @if(Auth::id() === ($profile->user_id))
+                    <a href="{{ action('Auth\ProfileController@edit', ['id' => Auth::id()] ) }}" role="button" class="btn btn-primary">プロフィール編集</a>
                 @endif
             </div>
             {{ csrf_field() }}
@@ -79,5 +79,8 @@
                 @endforeach
             </div>
             <!-- End Work Content -->
+            <div class="to_my_post row d-flex justify-content-center ">
+                <a href="{{ action('Auth\PostController@index', ['type'=>'userpage_post', 'id' => $profile ->user_id]) }}" role="button" class="btn btn-primary btn-lg btn-block col-md-4">{{ $profile->username }}の投稿一覧</a>
+            </div>
     </section>
 @endsection

@@ -23,7 +23,7 @@
                     @endif
                     
                     <div class="form-group row">
-                        <label class="mt-2 col-form-label text-md-left">ユーザー名</label>
+                        <label class="mt-2 col-form-label text-md-left">ユーザー名<span class="required">必須</span><span class="caution">最大10文字</span></label>
                         <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                     </div>  
                     
@@ -48,7 +48,7 @@
                         <textarea class="form-control" name="traveled_japan" rows="4">{{ old('traveled_japan') }}</textarea>
                     </div> 
                     <div class="form-group row">
-                        <label class ="col-form-label text-md-left">プロフィール画像</label>
+                        <label class ="col-form-label text-md-left">プロフィール画像<span class="caution">jpeg・jpg・png形式</span></label>
                         <input type="file" class="form-control-file mt-1" name="profile_image">
                     </div>
                     {{ csrf_field() }}

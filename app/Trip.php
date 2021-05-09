@@ -18,11 +18,4 @@ class Trip extends Model
         return $this->belongsToMany(Item::class)->using(ItemTrip::class)->withPivot(['memo']);
     }
     
-    public static $create_rules = [
-        'title' => ['required', 'max:20'],
-        'trip_start' => ['required','after_or_equal:yesterday'],
-        'trip_end' => ['required','after_or_equal:trip_start']
-        ];
-        
-
 }

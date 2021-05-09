@@ -25,6 +25,9 @@ class PostController extends Controller
         //Authは（）をつける　idメソッド
         }elseif($type == 'mypost'){
             $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(12);
+        //各ユーザーのユーザーページで、そのユーザーの投稿一覧ボタンを押した時
+        }elseif($type == 'userpage_post'){
+            $posts = Post::where('user_id', ($request->id))->orderBy('created_at', 'desc')->paginate(20);
 
         }else {
             //検索しなかったそれ以外は全ての投稿を取得する

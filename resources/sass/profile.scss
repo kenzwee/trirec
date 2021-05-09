@@ -143,3 +143,37 @@ body {
   color: #fff;
   box-shadow: inset #00b5ad 0 0 0 3em;
 }
+
+//auth/profile/create.blade.php
+.caution {
+  background-color: #f0ad4e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 10px;
+  padding: 3px 7px;
+  margin: 0px 5px;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+//auth/profile/create.blade.php
+.required {
+  background-color: #F30100;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 10px;
+  padding: 3px 7px;
+  margin: 0px 5px;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3px;
+}

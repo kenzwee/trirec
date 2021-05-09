@@ -18,7 +18,7 @@
                 <form action="{{ action('Auth\TripController@update') }}" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4 mt-4 d-flex align-items-center">
-                            <input type="text" class="form-control" name="title" value="{{ $trip->title }}">
+                            <input type="text" class="form-control" name="trip_title" value="{{ $trip->trip_title }}">
                         </div>
                         <div class="col-md-6 mt-4 d-flex align-items-center justify-content-center">
                                 <input type="date" id="trip_start" name="trip_start" value="{{ $trip->trip_start }}" min="2021-05-01" max="2025-12-31">〜
@@ -93,31 +93,10 @@
                                     <input type="text" class="form-control" name="memo[]" value="{{ $item->pivot->memo }}">
                                 </div>
                                 <div class="col-md-3 d-flex justify-content-center align-items-center">
-                                    <button type="button" class="delete-confirm btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal-{{ $item->id }}" value="['id'=>{{ $item->id }}]">
-                                        削除
-                                    </button>
+                                    <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="item_delete_btn btn btn-primary btn-sm">削除</button></a>
                                 </div>
-                    </div>
                     <input type="hidden" name="item_ids[]" value="{{ $item->id }}">
-                    <!-- 削除選択時の警告文 -->
-                    <div class="modal fade" id="exampleModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">本当に削除しますか？</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                </div>
-                                <div class="modal-body">
-                                １度削除すると元に戻せません。
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
-                                    <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="btn btn-primary" id="deletebtn" name="deletebtn">削除する</button></a>
-                                </div>
-                            </div>
-                        </div>
+
                         @php $count += 1 @endphp
                             @if($count > 0)
                             {{-- この</div>は1つの持ち物ごとに１本線を引くためのもの--}}

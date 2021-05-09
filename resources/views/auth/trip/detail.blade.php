@@ -11,7 +11,7 @@
              
                 <div class="row">
                     <div class="col-md-4 mt-4 d-flex justify-content-center align-items-center">
-                        {{ $trip->title }}
+                        {{ $trip->trip_title }}
                     </div>
                     <div class="col-md-4 mt-4 d-flex justify-content-center align-items-center">
                         {{ date("Y年m月d日", strtotime($trip->trip_start)) }}〜
@@ -92,7 +92,7 @@
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ $item->goods }}
                             </label>
-                        </div
+                        </div>
                         {{-- メモ --}}
                         <div class="col-md-3 form-check d-flex justify-content-center align-items-center">
                             <label class="form-check-label" for="defaultCheck1">
@@ -100,30 +100,10 @@
                             </label>
                         </div>
                         <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <button type="button" class="delete-confirm btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal-{{ $item->id }}" value="['id'=>{{ $item->id }}]">
-                              削除
-                            </button>
+                            <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="item_delete_btn btn btn-primary btn-sm">削除</button></a>
                         </div>
-                </div>
-                <!-- 削除選択時の警告文 -->
-                <div class="modal fade" id="exampleModal-{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">本当に削除しますか？</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                            </div>
-                            <div class="modal-body">
-                            １度削除すると元に戻せません。
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
-                                <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="btn btn-primary" id="deletebtn" name="deletebtn">削除する</button></a>
-                            </div>
-                        </div>
-                    </div>
+
+                    
                 @php $count += 1 @endphp
                     @if($count > 0)
                 {{-- この</div>は1つの持ち物ごとに１本線を引くためのもの--}}

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+
 .carousel {
   position: relative;
 }
@@ -27,23 +31,11 @@
   z-index: 3;
 }
 
-.button-fill {
-  display: inline-block;
-  padding: 1.5em 3em;
-  font-size: 0.8em;
-  color: #00b5ad;
-  text-decoration: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border: 1px #00b5ad solid;
-  box-shadow: inset #00b5ad 0 0 0 0;
-  transition: 0.3s;
-}
-
-.button-fill:hover {
-  color: #fff;
-  box-shadow: inset #00b5ad 0 0 0 3em;
+.top_btns {
+  padding: 1em 3em;
+  background-color: #4A82F6;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: bold;
 }
 

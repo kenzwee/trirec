@@ -22,7 +22,7 @@
                         @enderror
                 </div>
                 <div class="form-group row">
-                    <label for="email" class="mt-2 col-form-label text-md-left">Mail Address</label>
+                    <label for="email" class="mt-2 col-form-label text-md-left">Mail Address<span class="caution">半角</span></label>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
                 </div>
                 
                 <div class="form-group row">
-                    <label for="password" class="mt-2 col-form-label text-md-left">Password</label>
+                    <label for="password" class="mt-2 col-form-label text-md-left">Password<span class="caution">半角・8文字以上</span></label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">

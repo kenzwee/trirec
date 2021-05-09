@@ -13,7 +13,7 @@ class Post extends Model
     public static $rules = array(
         'direction' => 'required',
         'image' => 'required',
-        'title' => 'required',
+        'title' => 'required|max:20',
         'body' => 'required',
         );
         

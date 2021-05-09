@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Profile;
 use App\Post;
+use App\User;
 use App\Rules\AddImageRule;
 
 
@@ -18,11 +19,13 @@ class ProfileController extends Controller
     
     public function show(Request $request)
     {
-
-        $profile = Profile::find($request->id);
+        //$profile = Profile::with('user')->find($request->id);
+        $profile = Profile::where('user_id', $request->id)->first();
+        
+        //リレーションを使用して、use_idを取得
+        //$user = User::with('profile')->find($request->id);
         
         $posts = Post::where('user_id', $request->id)->orderBy('created_at', 'desc')->take(6)->get();
-        
         // $profile = $request->all();
 
         //Profile modelから現在ログインしているユーザーの画像データを取得
@@ -33,6 +36,7 @@ class ProfileController extends Controller
         //['profile_image' => $profile_image]  profile_imageは連想配列のキー（blade.phpで表示するために作成）
         //$profile_imageはfunction内で定義したインスタンス。要はblade.phpで表示するキーにしている作業
         //['profile_image' => $profile_image,'a' => 100]と連組配列を追加することも出来る
+        
         return view('auth.profile.userpage',['profile' => $profile, 'posts' => $posts]);
         
     }
@@ -80,7 +84,7 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
        //Profile Modelから現在ログインしているユーザーのデータを取得
-        $profile = Profile::find(Auth::id());
+        $profile = Profile::where('user_id', $request->id)->first();
         if (empty($profile)) {
             abort(404);
         }
@@ -141,8 +145,13 @@ class ProfileController extends Controller
         unset($profile_form['remove']);
         unset($profile_form['_token']);
         
+        
         //該当するデータを上書き保存
         $profile->fill($profile_form)->save();
-        return view ('auth.profile.edit', ['profile_form' => $profile]);
+        $user_id = $profile->user_id;
+        //パラメーターをroute関数に渡して、'userpage'にリダイレクトを✖かける
+        return redirect (route('userpage', ['id' => $user_id]));
+
+        // return view ('auth.profile.edit', ['profile_form' => $profile]);
     }
 }

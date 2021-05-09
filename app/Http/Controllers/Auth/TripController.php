@@ -14,13 +14,13 @@ class TripController extends Controller
 {
     public function index(Request $request)
     {   
-        $cond_title = $request->title;
+        $cond_title = $request->trip_title;
     
         $type = $request->type;
         
         //検索された場合
         if($type == 'search'){
-            $trips = Auth::user()->trips()->where('title', 'like', "%$cond_title%")->orderBy('trip_start', 'asc')->orderBy('trip_end', 'asc')->paginate(10);
+            $trips = Auth::user()->trips()->where('trip_title', 'like', "%$cond_title%")->orderBy('trip_start', 'asc')->orderBy('trip_end', 'asc')->paginate(10);
             
         //検索されてない場合
         }else{
@@ -44,8 +44,17 @@ class TripController extends Controller
     
     public function create(Request $request)
     {
+        //date関数を利用したruleをmodelで定義すると、アプリをherokuにアップした時に
+        //日付の取得(ex:5/1)が行われ、それ以降は取得されず(5/1)のままruleが適用される
+        //actionごとに書けば、そのactionが実行される都度に日付が取得される
+        $create_rules = array(
+        'trip_title' => 'required|max:20',
+        'trip_start' => 'required|after_or_equal:' . date('Y/m/d'),
+        'trip_end' => 'required|after_or_equal:trip_start'
+        );
+        
         //validation
-        $this->validate($request, Trip::$create_rules);
+        $this->validate($request, $create_rules);
         //送られてきたデータを下記の様に確認
         // dd($request->item_id);
         
@@ -64,12 +73,18 @@ class TripController extends Controller
         $trip->fill($form);
         $trip->save();
         
-        //create.viewで送ったidを取り出し、foreachで回す
-        //配列でデータが送られてくる為
-        foreach($request->item_id as $item){
+        
+        //tripをcreateする時点でseederのitemを選択しなかった時に対するif文
+        if(empty($request->item_id) == false){
+            //create.viewで送ったidを取り出し、foreachで回す
+            //配列でデータが送られてくる為
+            foreach($request->item_id as $item){
+            
+            
             //attachメソッドで中間テーブルに保存
             //全く同じカラムがitemテーブルに出来ない様にsync
             $trip->items()->attach($item);
+            }
         }
 
         return redirect('auth/trip/index');   
@@ -87,9 +102,14 @@ class TripController extends Controller
     
     public function update(Request $request)
     {
+        $create_rules = array(
+        'trip_title' => 'required|max:20',
+        'trip_start' => 'required|after_or_equal:' . date('Y/m/d'),
+        'trip_end' => 'required|after_or_equal:trip_start'
+        );
         
         //validationをかける ::→クラス変数を呼び出し
-        $trip_update_rules = array_merge(Item::$rules, Trip::$create_rules, ['memo' => 'max:20']);
+        $trip_update_rules = array_merge(Item::$rules, $create_rules, ['memo' => 'max:20']);
             
         $this->validate($request, $trip_update_rules);
         //Tripモデルから該当するidのデータを取得

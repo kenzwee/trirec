@@ -19,7 +19,7 @@
                             <div class="form-group row justify-content-end">
                                 <div class="col-md-6">
                                     <input type="hidden" class="form-control" name="type" value="search">
-                                    <input type="text" class="form-control" placeholder="旅行名で検索" name="title" value="{{ $cond_title }}">
+                                    <input type="text" class="form-control" placeholder="旅行名で検索" name="trip_title" value="{{ $cond_title }}">
                                 </div>
                                 <div class="col-md-2">
                                     {{ csrf_field() }}
@@ -44,15 +44,37 @@
                 @php $count = 0 @endphp
                     @foreach($trips as $trip)
                             <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                <a href="{{ action('Auth\TripController@show', ['id' => $trip->id]) }}" >{{ $trip->title }}</a>
+                                <a href="{{ action('Auth\TripController@show', ['id' => $trip->id]) }}" >{{ $trip->trip_title }}</a>
                             </div>
                             <div class="col-md-5 d-flex align-items-center justify-content-center">
                                 <div>{{ date("Y年m月d日", strtotime($trip->trip_start)) }}〜</div>
                                 <div>{{ date("Y年m月d日", strtotime($trip->trip_end)) }}</div>
                             </div>
                           　<div class="col-md-3 d-flex justify-content-center">
-                                <a href="{{ action('Auth\TripController@edit',['id'=>$trip->id]) }}" ><button type="button" class="item_edit_btn btn btn-primary ">編集</button></a>
-                                <a href="{{ action('Auth\TripController@delete',['id'=>$trip->id]) }}" > <button type="button" class="item_delete_btn btn btn-primary ">削除</button></a>
+                                <a href="{{ action('Auth\TripController@edit',['id'=>$trip->id]) }}" ><button type="button" class="item_edit_btn btn btn-primary btn-sm">編集</button></a>
+                                <button type="button" class="trip_index_delete-confirm btn btn-primary btn-sm" data-toggle="modal" data-target="#auth_trip_index_Modal-{{ $trip->id }}" value="['id'=>{{ $trip->id }}]">
+                                  削除
+                                </button>
+                            </div>
+                            <!-- 削除選択時の警告文 -->
+                            <div class="modal fade" id="auth_trip_index_Modal-{{ $trip->id }}" tabindex="-1" role="dialog" aria-labelledby="auth_trip_index_ModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="auth_trip_index_ModalLabel">本当に削除しますか？</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        １度削除すると元に戻せません。
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
+                                            <a href="{{ action('Auth\TripController@delete',['id'=>$trip->id]) }}" ><button type="button" class="btn btn-primary" id="deletebtn" name="deletebtn">削除する</button></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                 @php $count += 1 @endphp
                     @if($count > 0)
@@ -62,7 +84,6 @@
                     <div class = "row">
                 @php $count = 0 @endphp
                     @endif 
-
                     @endforeach
                 </div>
                 {{--ページネーション--}}

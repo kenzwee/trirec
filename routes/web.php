@@ -38,7 +38,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
     Route::get('profile/edit', 'Auth\ProfileController@edit');
     Route::post('profile/create', 'Auth\ProfileController@create');
     Route::post('profile/edit', 'Auth\ProfileController@update');
-    Route::get('profile/userpage', 'Auth\ProfileController@show');
+    Route::get('profile/userpage', 'Auth\ProfileController@show')->name('userpage');
 });
 
 //CommentController一覧
