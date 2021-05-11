@@ -1,11 +1,13 @@
 @extends('layouts.auth')
-@section('title', '投稿内容の編集')
+@section('title', '投稿内容編集')
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2>投稿内容編集</h2>
+        <div class="post_edit row">
+            <div class="col-md-6 mx-auto">
+                <div class="title text-center mt-5">
+                    <h2 class="page_title">Edit Post</h2>
+                </div>                
                 <form action="{{ action('Auth\PostController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
@@ -15,24 +17,29 @@
                         </ul>
                     @endif
                     <div class="form-group row">
-                        <label class="col-md-2" for="image">画像</label>
-                        <div class="col-md-10 ">
-                            <input type="file" class="form-control-file" name="image">
-                            {{-- ビューに現在設定中の画像を表示 --}}
-                            <img class = "col-md-10" src="{{secure_asset('storage/image/'.$post_form->image_path)}}">
-                            <div class="form-text text-info">
-                                設定中: {{ $post_form->image_path }}
-                            </div>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="remove" value="true">画像を削除
-                                </label>
-                            </div>
-                        </div>
+                        <label class="col-md col-form-label text-md-left" for="image">画像<span class="caution">jpeg・jpg・png形式</span></label>
+                        <input type="file" class="form-control-file mb-3" name="image">
+                        {{-- ビューに現在設定中の画像を表示 --}}
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="direction">方面</label>
-                        <div class="dropdown col-md-10">
+                        <div class="d-flex justify-content-center">
+                            <img class = "col-md-10" src="{{secure_asset('storage/image/'.$post_form->image_path)}}">
+                        </div>
+                        <div class="text-info text-center row col-md-10 mt-3">
+                            設定中: {{ $post_form->image_path }}
+                        </div>
+                        <div class="form-check row mt-3">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="remove" value="true">画像を削除
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="row">
+                            <label class ="col-md-2">方面</label>
+                        </div>
+                        <div class="row select_direction">
                             <select name="direction" id="direction-select" value="{{ $post_form->direction }}">
                                 <option value="">--方面を選んでください--</option>
                                 <option value="north_america" {{ ($post_form->direction == "north_america") ? "selected" : "" }}>北アメリカ</option>
@@ -46,26 +53,22 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="title">タイトル</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="title" value="{{ $post_form->title }}">
-                        </div>
+                        <label class="col-md mt-2 ol-form-label text-md-left">タイトル</label>
+                        <input type="text" class="form-control" name="title" value="{{ $post_form->title }}">
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="body">本文</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" name="body" rows="20">{{ $post_form->body }}</textarea>
-                        </div>
+                        <label class="col-md mt-2 ol-form-label text-md-left">本文</label>
+                        <textarea class="form-control" name="body" rows="10">{{ $post_form->body }}</textarea>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-6 mx-auto mt-4">
                             <input type="hidden" name="id" value="{{ $post_form->id }}">
                             {{ csrf_field() }}
-                            <input type="submit" class="btn btn-primary" value="更新">
+                            <input type="submit" class="btn btn-block" value="更新">
                         </div>
                     </div>
                 </form>
-                <div class="row mt-5">
+                {{--<div class="row mt-5">
                     <div class="col-md-4 mx-auto">
                         <h2>編集履歴</h2>
                         <ul class="list-group">
@@ -76,7 +79,7 @@
                             @endif
                         </ul>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>

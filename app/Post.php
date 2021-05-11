@@ -20,7 +20,7 @@ class Post extends Model
     public static $updateRules = array(
         'direction' => 'required',
         'title' => 'required',
-        'body' => 'required',
+        'body' => 'required|max:150',
         );
         
 

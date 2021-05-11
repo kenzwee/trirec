@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="post_comment row">
             <div class="col-md-6 mx-auto">
                 <div class="title text-center mt-5">
                     <h2 class="page_title">Update Comment</h2>
@@ -30,8 +30,8 @@
                     </div>
                         <input type="hidden" name="id" value="{{ $comment_form->id }}">
                         {{ csrf_field() }}
-                    <div class="row col-md-8 mx-auto mt-4">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="UPDATE">
+                    <div class="row mt-4 d-flex justify-content-center">
+                        <input type="submit" class="btn" value="更新">
                     </div>
                 </form>
     </div>

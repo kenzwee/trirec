@@ -2,7 +2,7 @@
 @section('title', '持ち物リスト編集')
 
 @section('content')
-    <div class="container">
+    <div class="trip_edit container">
         <div class="row">
             <div class="col-md-10 mx-auto">
                 <div class="title text-center mt-5">
@@ -26,9 +26,7 @@
                         </div>
                         <div class="col-md-2 mt-4">
                         {{-- 持ち物を全て削除するボタン --}}
-                            <button type="button" class="delete-confirm btn btn-primary btn-block" data-toggle="modal" data-target="#all_item_Modal" >
-                            持ち物全削除
-                            </button>
+                            <button type="button" class="delete_btn btn" data-toggle="modal" data-target="#all_item_Modal" >持ち物全削除</button>
                         </div>
                         <!-- 削除選択時の警告文 -->
                         <div class="modal fade" id="all_item_Modal" tabindex="-1" role="dialog" aria-labelledby="all_item_ModalLabel" aria-hidden="true">
@@ -43,9 +41,9 @@
                                     <div class="modal-body">
                                     １度削除すると元に戻せません。
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
-                                        <a href="{{ action('Auth\ItemController@alldelete',['id'=>$trip->id]) }}" ><button type="button" class="btn btn-primary" id="deletebtn" name="deletebtn">全ての持ち物削除する</button></a>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <a href="{{ action('Auth\ItemController@alldelete',['id'=>$trip->id]) }}" ><button type="button" class="delete_btn btn" id="deletebtn" name="deletebtn">全ての持ち物削除する</button></a>
+                                        <button type="button" class="stop_delete_btn btn" data-dismiss="modal">削除するのをやめる</button>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +51,7 @@
                     </div>
                     {{--tripとitemの区切り線--}}
                     <hr class="item_line">
-                    <div class="row mt-2 mb-3">
+                    <div class="detail_items_title row mt-2 mb-3">
                         <div class="col-md-3 text-center">
                             重要度
                         </div>
@@ -63,14 +61,11 @@
                         <div class="col-md-3 text-center">
                             メモ
                         </div>
-                        <div class="col-md-3 text-center">
-                            削除
-                        </div>
                     </div>
                     {{-- TripController@showで定義した$tripの中の???からItemControllerで定義した$itemを１つ１つ取り出してる--}}
                     {{--$postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
                     {{-- @foreach($trip->items as $item) --}}
-                    <div class="form-group row">
+                    <div class="add_items row">
                         @php $count = 0 @endphp
                             @foreach($items as $item)
                                 {{-- 重要度 --}}
@@ -93,7 +88,7 @@
                                     <input type="text" class="form-control" name="memo[]" value="{{ $item->pivot->memo }}">
                                 </div>
                                 <div class="col-md-3 d-flex justify-content-center align-items-center">
-                                    <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="item_delete_btn btn btn-primary btn-sm">削除</button></a>
+                                    <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="delete_btn btn btn-sm">削除</button></a>
                                 </div>
                     <input type="hidden" name="item_ids[]" value="{{ $item->id }}">
 
@@ -102,34 +97,37 @@
                             {{-- この</div>は1つの持ち物ごとに１本線を引くためのもの--}}
                             </div>
                                 <hr class="index_line">
-                                <div class = "row">
+                                <div class ="row">
                         @php $count = 0 @endphp
                             @endif 
                             @endforeach
                         </div>
                         @csrf
-                        <div class="row d-flex justify-content-center mt-5 mb-4">
-                          <button type="submit" class="btn btn-primary btn-lg">保存する</button>
+                        <div class="caution_message row d-flex justify-content-center mt-5 mb-2">
+                            内容を変更した後はコチラを押しましょう！（押さないと保存されません）
+                        </div>
+                        <div class="row d-flex justify-content-center mb-4">
+                            <button type="submit" class="btn">保存する</button>
                         </div>
                         <input type="hidden" name="id" value="{{ $trip->id }}">
                 </form>
-                <div class="row title text-left mt-5">
-                    <h3 class="page_title_2">Add Item</h2>
+                <div class="row text-left mt-5">
+                    <h2 class="middle_title">Add Item</h2>
                 </div>
                 <form action="{{ action('Auth\ItemController@create') }}" method="post">
                     <input type="hidden" name="trip_id" value="{{ $trip->id }}"> 
         
-                    <div class="row text-center">
-                        <label class ="col-md-4">重要度</label>
-                            <div class="col-md-4">
+                    <div class="row text-center mt-3">
+                        <label class ="col-md-3">重要度</label>
+                            <div class="col-md-3">
                                 持ち物
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 メモ
                             </div>
                     </div>
                     <div class="form-group row">
-                        <div class="dropdown col-md-4 d-flex justify-content-center">
+                        <div class="dropdown col-md-3 d-flex justify-content-center">
                             <select name="importance" id="importance-select">
                                 <option value="">---重要度を選択---</option>
                                 <option value="2">S</option>
@@ -139,20 +137,20 @@
                                 <option value="6">D</option>
                             </select>
                         </div>
-                        <div class="col-md-4 d-flex justify-content-center">
+                        <div class="col-md-3 d-flex justify-content-center">
                             <input type="text" class="form-control" name="goods" value="">
                         </div>
-                        <div class="col-md-4 d-flex justify-content-center">
+                        <div class="col-md-3 d-flex justify-content-center">
                             <input type="text" class="form-control" name="memo" value="">
                         </div>
-                    </div>
-                    <div class="row d-flex justify-content-center mt-4 mb-5">
-                        <input type="submit" class="btn btn-primary btn-lg" value="追加">
+                        <div class="col-md-3 d-flex justify-content-center">
+                            <input type="submit" class="btn" value="追加">
+                        </div>
                     </div>
                     {{ csrf_field() }}
                 </form>
                 <div class="row d-flex justify-content-center mt-5">
-                    <a href="{{ action('Auth\TripController@index') }}"><input type="submit" class="btn btn-primary btn-lg btn-block" value="旅行リスト一覧に戻る"></a>
+                    <a href="{{ action('Auth\TripController@index') }}"><button class="return_all_post btn" type="button">旅行リスト一覧に戻る</button></a>
                 </div>
             </div>
         </div>

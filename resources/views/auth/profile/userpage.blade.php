@@ -2,7 +2,7 @@
 @section('title', 'ユーザーページ')
 
 @section('content')
-    <div class="container">
+    <div class="profile_userpage container">
         <div class="row">
             <h2>ユーザーページ</h2>
         </div>
@@ -15,8 +15,8 @@
             {{ csrf_field() }}
         </div>
         <div class="row">
-            <div class="col-md-12 mt-3 mb-3 text-center">
-                <h2>{{ $profile->username }}</h2>
+            <div class="col-md-12 mt-3 mb-4 text-center">
+                <h2 class="middle_title">{{ $profile->username }}</h2>
             </div>
         </div>
         <div class="row">
@@ -29,40 +29,50 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 mb-lg-5 pl-lg-5 mt-5 text-align:center">
-                <h4 class="mb-3">自己紹介</h4>
-                <p>{{ $profile->introduction }}</p>
+            <div class="col-md-12 mb-lg-5 pl-lg-5 mt-5 text-align:center">
+                <h3 class="small_title mb-2">自己紹介</h3>
+                <div class="introduction_field">
+                    {{ $profile->introduction }}
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 mb-lg-5 pl-lg-5 mt-5">
-                <h4 class="mb-3">旅行したい国</h4>
-                <p>{{ $profile->want_to_travel_world }}</p>
+            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
+                <h3 class="small_title mb-2">旅行したい国</h3>
+                <div class="information_field">
+                    {{ $profile->want_to_travel_world }}
+                </div>
             </div>
-            <div class="col-lg-6 mb-lg-5 pl-lg-5 mt-5">
-                <h4 class="mb-3">旅行したことのある国</h4>
-                <p>{{ $profile->traveled_world }}</p>
+            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
+                <h3 class="small_title mb-2">旅行したことのある国</h3>
+                <div class="information_field">
+                    {{ $profile->traveled_world }}
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 mb-lg-5 pl-lg-5 mt-5">
-                <h4 class="mb-3">旅行したい都道府県</h4>
-                <p>{{ $profile->want_to_travel_japan }}</p>
+            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
+                <h3 class="small_title mb-2">旅行したい都道府県</h3>
+                <div class="information_field">
+                    {{ $profile->want_to_travel_japan }}
+                    </div>
             </div>
-            <div class="col-lg-6 mb-lg-5 pl-lg-5 mt-5">
-                <h4 class="mb-3">旅行したことがある都道府県</h4>
-                <p>{{ $profile->traveled_japan }}</p>
+            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
+                <h3 class="small_title mb-2">旅行したことがある都道府県</h3>
+                <div class="information_field">
+                    {{ $profile->traveled_japan }}
+                </div>
             </div>
-        </div>        
+        </div> 
     </div>
     {{-- 横線 --}}
-    <div class="container">
+    <div class="my_post container">
         <hr class="my-0">
     </div>
     <section class="u-content-space">
         <div class="container">
             <header class="text-center w-md-50 mx-auto mb-5">
-                <h2 class="h1">My Post</h2>
+                <h3 class="middle_title">My Post</h2>
             </header>
             <!-- Work Content -->
             <div class="u-portfolio row no-gutters mb-5">
@@ -79,8 +89,8 @@
                 @endforeach
             </div>
             <!-- End Work Content -->
-            <div class="to_my_post row d-flex justify-content-center ">
-                <a href="{{ action('Auth\PostController@index', ['type'=>'userpage_post', 'id' => $profile ->user_id]) }}" role="button" class="btn btn-primary btn-lg btn-block col-md-4">{{ $profile->username }}の投稿一覧</a>
+            <div class="to_my_post row d-flex justify-content-center col-md">
+                <a href="{{ action('Auth\PostController@index',['type'=>'userpage_post', 'id' => $profile ->user_id]) }}"><button type="button" class="btn">{{ $profile->username }}の投稿一覧</button></a>
             </div>
     </section>
 @endsection

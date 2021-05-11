@@ -50,11 +50,9 @@
                             {{-- ログインしているユーザーと投稿者のIDが一致したら編集ボタン、削除ボタンを表示 --}}
                             @if(Auth::id() === ($post->user_id))
                             <div class="index_btns d-flex justify-content-center">
-                                <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}"><button type="button" class="edit_btn btn-sm">編集</button></a>
+                                <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}"><button type="button" class="edit_btn btn btn-sm">編集</button></a>
                                 <!-- 削除選択時の警告文を表示するボタン -->
-                                <button type="button" class="delete_btn btn btn-sm" data-toggle="modal" data-target="#auth_post_index_Modal-{{$post->id}}" value="['id'=>{{ $post->id }}]">
-                                  削除
-                                </button> 
+                                <button type="button" class="delete_btn btn btn-sm" data-toggle="modal" data-target="#auth_post_index_Modal-{{$post->id}}" value="['id'=>{{ $post->id }}]">削除</button> 
                             </div>
                             @endif
                         </div>

@@ -1,14 +1,13 @@
 {{-- layouts/auth.blade.phpを読み込む --}}
 @extends('layouts.auth')
 
-
 {{-- auth.blade.phpの@yield('title')に'投稿新規作成'を埋め込む --}}
 @section('title', '投稿新規作成')
 
 {{-- auth.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="post_create row">
             <div class="col-md-6 mx-auto">
                 <div class="title text-center mt-5">
                     <h2 class="page_title">New Post</h2>
@@ -22,8 +21,6 @@
                             @endforeach
                         </ul>
                     @endif
-                    
-                    
                     <div class="post-create-form-group">
                         <div class="row">
                             <label class ="col-md-2">方面</label>
@@ -41,8 +38,6 @@
                             </select>
                         </div>
                     </div>
-                    
-                    
                     <div class="post-create-form-group row">
                         <label class ="col-md mt-2 col-form-label text-md-left">画像<span class="caution">jpeg・jpg・png形式</span></label>
                         <input type="file" class="form-control-file" name="image">
@@ -60,8 +55,8 @@
                         {{ csrf_field() }}
 
                     <div class="row">
-                        <div class="d-grid gap-2 col-6 mx-auto mt-4">
-                            <input type="submit" class="btn btn-primary btn-block" value="投稿">
+                        <div class="col-6 mx-auto mt-4">
+                            <input type="submit" class="btn btn-block" value="投稿">
                         </div>
                     </div>
                 </form>

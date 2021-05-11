@@ -1,8 +1,40 @@
+$page_title_font: impact;
+
+$middle_title_color: #000000;
+$middle_title_font: impact;
+
+$card_title_color: #000000;
+$direction_color: #6495ed;
+
+$card_title_color: #000000;
+
+
+$btn_word_color: #ffffff;
+
+$btn_color: #1F9AF5;
+$edit_btn_color: #33cc33;
+$delete_btn_color: #ea5550;
+
+$modal_caution_color: #ff0000;
+$modal_phrase_color: #000000;
+$modal_stop_delete_color: #1F9AF5;
+
+$username_color: #000080;
+
+//全般的に使用
+.btn {
+  background-color: $btn_color;
+  color: $btn_word_color;
+}
+
+
+
+
 body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: #f5f5f5;
-  color: #ccc;
+  color: #000000;
 }
 
 .navbar-laravel {
@@ -100,27 +132,8 @@ body {
     font-weight: bold;
 }
 
-//auth/trip/index.blade.php
-.index_line {
-  color: #c0c0c0;
-  border: none;
-  border-bottom:dashed  3px
-}
 
 
-
-///auth/trip/detail.blade.php
-.item_line {
-  border-top: 3px double #ccc;
-}
-
-//auth/trip/detail.blade.php
-.page_title_2 {
-  font-family: impact;
-  color: black;
-  font-size: 40px;
-  
-}
 
 //auth/register.blade.php
 //auth/post/create.blade.php
@@ -157,46 +170,131 @@ body {
   border-radius: 3px;
 }
 
+//auth/post/detail
+.detail_page {
+  .detail_direction {
+    color: $direction_color;
+    font-size: 20px; 
+  }
+  
+  .index_btns {
+    padding: 0 3px 10px 3px;
+    
+    .edit_btn {
+      background-color: $edit_btn_color;
+      color: $btn_word_color;
+    }
+    
+    .delete_btn {
+      margin-left: 5px;
+      background-color: $delete_btn_color;
+      color: $btn_word_color;
+    }
+  }
+  
+  .modal-content {
+    .modal-header {
+      .modal-title {
+        color: $modal_caution_color;
+        font-weight: 700;
+      }
+    }
+    
+    .modal-body {
+      color: $modal_phrase_color;
+    }
+    
+    .modal-footer {
+      .delete_btn {
+        background-color: $delete_btn_color;
+        color: $btn_word_color;
+      }
+      
+      .stop_delete_btn {
+        background-color: $modal_stop_delete_color;
+        color: $btn_word_color;
+      }
+    }
+  }
+  
+  .detail_title {
+    color: $card_title_color;
+    font-size: 30px;
+    // margin-bottom: 0;
+    // padding: 8px;
+    font-weight: 600;
+  }
+  
+  .detail_body{
+    .detail_count {
+      color: #000000;
+    }
+    
+    .detail_username {
+      font-size: 25px;
+      color: $username_color;
+    }
+    
+    .detail_text {
+      background: #ffffff;
+      color: #000000;
+      border-radius: 0;
+      border: 0;
+    }
+  }
+  
+  .middle_title {
+    color: $middle_title_color;
+    font-family: $middle_title_font;
+  }
+  
+  .username {
+    a {
+      color: $username_color;
+    }
+  }
+  
+  .comment {
+    color: #000000;
+  }
+  
+  .comment_index_btns {
+    .edit_btn {
+      background-color: $edit_btn_color;
+      color: $btn_word_color;
+    }
+    
+    .delete_btn {
+      margin-left: 5px;
+      background-color: $delete_btn_color;
+      color: $btn_word_color;
+    }
+  }
+  
+  .return_btn {
+    .return_all_post {
+      margin-right: 3px;
+    }
+    
+    .return_direction_post {
+      margin-left: 3px;
+    }
+  }
+}
+//////////////////////////////////////////
 
-
-//auth/post/detail.blade.php
-.detail_title {
-  color: #000000;
-  font-size: 30px;
-  // margin-bottom: 0;
-  // padding: 8px;
-  font-weight: 600;
+//auth/post/create
+.post_create {
+  .title {
+    .page_title {
+      font-family: $page_title_font;
+    }
+  }
 }
 
-.detail_direction {
-  color: #6495ed;
-  font-size: 20px;
-}
-
-.detail_count {
-  color: #000000;
-}
-
-.detail_username {
-  font-size: 25px;
-  color: #000080;
-}
-
-.detail_text {
-  background: #ffffff;
-}
+//////////////////////////////////////////
 
 //auth/post/index/
-
-$card_title_color: #000000;
-$btn_color: #1F9AF5;
-$edit_btn_color: #33cc33;
-$delete_btn_color: #ea5550;
-
-.btn {
-  background-color: $btn_color;
-  color: #ffffff;
-}
 
 .card {
     border-radius: 0;
@@ -237,7 +335,7 @@ $delete_btn_color: #ea5550;
         padding: 0 10px;
         margin-bottom: 0;
         a { 
-          color: #000080;
+          color: $username_color;
         }
       }
       
@@ -245,7 +343,7 @@ $delete_btn_color: #ea5550;
         padding: 0 10px;
         margin-bottom: 0;
         a { 
-          color: #6495ed;
+          color: $direction_color;
         }
       }
       
@@ -260,27 +358,223 @@ $delete_btn_color: #ea5550;
       
       .edit_btn {
         background-color: $edit_btn_color;
-        color: #ffffff;
+        color: $btn_word_color;
 
       }
       
       .delete_btn {
         margin-left: 5px;
         background-color: $delete_btn_color;
-        color: #ffffff;
+        color: $btn_word_color;
       }
+    }
+  }
+}
+/////////////////////////////////////////////
+//auth/post/edit
+.post_edit {
+  .title {
+    .page_title {
+      family-font: $page_title_font;
     }
   }
 }
 
 
+/////////////////////////////////////////////
+//auth/comment/edit
+.post_comment {
+  .title {
+    .page_title {
+      family-font: $page_title_font;
+    }
+  }
+}
+
+/////////////////////////////////////////////
 //auth/trip/index.blade.php
-.item_delete_btn {
-  margin-left: 3px;
-}
+.trip_index {
+  .title {
+    .page_title {
+      family-font: $page_title_font;
+    }
+  }
+  
+  .index_btns {
+    .edit_btn {
+      background-color: $edit_btn_color;
+      color: $btn_word_color;
 
-///auth/trip/index.blade.php
-.trip_index_delete-confirm {
-  margin-left: 3px;
+    }
+    
+    .delete_btn {
+      margin-left: 5px;
+      background-color: $delete_btn_color;
+      color: $btn_word_color;
+    }
+  }
+  
+  .modal-content {
+    .modal-header {
+      .modal-title {
+        color: $modal_caution_color;
+        font-weight: 700;
+      }
+    }
+    
+    .modal-body {
+      color: $modal_phrase_color;
+    }
+    
+    .modal-footer {
+      .delete_btn {
+        background-color: $delete_btn_color;
+        color: $btn_word_color;
+      }
+      
+      .stop_delete_btn {
+        background-color: $modal_stop_delete_color;
+        color: $btn_word_color;
+      }
+    }
+  }
+  
+  .index_line {
+    color: #c0c0c0;
+    border: none;
+    border-bottom:dashed  3px
+  }
+  
 }
+/////////////////////////////////
 
+//auth/trip/detail
+.trip_detail {
+  .title {
+    .page_title {
+      family-font: $page_title_font;
+    }
+  }
+  
+    .edit_btn {
+    background-color: $edit_btn_color;
+    color: $btn_word_color;
+  }
+
+  .delete_btn {
+    background-color: $delete_btn_color;
+    color: $btn_word_color;
+  }
+  
+  .modal-content {
+    .modal-header {
+      .modal-title {
+        color: $modal_caution_color;
+        font-weight: 700;
+      }
+    }
+    
+    .modal-body {
+      color: $modal_phrase_color;
+    }
+    
+    .modal-footer {
+      .delete_btn {
+        background-color: $delete_btn_color;
+        color: $btn_word_color;
+      }
+      
+      .stop_delete_btn {
+        background-color: $modal_stop_delete_color;
+        color: $btn_word_color;
+      }
+    }
+  }
+  
+  .item_line {
+    border-top: 3px double #ccc;
+  }
+  
+  .detail_items_title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  .add_items {
+    .delete_btn {
+      background-color: $delete_btn_color;
+      color: $btn_word_color;
+    }
+  }
+  
+  .middle_title {
+    color: $middle_title_color;
+    font-family: $middle_title_font;
+  }
+  
+}
+//////////////////////////////////////////
+
+//auth/trip/edit
+
+.trip_edit {
+  .title {
+    .page_title {
+      family-font: $page_title_font;
+    }
+  }
+  
+  .delete_btn {
+      background-color: $delete_btn_color;
+      color: $btn_word_color;
+  }
+  
+  .modal-content {
+    .modal-header {
+      .modal-title {
+        color: $modal_caution_color;
+        font-weight: 700;
+      }
+    }
+    
+    .modal-body {
+      color: $modal_phrase_color;
+    }
+    
+    .modal-footer {
+      .delete_btn {
+        background-color: $delete_btn_color;
+        color: $btn_word_color;
+      }
+      
+      .stop_delete_btn {
+        background-color: $modal_stop_delete_color;
+        color: $btn_word_color;
+      }
+    }
+  }
+  
+  .detail_items_title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  .add_items {
+    .delete_btn {
+      background-color: $delete_btn_color;
+      color: $btn_word_color;
+    }
+  }
+  
+  .caution_message {
+    color: $modal_caution_color;
+    font-weight: 700;
+  }
+  
+  .middle_title {
+    color: $middle_title_color;
+    font-family: $middle_title_font;
+  }
+  
+}
+//////////////////////////
