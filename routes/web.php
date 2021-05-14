@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 
 //PostController一覧
-Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
+Route::group(['prefix' => 'auth', 'middleware'=> ['auth', 'profile']], function(){
     Route::get('post/create', 'Auth\PostController@add');
     Route::post('post/create', 'Auth\PostController@create');
     Route::get('post', 'Auth\PostController@index')->name('top');
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'], function(){
 //追加、get 文字列だけ、見られてもいいもの　読み出し　画面表示など
 
 //ProfileController一覧
-Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+Route::group(['prefix' => 'auth', 'middleware'=> ['auth','profile']],function(){
     Route::get('profile/create', 'Auth\ProfileController@add');
     Route::get('profile/edit', 'Auth\ProfileController@edit');
     Route::post('profile/create', 'Auth\ProfileController@create');
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
 });
 
 //CommentController一覧
-Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+Route::group(['prefix' => 'auth', 'middleware'=> ['auth', 'profile']],function(){
     Route::post('commment/create', 'Auth\CommentController@create');
     Route::get('comment/delete', 'Auth\CommentController@delete');
     Route::get('comment/edit', 'Auth\CommentController@edit');
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
 });
 
 //TripController一覧
-Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+Route::group(['prefix' => 'auth', 'middleware'=> ['auth', 'profile']],function(){
     Route::get('trip/index', 'Auth\TripController@index');
     Route::get('trip/detail', 'Auth\TripController@show');
     Route::get('trip/create', 'Auth\TripController@add');
@@ -61,7 +61,7 @@ Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
 });
 
 //ItemController一覧
-Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+Route::group(['prefix' => 'auth', 'middleware'=> ['auth', 'profile']],function(){
     Route::post('item/create', 'Auth\ItemController@create');
     Route::get('item/delete', 'Auth\ItemController@delete');
     Route::get('item/all_delete', 'Auth\ItemController@alldelete');
