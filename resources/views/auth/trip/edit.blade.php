@@ -1,12 +1,12 @@
 @extends('layouts.auth')
-@section('title', '持ち物リスト編集')
+@section('title', '持ち物リスト編集/Trirec')
 
 @section('content')
     <div class="trip_edit container">
         <div class="row">
             <div class="col-md-10 mx-auto">
                 <div class="title text-center mt-5">
-                    <h2 class="page_title">Edit Item list</h2>
+                    <h2 class="page_title">Update Item list</h2>
                 </div>
                 @if (count($errors) > 0)
                     <ul>
@@ -17,13 +17,18 @@
                 @endif
                 <form action="{{ action('Auth\TripController@update') }}" method="post" enctype="multipart/form-data">
                     <div class="row">
-                        <div class="col-md-4 mt-4 d-flex align-items-center">
+                        <div class="col-md-3 mt-4 d-flex align-items-center">
                             <input type="text" class="form-control" name="trip_title" value="{{ $trip->trip_title }}">
                         </div>
-                        <div class="col-md-6 mt-4 d-flex align-items-center justify-content-center">
+                        <div class="col-md-5 mt-4 d-flex align-items-center justify-content-center">
                                 <input type="date" id="trip_start" name="trip_start" value="{{ $trip->trip_start }}" min="2021-05-01" max="2025-12-31">〜
                                 <input type="date" id="trip_end" name="trip_end" value="{{ $trip->trip_end }}" min="2021-05-01" max="2025-12-31">
                         </div>
+                        <div class="col-md-2 mt-4">
+                        {{-- 持ち物保存ボタン --}}
+                            <button type="submit" class="btn">保存する</button>
+                        </div>
+                        
                         <div class="col-md-2 mt-4">
                         {{-- 持ち物を全て削除するボタン --}}
                             <button type="button" class="delete_btn btn" data-toggle="modal" data-target="#all_item_Modal" >持ち物全削除</button>
@@ -103,12 +108,6 @@
                             @endforeach
                         </div>
                         @csrf
-                        <div class="caution_message row d-flex justify-content-center mt-5 mb-2">
-                            内容を変更した後はコチラを押しましょう！（押さないと保存されません）
-                        </div>
-                        <div class="row d-flex justify-content-center mb-4">
-                            <button type="submit" class="btn">保存する</button>
-                        </div>
                         <input type="hidden" name="id" value="{{ $trip->id }}">
                 </form>
                 <div class="row text-left mt-5">

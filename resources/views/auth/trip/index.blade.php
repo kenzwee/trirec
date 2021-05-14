@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', '旅行リスト一覧')
+@section('title', '旅行リスト一覧/Trirec')
 
 @section('content')
     <div class="container">
@@ -20,8 +20,8 @@
                                     <input type="text" class="form-control" placeholder="旅行名で検索" name="trip_title" value="{{ $cond_title }}">
                                 </div>
                                 <div class="col-md-2">
-                                    {{ csrf_field() }}
-                                        <input type="submit" class="btn btn-primary" value="検索">
+                                    @csrf
+                                    <input type="submit" class="btn btn-primary" value="検索">
                                 </div>
                             </div>
                         </form>

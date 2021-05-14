@@ -2,7 +2,7 @@
 @extends('layouts.auth')
 
 {{-- auth.blade.phpの@yield('title')に'投稿新規作成'を埋め込む --}}
-@section('title', '投稿新規作成')
+@section('title', '投稿新規作成/Trirec')
 
 {{-- auth.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
@@ -21,7 +21,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    <div class="post-create-form-group">
+                    <div class="post-create-form-group mt-2">
                         <div class="row">
                             <label class ="col-md-2">方面</label>
                         </div>
@@ -52,7 +52,7 @@
                         <label class="col-md mt-2 ol-form-label text-md-left">本文</label>
                         <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
                     </div>
-                        {{ csrf_field() }}
+                        @csrf
 
                     <div class="row">
                         <div class="col-6 mx-auto mt-4">

@@ -3,6 +3,20 @@
   color: #ffffff;
 }
 
+.page_title {
+  font-family: impact;
+  color: black;
+  font-size: 50px;
+}
+
+.pagenation {
+  font-size: 10pt;
+}
+
+.pagenation li {
+  display: inline-block;
+}
+
 body {
   background-repeat: no-repeat;
   background-position: center;
@@ -42,58 +56,6 @@ body {
 
 .login-body {
   background-color: rgba(0, 0, 0, 0.25);
-}
-
-.pagenation {
-  font-size: 10pt;
-}
-
-.pagenation li {
-  display: inline-block;
-}
-
-.card-picture {
-  width: 100%;
-}
-
-.direction_img {
-  max-width: 100%;
-}
-
-.card-img-top {
-  -o-object-fit: cover;
-     object-fit: cover;
-  height: 200px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.card-text-username {
-  float: left;
-  width: 50%;
-}
-
-.card-text-direction {
-  float: right;
-  width: 50%;
-}
-
-.post-create-form-group {
-  margin-bottom: 0;
-}
-
-.page_title {
-  font-family: impact;
-  color: black;
-  font-size: 50px;
-}
-
-.login_btns {
-  padding: 0.5em 2em;
-  background-color: #4A82F6;
-  color: #FFFFFF;
-  font-size: 15px;
-  font-weight: bold;
 }
 
 .caution {
@@ -221,34 +183,38 @@ body {
   margin-left: 3px;
 }
 
-.post_create .title .page_title {
-  font-family: impact;
-}
-
-.card {
+.post_index .card {
   border-radius: 0;
 }
 
-.card .card_image {
+.post_index .card .card_image {
   position: relative;
 }
 
-.card .card_image .eye {
+.post_index .card .card_image .card-img-top {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.post_index .card .card_image .eye {
   position: absolute;
   top: 0px;
   right: 5px;
 }
 
-.card .card_image .eye .count-text {
+.post_index .card .card_image .eye .count-text {
   color: #ffffff;
 }
 
-.card .card_body {
+.post_index .card_body {
   background: #ffffff;
   padding: 0;
 }
 
-.card .card_body .card_title {
+.post_index .card_body .card_title {
   color: #000000;
   font-size: 20px;
   margin-bottom: 0;
@@ -256,61 +222,49 @@ body {
   font-weight: 500;
 }
 
-.card .card_body .card_text {
+.post_index .card_body .card_text {
   color: #000000;
   padding: 5px;
   -webkit-margin-after: 0;
           margin-block-end: 0;
 }
 
-.card .card_body .card_text .username {
+.post_index .card_body .card_text .username {
   padding: 0 10px;
   margin-bottom: 0;
 }
 
-.card .card_body .card_text .username a {
+.post_index .card_body .card_text .username a {
   color: #000080;
 }
 
-.card .card_body .card_text .direction {
+.post_index .card_body .card_text .direction {
   padding: 0 10px;
   margin-bottom: 0;
 }
 
-.card .card_body .card_text .direction a {
+.post_index .card_body .card_text .direction a {
   color: #6495ed;
 }
 
-.card .card_body .card_text .create_at {
+.post_index .card_body .card_text .create_at {
   color: #000000;
   margin-bottom: 0;
 }
 
-.card .card_body .index_btns {
+.post_index .card_body .index_btns {
   padding: 0 3px 10px 3px;
 }
 
-.card .card_body .index_btns .edit_btn {
+.post_index .card_body .index_btns .edit_btn {
   background-color: #33cc33;
   color: #ffffff;
 }
 
-.card .card_body .index_btns .delete_btn {
+.post_index .card_body .index_btns .delete_btn {
   margin-left: 5px;
   background-color: #ea5550;
   color: #ffffff;
-}
-
-.post_edit .title .page_title {
-  family-font: impact;
-}
-
-.post_comment .title .page_title {
-  family-font: impact;
-}
-
-.trip_index .title .page_title {
-  family-font: impact;
 }
 
 .trip_index .index_btns .edit_btn {
@@ -349,10 +303,6 @@ body {
   border-bottom: dashed 3px;
 }
 
-.trip_detail .title .page_title {
-  family-font: impact;
-}
-
 .trip_detail .edit_btn {
   background-color: #33cc33;
   color: #ffffff;
@@ -382,13 +332,17 @@ body {
   color: #ffffff;
 }
 
-.trip_detail .item_line {
-  border-top: 3px double #ccc;
+.trip_detail .table {
+  table-layout: fixed;
 }
 
-.trip_detail .detail_items_title {
+.trip_detail .table .thead {
+  background-color: #ABE3FF;
+}
+
+.trip_detail .no_item {
+  color: red;
   font-weight: 600;
-  font-size: 20px;
 }
 
 .trip_detail .add_items .delete_btn {
@@ -401,8 +355,8 @@ body {
   font-family: impact;
 }
 
-.trip_edit .title .page_title {
-  family-font: impact;
+.trip_create .return_btn {
+  margin-top: 100px;
 }
 
 .trip_edit .delete_btn {
@@ -439,13 +393,100 @@ body {
   color: #ffffff;
 }
 
-.trip_edit .caution_message {
-  color: #ff0000;
-  font-weight: 700;
-}
-
 .trip_edit .middle_title {
   color: #000000;
   font-family: impact;
+}
+
+.post_search .direction_img {
+  max-width: 100%;
+}
+
+.search_result_direction .direction_img {
+  max-width: 100%;
+}
+
+.post_search_result .card {
+  border-radius: 0;
+}
+
+.post_search_result .card .card_image {
+  position: relative;
+}
+
+.post_search_result .card .card_image .card-img-top {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.post_search_result .card .card_image .eye {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+
+.post_search_result .card .card_image .eye .count-text {
+  color: #ffffff;
+}
+
+.post_search_result .card_body {
+  background: #ffffff;
+  padding: 0;
+}
+
+.post_search_result .card_body .card_title {
+  color: #000000;
+  font-size: 20px;
+  margin-bottom: 0;
+  padding: 8px;
+  font-weight: 500;
+}
+
+.post_search_result .card_body .card_text {
+  color: #000000;
+  padding: 5px;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
+.post_search_result .card_body .card_text .username {
+  padding: 0 10px;
+  margin-bottom: 0;
+}
+
+.post_search_result .card_body .card_text .username a {
+  color: #000080;
+}
+
+.post_search_result .card_body .card_text .direction {
+  padding: 0 10px;
+  margin-bottom: 0;
+}
+
+.post_search_result .card_body .card_text .direction a {
+  color: #6495ed;
+}
+
+.post_search_result .card_body .card_text .create_at {
+  color: #000000;
+  margin-bottom: 0;
+}
+
+.post_search_result .card_body .index_btns {
+  padding: 0 3px 10px 3px;
+}
+
+.post_search_result .card_body .index_btns .edit_btn {
+  background-color: #33cc33;
+  color: #ffffff;
+}
+
+.post_search_result .card_body .index_btns .delete_btn {
+  margin-left: 5px;
+  background-color: #ea5550;
+  color: #ffffff;
 }
 

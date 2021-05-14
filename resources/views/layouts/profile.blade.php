@@ -25,6 +25,7 @@
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         {{-- この章の後半で作成するCSSを読み込みます --}}
         <link href="{{ secure_asset('css/profile.css') }}" rel="stylesheet">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ secure_asset('images/favicon-32x32.png') }}">
     </head>
     <body>
         <div id="app">
@@ -40,6 +41,8 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
+                        @guest
+                        @else
                         <div class="navbar-nav mr-auto">
                             <a class="nav-link active" aria-current="page" href="{{ action('Auth\PostController@index') }}">Home</a>
                             <a class="nav-link" href="{{ action('Auth\PostController@search') }}">Search</a>
@@ -47,7 +50,7 @@
                             <a class="nav-link" href="{{ action('Auth\ProfileController@show',  ["id" => Auth::id()]) }}">User</a>
                             <a class="nav-link" href="{{ action('Auth\TripController@index') }}">Item</a>
                         </div>
-
+                        @endguest
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

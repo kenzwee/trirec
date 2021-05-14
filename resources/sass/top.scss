@@ -1,3 +1,10 @@
+$btn_word_color: #ffffff;
+$btn_color: #1F9AF5;
+
+.py-4 {
+    padding-bottom : 0;
+}
+
 .body {
     font-family: "Helvetica Neue",
     Arial,
@@ -7,47 +14,64 @@
     sans-serif;
 }
 
-.carousel {
-    position: relative;
+.navbar-laravel {
+  background-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.carousel-item {
-    background-size: cover;
-    
+.navbar-brand {
+  color: #fff !important;
 }
 
-.top_logo {
-    position: absolute;
-    width: 70%;
-    top: 30%;
-    left: 50%;
-    -ms-transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    margin:0;
-    padding:0;
+.nav-link {
+  color: #fff !important;
 }
 
-.top_button {
-    position: absolute;
-    width: 100%;
-    top: 70%;
-  　left: 50%;
-  　-ms-transform: translate(-50%,-50%);
-  　-webkit-transform: translate(-50%,-50%);
-  　transform: translate(-50%,-50%);
-  　z-index: 3;
+//////////////////////////////////////
+//top
+.top_page {
+    .carousel {
+        position: relative;
+        
+        .carousel-item {
+            background-size: cover;
+            
+            .top_logo {
+                position: absolute;
+                width: 70%;
+                top: 30%;
+                left: 50%;
+                -ms-transform: translate(-50%,-50%);
+                -webkit-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+                margin:0;
+                padding:0;
+            }
+            
+            .top_button {
+                position: absolute;
+                width: 100%;
+                top: 70%;
+              　left: 50%;
+              　-ms-transform: translate(-50%,-50%);
+              　-webkit-transform: translate(-50%,-50%);
+              　transform: translate(-50%,-50%);
+              　z-index: 3;
+            
+                .top_btns {
+                    padding: 15px 35px;
+                    background-color: $btn_color;
+                    // background-color: #53D5EB;
+                    color: $btn_word_color;
+                    border: solid 3px #ffffff;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 }
-
-.top_btns {
-    padding: 1em 3em;
-    background-color: #4A82F6;
-    // background-color: #53D5EB;
-    color: #FFFFFF;
-    font-size: 15px;
-    font-weight: bold;
-}
-
+////////////////////////////////////////////////
 
 
 

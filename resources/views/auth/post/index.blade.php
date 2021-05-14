@@ -1,8 +1,8 @@
 @extends('layouts.auth')
-@section('title', '登録済みの投稿一覧')
+@section('title', '投稿一覧/Trirec')
 
 @section('content')
-    <div class="container">
+    <div class="post_index container">
         <div class="row">
             <h2>投稿一覧</h2>
         </div>
@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-2">
                             {{ csrf_field() }}
-                            <input type="submit" class="btn btn-primary" value="検索">
+                            <input type="submit" class="btn" value="検索">
                         </div>
                     </div>
                 </form>
@@ -39,7 +39,9 @@
                             </div>
                         </div>
                         <div class="card_body">
-                            <div class="card_title">{{ str_limit($post->title, 18) }}</div>
+                            <div class="card_title">
+                                {{ str_limit($post->title, 18) }}
+                            </div>
                             <div class="card_text">
                                 <p class="username"><a href="{{ action('Auth\ProfileController@show', ["id" =>$post->user_id]) }}">{{ str_limit($post ->user->profile->username, 20) }}</a></p>
                                 <p class="direction"><a href="{{ action('Auth\PostController@result', ["direction" => $post->direction]) }}">{{ str_limit(config('direction.names.' . $post->direction),20) }}</a></p>
@@ -73,14 +75,14 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">削除するのをやめる</button>
-                                <a href="{{ action('Auth\PostController@delete',['id' => $post->id]) }}" ><button type="button" class="btn btn-primary ">削除する</button></a>
+                                <a href="{{ action('Auth\PostController@delete',['id' => $post->id]) }}" ><button type="button" class="btn">削除する</button></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 @php $count +=1 @endphp
-                @if($count > 4)
         {{-- この</div>は4つの投稿を1グループとしてここで１本線を引くためのもの--}}
+                @if(4 < $count)
         </div>
                     <hr color="#c0c0c0">
                     <div class = "row">
@@ -88,8 +90,6 @@
                 @endif
             @endforeach
         </div>
-        
-        
         <div class="row d-flex justify-content-center">
             {{ $posts->links() }}
         </div>

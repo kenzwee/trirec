@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', 'コメント編集')
+@section('title', 'コメント編集/Trirec')
 
 @section('content')
     <div class="container">
@@ -29,7 +29,7 @@
                         <textarea class="form-control" name="body" rows="5">{{ $comment_form->body }}</textarea>
                     </div>
                         <input type="hidden" name="id" value="{{ $comment_form->id }}">
-                        {{ csrf_field() }}
+                        @csrf
                     <div class="row mt-4 d-flex justify-content-center">
                         <input type="submit" class="btn" value="更新">
                     </div>

@@ -1,12 +1,12 @@
 @extends('layouts.auth')
-@section('title', '投稿内容編集')
+@section('title', '投稿編集/Trirec')
 
 @section('content')
     <div class="container">
         <div class="post_edit row">
             <div class="col-md-6 mx-auto">
                 <div class="title text-center mt-5">
-                    <h2 class="page_title">Edit Post</h2>
+                    <h2 class="page_title">Update Post</h2>
                 </div>                
                 <form action="{{ action('Auth\PostController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
@@ -16,7 +16,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    <div class="form-group row">
+                    <div class="form-group row mt-2">
                         <label class="col-md col-form-label text-md-left" for="image">画像<span class="caution">jpeg・jpg・png形式</span></label>
                         <input type="file" class="form-control-file mb-3" name="image">
                         {{-- ビューに現在設定中の画像を表示 --}}
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-6 mx-auto mt-4">
                             <input type="hidden" name="id" value="{{ $post_form->id }}">
-                            {{ csrf_field() }}
+                            @csrf
                             <input type="submit" class="btn btn-block" value="更新">
                         </div>
                     </div>

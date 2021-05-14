@@ -3,7 +3,7 @@
 
 
 {{-- profile.blade.phpの@yield('title')に'プロフィール新規作成'を埋め込む --}}
-@section('title', 'プロフィール新規作成')
+@section('title', 'プロフィール新規作成/Trirec')
 
 {{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
@@ -51,12 +51,12 @@
                         <label class ="col-form-label text-md-left">プロフィール画像<span class="caution">jpeg・jpg・png形式</span></label>
                         <input type="file" class="form-control-file mt-1" name="profile_image">
                     </div>
-                    {{ csrf_field() }}
+                    @csrf
                     
                     <div class="form-group row mb-0">
-                        <div class="col-md-12 mt-3 d-flex justify-content-center">
-                            <button class="button-fill" type="submmit">
-                                ENTRY
+                        <div class="col-md-12 mt-4 d-flex justify-content-center">
+                            <button class="btn" type="submmit">
+                                {{ __('messages.Sign Up') }}
                             </button>
                         </div>
                     </div>

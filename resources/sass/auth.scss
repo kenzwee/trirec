@@ -27,6 +27,20 @@ $username_color: #000080;
   color: $btn_word_color;
 }
 
+.page_title {
+  font-family: $page_title_font;
+  color: black;
+  font-size: 50px;
+}
+
+.pagenation {
+  font-size: 10pt;
+}
+
+.pagenation li {
+  display: inline-block;
+}
+//////////////////////////////
 
 
 
@@ -71,66 +85,39 @@ body {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-.pagenation {
-  font-size: 10pt;
-}
 
-.pagenation li {
-  display: inline-block;
-}
 
-.card-picture {
-  width: 100%;
-}
+// .card-picture {
+//   width: 100%;
+// }
 
 
 
 
-.direction_img {
-  max-width: 100%;
-
-}
 
 
-//top pageで利用
-.card-img-top {
-    object-fit: cover;
-    height: 200px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
+// .post-create-form-group {
+//     margin-bottom: 0;
+// }
+///////////////////////////////////////
+//auth/login
 
-.card-text-username {
-    float: left;
-    width: 50%;
-}
 
-.card-text-direction {
-    float: right;
-    width: 50%;  
-}
+.login {
 
-.post-create-form-group {
-    margin-bottom: 0;
-}
-
-//login.blade.phpで利用
-.page_title {
-  font-family: impact;
-  color: black;
-  font-size: 50px;
+  
 }
 
 
 
-.login_btns {
-    padding: 0.5em 2em;
-    background-color: #4A82F6;
-    // background-color: #53D5EB;
-    color: #FFFFFF;
-    font-size: 15px;
-    font-weight: bold;
-}
+// .login_btns {
+//     padding: 0.5em 2em;
+//     background-color: #4A82F6;
+//     // background-color: #53D5EB;
+//     color: #FFFFFF;
+//     font-size: 15px;
+//     font-weight: bold;
+// }
 
 
 
@@ -285,33 +272,40 @@ body {
 
 //auth/post/create
 .post_create {
-  .title {
-    .page_title {
-      font-family: $page_title_font;
-    }
-  }
+  // .title {
+  //   .page_title {
+  //     font-family: $page_title_font;
+  //   }
+  // }
 }
 
 //////////////////////////////////////////
 
 //auth/post/index/
-
-.card {
-    border-radius: 0;
-  
-  .card_image {
-    position: relative;
+.post_index{
+  .card {
+      border-radius: 0;
     
-    .eye {
-      position: absolute;
-      top: 0px;
-      right: 5px;
+    .card_image {
+      position: relative;
       
-      .count-text {
-      color: #ffffff;
+      .card-img-top {
+        object-fit: cover;
+        height: 200px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      
+      .eye {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        
+        .count-text {
+        color: #ffffff;
+        }
       }
     }
-    
   }
     
   .card_body {
@@ -373,33 +367,19 @@ body {
 /////////////////////////////////////////////
 //auth/post/edit
 .post_edit {
-  .title {
-    .page_title {
-      family-font: $page_title_font;
-    }
-  }
+
 }
 
 
 /////////////////////////////////////////////
 //auth/comment/edit
 .post_comment {
-  .title {
-    .page_title {
-      family-font: $page_title_font;
-    }
-  }
+
 }
 
 /////////////////////////////////////////////
 //auth/trip/index.blade.php
 .trip_index {
-  .title {
-    .page_title {
-      family-font: $page_title_font;
-    }
-  }
-  
   .index_btns {
     .edit_btn {
       background-color: $edit_btn_color;
@@ -450,13 +430,7 @@ body {
 
 //auth/trip/detail
 .trip_detail {
-  .title {
-    .page_title {
-      family-font: $page_title_font;
-    }
-  }
-  
-    .edit_btn {
+  .edit_btn {
     background-color: $edit_btn_color;
     color: $btn_word_color;
   }
@@ -491,14 +465,27 @@ body {
     }
   }
   
-  .item_line {
-    border-top: 3px double #ccc;
+  .table {
+    table-layout: fixed;
+    
+    .thead {
+      background-color: #ABE3FF;
+    }
   }
   
-  .detail_items_title {
+  .no_item {
+    color: red;
     font-weight: 600;
-    font-size: 20px;
   }
+  
+  
+  
+
+  
+  // .detail_items_title {
+  //   font-weight: 600;
+  //   font-size: 20px;
+  // }
   
   .add_items {
     .delete_btn {
@@ -513,16 +500,22 @@ body {
   }
   
 }
+
+//////////////////////////////////////////
+
+//auth/trip/create
+.trip_create {
+  .return_btn {
+    margin-top: 100px;
+  }
+}
+
 //////////////////////////////////////////
 
 //auth/trip/edit
 
 .trip_edit {
-  .title {
-    .page_title {
-      family-font: $page_title_font;
-    }
-  }
+
   
   .delete_btn {
       background-color: $delete_btn_color;
@@ -566,15 +559,113 @@ body {
     }
   }
   
-  .caution_message {
-    color: $modal_caution_color;
-    font-weight: 700;
-  }
-  
   .middle_title {
     color: $middle_title_color;
     font-family: $middle_title_font;
   }
   
 }
-//////////////////////////
+
+//////////////////////////////////////////
+
+//auth/post/search
+.post_search {
+  .direction_img {
+    max-width: 100%;
+  
+  }
+}
+
+
+//////////////////////////////////////////
+
+//auth/post/search_result
+.search_result_direction {
+  .direction_img {
+  max-width: 100%;
+  }
+}
+
+.post_search_result{
+  .card {
+      border-radius: 0;
+    
+    .card_image {
+      position: relative;
+      
+      .card-img-top {
+        object-fit: cover;
+        height: 200px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      
+      .eye {
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        
+        .count-text {
+        color: #ffffff;
+        }
+      }
+    }
+  }
+
+
+  .card_body {
+    background: #ffffff;
+    padding: 0;
+    
+    .card_title {
+      color: $card_title_color;
+      font-size: 20px;
+      margin-bottom: 0;
+      padding: 8px;
+      font-weight: 500;
+    }
+    
+    .card_text {
+      color: #000000;
+      padding: 5px;
+      margin-block-end: 0;
+      
+      .username {
+        padding: 0 10px;
+        margin-bottom: 0;
+        a { 
+          color: $username_color;
+        }
+      }
+      
+      .direction {
+        padding: 0 10px;
+        margin-bottom: 0;
+        a { 
+          color: $direction_color;
+        }
+      }
+      
+      .create_at {
+        color: #000000;
+        margin-bottom: 0;
+      }
+    }
+    
+    .index_btns {
+      padding: 0 3px 10px 3px; 
+      
+      .edit_btn {
+        background-color: $edit_btn_color;
+        color: $btn_word_color;
+
+      }
+      
+      .delete_btn {
+        margin-left: 5px;
+        background-color: $delete_btn_color;
+        color: $btn_word_color;
+      }
+    }
+  }
+}

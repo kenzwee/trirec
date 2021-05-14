@@ -195,17 +195,14 @@ body {
 
 //auth/profile/userpage
 .profile_userpage {
-  .small_title {
-    font-weight: 500;
-    color: $card_title_color;
-  }
+
   
   .introduction_field {
     background-color: #ffffff;
     width: 100%;
     height: 100px;
     font-size: 20px;
-    border: 1px solid #61DBFF;
+    // border: 1px solid #61DBFF;
   }
   
   .information_field {
@@ -213,18 +210,99 @@ body {
     width: 100%;
     height: 200px;
     font-size: 20px;
-    border: 1px solid #61DBFF;
+    // border: 1px solid #61DBFF;
   }
-}
+  
+  .introduce {
+    padding:5%;
+    
+    .img{
+      text-align:center;
+    }
+      
+    .details{
+      // border-left:3px solid #ded4da;
+  
+      .user_name {
+        color: $middle_title_color;
+        font-family: $middle_title_font;
+        font-size: 40px;
+      }
+      .middle_title {
+        color: $middle_title_color;
+        font-family: $middle_title_font;
+      }
+    }
+      
+
+      .tags {
+        background: #5cd;
+        // border-radius: 8px 0 0 8px;
+        color: #fff;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 2em 0 3em;
+        position: relative;
+        color: $card_title_color;
+        font-size: 20px;
+        
+        .small_title {
+          font-weight: 500;
+          color: #ffffff;
+        }
+      }
+      
+      .detail_text {
+        background: #ffffff;
+        color: #000000;
+        border-radius: 0;
+        border: 0;
+        font-size: 18px;
+      }
+      
+      .tags::before {
+        border: 25px solid transparent;
+        border-left-color: #5cd;
+        border-right-width: 0;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        right: -25px;
+        top: 0;
+        width: 0;
+        font-weight: 500;
+
+        
+      }
+      
+      .tags::after {
+        background: #28c;
+        // border-radius: 8px 0 0 8px;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 1em;
+      }
+    }
+  }
+
 
 .my_post {
   .middle_title {
     color: $middle_title_color;
     font-family: $middle_title_font;
+    font-size: 40px;
   }
   
   .to_my_post {
     padding-right: 0;
   }
 }
+
+
 ///////////////////////////

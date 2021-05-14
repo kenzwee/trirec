@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', '投稿内容')
+@section('title', '投稿詳細/Trirec')
 
 @section('content')
     <div class="detail_page container">
@@ -39,7 +39,7 @@
             </div>
         </div>   
         {{-- タイトル --}}
-        <div class="detail_title row d-flex justify-content-center col-md-10 offset-md-1 mt-2 mb-3">
+        <div class="detail_title row d-flex justify-content-center col-md-10 offset-md-1 mt-3 mb-3">
             {{ $post->title }}
         </div>    
         <div class="detail_body row d-flex justify-content-center">
@@ -118,7 +118,7 @@
             <div class="row col-md-10 mx-auto">
                 <textarea class="form-control" name="body" rows="3">{{ old('body') }}</textarea>
             </div>
-            {{ csrf_field() }}
+            @csrf
             <div class="row d-flex justify-content-center mt-4 mb-5">
                 <input type="submit" class="btn" value="コメントする">
             </div>

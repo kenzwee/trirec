@@ -1,5 +1,5 @@
 @extends('layouts.profile')
-@section('title', 'ユーザーページ')
+@section('title', 'ユーザーページ/Trirec')
 
 @section('content')
     <div class="profile_userpage container">
@@ -9,70 +9,78 @@
         <div class="row">
             <div class="col-md-4">
                 @if(Auth::id() === ($profile->user_id))
-                    <a href="{{ action('Auth\ProfileController@edit', ['id' => Auth::id()] ) }}" role="button" class="btn btn-primary">プロフィール編集</a>
+                    <a href="{{ action('Auth\ProfileController@edit', ['id' => Auth::id()] ) }}" role="button" class="btn">プロフィール編集</a>
                 @endif
             </div>
-            {{ csrf_field() }}
+            @csrf
         </div>
-        <div class="row">
-            <div class="col-md-12 mt-3 mb-4 text-center">
-                <h2 class="middle_title">{{ $profile->username }}</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="box text-center col-md-12 mb-5">
+        <div class="introduce row">
+            <div class="col-md-6 img">
                 @if(isset($profile->image_path))
                 <img src="{{secure_asset('storage/profile_image/'.$profile->image_path)}}" class="profile_round_image" alt="profile_image">
                 @else
                 <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image" alt="no_image">
                 @endif
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 mb-lg-5 pl-lg-5 mt-5 text-align:center">
-                <h3 class="small_title mb-2">自己紹介</h3>
-                <div class="introduction_field">
-                    {{ $profile->introduction }}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
-                <h3 class="small_title mb-2">旅行したい国</h3>
-                <div class="information_field">
-                    {{ $profile->want_to_travel_world }}
-                </div>
-            </div>
-            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
-                <h3 class="small_title mb-2">旅行したことのある国</h3>
-                <div class="information_field">
-                    {{ $profile->traveled_world }}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
-                <h3 class="small_title mb-2">旅行したい都道府県</h3>
-                <div class="information_field">
-                    {{ $profile->want_to_travel_japan }}
+            <div class="col-md-6 mb-2 details">
+                    <h2 class="user_name">{{ $profile->username }}</h2>
+                    <div class="tags mb-2">
+                        <div class="small_title">
+                            自己紹介
+                        </div>
                     </div>
+                <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->introduction }}</textarea>
             </div>
-            <div class="col-md-6 mb-lg-5 pl-lg-5 mt-5">
-                <h3 class="small_title mb-2">旅行したことがある都道府県</h3>
-                <div class="information_field">
-                    {{ $profile->traveled_japan }}
-                </div>
+        </div>
+        
+        <div class="introduce row">
+            <div class="col-md-6 mb-2 details">
+                    <div class="tags mb-2">
+                        <div class="small_title">
+                            旅行したい国
+                        </div>
+                    </div>
+                <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->want_to_travel_world }}</textarea>
             </div>
-        </div> 
+            <div class="col-md-6 mb-2 details">
+                    <div class="tags mb-2">
+                        <div class="small_title">
+                            旅行したことのある国
+                        </div>
+                    </div>
+                <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->traveled_world  }}</textarea>
+            </div>
+        </div>
+        
+        
+        
+        <div class="introduce row">
+            <div class="col-md-6 mb-2 details">
+                    <div class="tags mb-2">
+                        <div class="small_title">
+                            旅行したい都道府県
+                        </div>
+                    </div>
+                <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->want_to_travel_japan }}</textarea>
+            </div>
+            <div class="col-md-6 mb-2 details">
+                    <div class="tags mb-2">
+                        <div class="small_title">
+                            旅行したことがある都道府県
+                        </div>
+                    </div>
+                <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->traveled_japan }}</textarea>
+            </div>
+        </div>
     </div>
     {{-- 横線 --}}
-    <div class="my_post container">
+    <div class="container">
         <hr class="my-0">
     </div>
     <section class="u-content-space">
-        <div class="container">
+        <div class="my_post container">
             <header class="text-center w-md-50 mx-auto mb-5">
-                <h3 class="middle_title">My Post</h2>
+                <h2 class="middle_title">My Post</h2>
             </header>
             <!-- Work Content -->
             <div class="u-portfolio row no-gutters mb-5">
@@ -89,8 +97,8 @@
                 @endforeach
             </div>
             <!-- End Work Content -->
-            <div class="to_my_post row d-flex justify-content-center col-md">
-                <a href="{{ action('Auth\PostController@index',['type'=>'userpage_post', 'id' => $profile ->user_id]) }}"><button type="button" class="btn">{{ $profile->username }}の投稿一覧</button></a>
+            <div class="to_my_post col-md-4 mx-auto">
+                <a href="{{ action('Auth\PostController@index',['type'=>'userpage_post', 'id' => $profile ->user_id]) }}"><button type="button" class="btn btn-block">{{ $profile->username }}の投稿一覧</button></a>
             </div>
     </section>
 @endsection

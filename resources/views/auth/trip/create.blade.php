@@ -1,8 +1,8 @@
 @extends('layouts.auth')
-@section('title', '旅行リスト新規作成')
+@section('title', '旅行リスト新規作成/Trirec')
 
 @section('content')
-    <div class="container">
+    <div class="trip_create container">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="title text-center mt-5">
@@ -41,13 +41,13 @@
                             </div>  
                         @endif
                     @endforeach
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="row d-flex justify-content-center mt-4 mb-5">
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}"> 
-                        <input type="submit" class="btn btn-primary w-25" value="登録">
+                        <input type="submit" class="btn btn-block col-md-4" value="登録">
                     </div>
-                    <div class="row d-flex justify-content-center mt-5">
-                        <a href="{{ action('Auth\TripController@index') }}"><input type="submit" class="btn btn-primary btn-lg btn-block" value="旅行リスト一覧に戻る"></a>
+                    <div class="return_btn row d-flex justify-content-center">
+                        <a href="{{ action('Auth\TripController@index') }}"><input type="submit" class="btn btn-block" value="旅行リスト一覧に戻る"></a>
                     </div>
                 </form>
             </div>

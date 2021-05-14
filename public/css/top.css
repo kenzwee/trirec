@@ -1,18 +1,35 @@
 @charset "UTF-8";
 
+.py-4 {
+  padding-bottom: 0;
+}
+
 .body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
 
-.carousel {
+.navbar-laravel {
+  background-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-brand {
+  color: #fff !important;
+}
+
+.nav-link {
+  color: #fff !important;
+}
+
+.top_page .carousel {
   position: relative;
 }
 
-.carousel-item {
+.top_page .carousel .carousel-item {
   background-size: cover;
 }
 
-.top_logo {
+.top_page .carousel .carousel-item .top_logo {
   position: absolute;
   width: 70%;
   top: 30%;
@@ -22,7 +39,7 @@
   padding: 0;
 }
 
-.top_button {
+.top_page .carousel .carousel-item .top_button {
   position: absolute;
   width: 100%;
   top: 70%;
@@ -31,11 +48,12 @@
   z-index: 3;
 }
 
-.top_btns {
-  padding: 1em 3em;
-  background-color: #4A82F6;
-  color: #FFFFFF;
-  font-size: 15px;
+.top_page .carousel .carousel-item .top_button .top_btns {
+  padding: 15px 35px;
+  background-color: #1F9AF5;
+  color: #ffffff;
+  border: solid 3px #ffffff;
+  font-size: 20px;
   font-weight: bold;
 }
 

@@ -1,5 +1,5 @@
 @extends('layouts.auth')
-@section('title', '持ち物リスト')
+@section('title', '持ち物リスト/Trirec')
 
 @section('content')
     <div class="container">
@@ -45,73 +45,48 @@
                         </div>
                     </div>
                 </div>
-                {{--tripとitemの区切り線--}}
-                <hr class="item_line">
-                <div class="detail_items_title row mt-2 mb-3">
-                    <div class="col-md-3 text-center">
-                        重要度
+                {{--ここからtable--}}
+                <table class="table table-hover mt-3 mb-3 text-center">
+                    <thead class="thead">
+                        <tr>
+                        <th>重要度</th>
+                        <th>持ち物</th>
+                        <th>メモ</th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- TripController@showで定義した$tripの中の???からItemControllerで定義した$itemを１つ１つ取り出してる--}}
+            　　          {{--$postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
+                        {{-- @foreach($trip->items as $item) --}}
+                        @foreach($items as $item)
+                            <tr>
+                                {{-- 重要度 --}}
+                                @if($item->importance == "1" || $item->importance == "2")
+                                    <td>S rank</td>
+                                @elseif($item->importance == "3")
+                                    <td>A rank</td>  
+                                @elseif($item->importance == "4")
+                                    <td>B rank</td>                                
+                                @elseif($item->importance == "5")
+                                    <td>C rank</td>    
+                                @elseif($item->importance == "6")
+                                    <td>D rank</td> 
+                                @endif
+                                <td>{{ $item->goods }}</td>
+                                <td>{{ $item->pivot->memo }}</td>
+                                <td><a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="delete_btn btn btn-sm">削除</button></a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                
+                @if(count($items)==0)
+                    <div class="no_item d-flex justify-content-center">
+                        持ち物の登録はありません
                     </div>
-                    <div class="col-md-3 text-center">
-                        持ち物
-                    </div>
-                    <div class="col-md-3 text-center">
-                        メモ
-                    </div>
-                </div>    
-                {{-- TripController@showで定義した$tripの中の???からItemControllerで定義した$itemを１つ１つ取り出してる--}}
-            　　{{--$postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
-                <div class="add_items row">
-                @php $count = 0 @endphp
-                {{-- @foreach($trip->items as $item) --}}
-                    @foreach($items as $item)
-                        {{-- 重要度 --}}
-                        <div class="col-md-3 form-check d-flex justify-content-center align-items-center">
-                            <label class="form-check-label" for="defaultCheck1">
-                                    @if($item->importance == "1" || $item->importance == "2")
-                                    <div>S rank</div>
-                                    @elseif($item->importance == "3")
-                                    <div>A rank</div>  
-                                    @elseif($item->importance == "4")
-                                    <div>B rank</div>                                
-                                    @elseif($item->importance == "5")
-                                    <div>C rank</div>    
-                                    @elseif($item->importance == "6")
-                                    <div>D rank</div> 
-                                    @endif
-                            </label>
-                        </div>
-                        {{-- 持ち物 --}}
-                        <div class="col-md-3 form-check d-flex justify-content-center align-items-center">
-                            <label class="form-check-label" for="defaultCheck1">
-                                {{ $item->goods }}
-                            </label>
-                        </div>
-                        {{-- メモ --}}
-                        <div class="col-md-3 form-check d-flex justify-content-center align-items-center">
-                            <label class="form-check-label" for="defaultCheck1">
-                                {{ $item->pivot->memo }}
-                            </label>
-                        </div>
-                        <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <a href="{{ action('Auth\ItemController@delete',['id'=>$item->id]) }}" ><button type="button" class="delete_btn btn btn-sm">削除</button></a>
-                        </div>
+                @endif
 
-                    
-                @php $count += 1 @endphp
-                    @if($count > 0)
-                {{-- この</div>は1つの持ち物ごとに１本線を引くためのもの--}}
-                </div>
-                    <hr class="index_line">
-                    <div class = "row">
-                @php $count = 0 @endphp
-                    @endif 
-                    @endforeach
-                </div>
-                {{--<div class="row d-flex justify-content-center mt-5 mb-4">
-                  <button type="button" class="btn btn-primary btn-lg">保存する</button>
-                </div>--}}
-        
-        
                 <div class="row text-left mt-5">
                     <h2 class="middle_title">Add Item</h2>
                 </div>
@@ -148,7 +123,7 @@
                             <input type="submit" class="btn" value="追加">
                         </div>
                     </div>
-                    {{ csrf_field() }}
+                    @csrf
                 </form>
                 <div class="row d-flex justify-content-center mt-5">
                     <a href="{{ action('Auth\TripController@index') }}"><button class="return_all_post btn" type="button">旅行リスト一覧に戻る</button></a>

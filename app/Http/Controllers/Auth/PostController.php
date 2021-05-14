@@ -24,14 +24,14 @@ class PostController extends Controller
             $posts = Post::where('title', 'like', "%$cond_title%")->orderBy('created_at', 'desc')->paginate(20);
         //Authは（）をつける　idメソッド
         }elseif($type == 'mypost'){
-            $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(12);
+            $posts = Auth::user()->posts()->orderBy('created_at', 'desc')->paginate(20);
         //各ユーザーのユーザーページで、そのユーザーの投稿一覧ボタンを押した時
         }elseif($type == 'userpage_post'){
             $posts = Post::where('user_id', ($request->id))->orderBy('created_at', 'desc')->paginate(20);
 
         }else {
             //検索しなかったそれ以外は全ての投稿を取得する
-            $posts = Post::orderBy('created_at', 'desc')->paginate(12);
+            $posts = Post::orderBy('created_at', 'desc')->paginate(20);
         }
         
         return view('auth.post.index', ['posts' => $posts, 'cond_title' => $cond_title]);
@@ -149,29 +149,34 @@ class PostController extends Controller
     
     public function result(Request $request)
     {
-        // dd($request);
         // dd(Auth::user()->posts()->where('direction', $request->direction)->get());
         $cond_title = $request->cond_title;
         $type = $request->type;
+        $direction = $request->direction;
         
         if($type == 'search'){
             //検索されたら検索結果を取得する 完全一致
-            $posts = Post::where('direction', $request->direction)->where('title', 'like', "%$cond_title%")->orderBy('updated_at', 'desc')->paginate(20);
+            $posts = Post::where('direction', $request->direction)->where('title', 'like', "%$cond_title%")->orderBy('created_at', 'desc')->paginate(20);
         //Authは（）をつける　idメソッド
         }elseif($type == 'mypost'){
-            $posts = Auth::user()->posts()->where('direction', $request->direction)->orderBy('updated_at', 'desc')->paginate(12);
+            $posts = Auth::user()->posts()->where('direction', $request->direction)->orderBy('created_at', 'desc')->paginate(20);
             // $posts = Post::where('user_id', Auth::id())->paginate(4);
-            
-        }else {
+
+        }else{
+            // if($request->direction == "north_america"){
+            //     $image_path = 'images/north_america.png'
+            // }
             //検索しなかったそれ以外は全ての投稿を取得する
-            $posts = Post::where('direction', $request->direction)->orderBy('updated_at', 'desc')->paginate(12);
+            $posts = Post::where('direction', $request->direction)->orderBy('created_at', 'desc')->paginate(20);
+            // if($posts == null){
+                // $posts = $request->direction;
+            // }
         }
-        
+
 
         //第一引数は検索したいカラム名、第二引数（第三）は第一引数のカラム名に対する値
         //$postsはコレクションインスタンス
         // $posts = Post::where('direction', $request->direction)->get();
-        
         return view('auth/post/search_result', ['posts' => $posts, 'cond_title' => $cond_title]);
     }
     
@@ -186,7 +191,7 @@ class PostController extends Controller
         $post->save();
         
         // post1件1件にコメントされたコメントを全て取得
-        $comments = Comment::where('post_id', $request->id)->orderBy('created_at', 'desc')->paginate(15);
+        $comments = Comment::where('post_id', $request->id)->orderBy('created_at', 'desc')->paginate(20);
         
 
         // $post->fill($post_form)->save();

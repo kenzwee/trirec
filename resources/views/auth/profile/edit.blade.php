@@ -2,7 +2,7 @@
 @extends('layouts.profile')
 
 {{-- profile.blade.phpの@yield('title')に'プロフィール新規作成'を埋め込む --}}
-@section('title', 'プロフィール編集')
+@section('title', 'プロフィール編集/Trirec')
 
 {{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
@@ -69,16 +69,14 @@
                         
                     
                     <input type="hidden" name="id" value="{{ $profile_form->id }}">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="form-group row mb-0">
                         <div class="col-md-12 mt-4 d-flex justify-content-center">
-                            <button class="button-fill" type="submmit">
-                                UPDATE
+                            <button class="btn" type="submmit">
+                                更新
                             </button>
                         </div>
                     </div>    
-                        
-                        
                 </form>
             </div>
         </div>
