@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Validator::extend('heic', 'App\Rules\HeicRule@passes');
+        if (\App::environment('production')) {
+        \URL::forceScheme('https');
+    }
     }
 }
 
