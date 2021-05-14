@@ -34,11 +34,15 @@ Route::group(['prefix' => 'auth', 'middleware'=> ['auth', 'profile']], function(
 
 //ProfileController一覧
 Route::group(['prefix' => 'auth', 'middleware'=> ['auth','profile']],function(){
-    Route::get('profile/create', 'Auth\ProfileController@add');
+    // Route::get('profile/create', 'Auth\ProfileController@add');
     Route::get('profile/edit', 'Auth\ProfileController@edit');
-    Route::post('profile/create', 'Auth\ProfileController@create');
     Route::post('profile/edit', 'Auth\ProfileController@update');
     Route::get('profile/userpage', 'Auth\ProfileController@show')->name('userpage');
+});
+
+Route::group(['prefix' => 'auth', 'middleware'=> 'auth'],function(){
+    Route::post('profile/create', 'Auth\ProfileController@create');
+    Route::get('profile/create', 'Auth\ProfileController@add');
 });
 
 //CommentController一覧
