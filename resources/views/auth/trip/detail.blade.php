@@ -91,6 +91,14 @@
                     <h2 class="middle_title">Add Item</h2>
                 </div>
                 <form action="{{ action('Auth\ItemController@create') }}" method="post">
+                    @if (count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                    
                     <input type="hidden" name="trip_id" value="{{ $trip->id }}"> 
         
                     <div class="row text-center mt-3">

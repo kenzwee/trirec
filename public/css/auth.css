@@ -406,6 +406,12 @@ body {
   max-width: 100%;
 }
 
+.post_search_result .no_post {
+  color: red;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .post_search_result .card {
   border-radius: 0;
 }

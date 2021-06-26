@@ -19,7 +19,12 @@ class Profile extends Model
         ];
         
     public static $max_rules = [
-        'username' => ['max:10']
+        'username' => ['max:10'],
+        'introduction' => ['max:200'],
+        'want_to_travel_world' => ['max:200'],
+        'traveled_world' => ['max:200'],
+        'want_to_travel_japan' => ['max:200'],
+        'traveled_japan' => ['max:200']
         ];
     
     public static $messages = [

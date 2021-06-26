@@ -100,5 +100,6 @@
             <div class="to_my_post col-md-4 mx-auto">
                 <a href="{{ action('Auth\PostController@index',['type'=>'userpage_post', 'id' => $profile ->user_id]) }}"><button type="button" class="btn btn-block">{{ $profile->username }}の投稿一覧</button></a>
             </div>
+        </div>
     </section>
 @endsection

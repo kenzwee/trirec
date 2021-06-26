@@ -86,19 +86,6 @@ body {
 }
 
 
-
-// .card-picture {
-//   width: 100%;
-// }
-
-
-
-
-
-
-// .post-create-form-group {
-//     margin-bottom: 0;
-// }
 ///////////////////////////////////////
 //auth/login
 
@@ -587,6 +574,12 @@ body {
 }
 
 .post_search_result{
+  .no_post {
+    color: red;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
   .card {
       border-radius: 0;
     

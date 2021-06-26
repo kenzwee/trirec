@@ -157,7 +157,7 @@ return [
         'trip_title' => '旅行名',
         'trip_start' => '旅行開始日',
         'trip_end' => '旅行終了日',
-        'goods' => '持っていく物',
+        'goods' => '持ち物',
         'importance' => '重要度',
         'memo' => 'メモ',
         'profile_image' => 'プロフィール画像',
