@@ -46,7 +46,6 @@
                                 <p class="username"><a href="{{ action('Auth\ProfileController@show', ["id" =>$post->user_id]) }}">{{ str_limit($post ->user->profile->username, 20) }}</a></p>
                                 <p class="direction"><a href="{{ action('Auth\PostController@result', ["direction" => $post->direction]) }}">{{ str_limit(config('direction.names.' . $post->direction),20) }}</a></p>
                                 <p class="create_at text-center">{{ date("Y年m月d日 H:i", strtotime($post->created_at)) }}</p>
-                                {{--<div class="card-text"><a href="{{ action('Auth\PostController@result', ["direction" => $post->direction]) }}">{{ str_limit(config('direction.names.' . $post->direction),20) }}</a></div>--}}
                             </div>
                             
                             {{-- ログインしているユーザーと投稿者のIDが一致したら編集ボタン、削除ボタンを表示 --}}

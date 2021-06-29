@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+
 @section('title', '新規登録/Trirec')
 
 @section('content')

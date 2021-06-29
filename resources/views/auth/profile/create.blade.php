@@ -1,11 +1,7 @@
-{{-- layouts/profile.blade.phpを読み込む --}}
 @extends('layouts.profile')
 
-
-{{-- profile.blade.phpの@yield('title')に'プロフィール新規作成'を埋め込む --}}
 @section('title', 'プロフィール新規作成/Trirec')
 
-{{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
     <div class="container">
         <div class="row">
@@ -21,12 +17,10 @@
                             @endforeach
                         </ul>
                     @endif
-                    
                     <div class="form-group row">
                         <label class="mt-2 col-form-label text-md-left">ユーザー名<span class="required">必須</span><span class="caution">最大10文字</span></label>
                         <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                     </div>  
-                    
                     <div class="form-group row">
                         <label class="col-form-label text-md-left">自己紹介</label>
                         <textarea class="form-control" name="introduction" rows="3">{{ old('introduction') }}</textarea>
@@ -52,7 +46,6 @@
                         <input type="file" class="form-control-file mt-1" name="profile_image">
                     </div>
                     @csrf
-                    
                     <div class="form-group row mb-0">
                         <div class="col-md-12 mt-4 d-flex justify-content-center">
                             <button class="btn" type="submmit">

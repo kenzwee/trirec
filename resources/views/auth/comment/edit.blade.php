@@ -16,14 +16,12 @@
                             @endforeach
                         </ul>
                     @endif
-                    
                     <div class="form-group row">
                         <label class="mt-2 col-form-label text-md-left">ユーザー名</label>
                         <div class="form-control" name="username">
                             <p>{{ Auth::user()->profile->username}}</p>
                         </div>  
                     </div>
-                    
                     <div class="form-group row">
                         <label class="mt-2 col-form-label text-md-left">本文</label>
                         <textarea class="form-control" name="body" rows="5">{{ $comment_form->body }}</textarea>
@@ -34,5 +32,7 @@
                         <input type="submit" class="btn" value="更新">
                     </div>
                 </form>
+            </div>
+        </div>
     </div>
 @endsection

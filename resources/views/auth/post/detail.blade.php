@@ -1,10 +1,11 @@
 @extends('layouts.auth')
+
 @section('title', '投稿詳細/Trirec')
 
 @section('content')
     <div class="detail_page container">
         <div class="row">
-            <h2>投稿内容</h2>
+            <h2>投稿詳細</h2>
         </div>
         <div class="row">
             <div class="detail_direction col-md-6">
@@ -13,11 +14,10 @@
             @if(Auth::id() === ($post->user_id))
                 <div class="index_btns col-md-5 d-flex justify-content-end">
                     <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}"><button type="button" class="edit_btn btn">編集</button></a>
-                    <!-- 削除選択時の警告文を表示するボタン -->
                     <button type="button" class="delete_btn btn" data-toggle="modal" data-target="#post_delete_modal">削除</button>
                 </div>
             @endif
-            <!-- 削除選択時の警告文 -->
+
             <div class="modal fade" id="post_delete_modal" tabindex="-1" role="dialog" aria-labelledby="post_delete_modal_Label" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -77,12 +77,8 @@
                     <h3>Comments</h3>
                 </div>
             </div>
-            
-            {{-- PostController@showで定義した$postの中のcommentsからCommentControllerで定義した$commentを１つ１つ取り出してる--}}
-            {{-- $postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
             @php $count = 0 @endphp
             <div class="comments row">
-            {{-- @foreach($post->comments as $comment) --}}
                 @foreach($comments as $comment)
                     <div class="username col-md-2 d-flex align-items-center">
                         <a href="{{ action('Auth\ProfileController@show', ['id' =>$comment->user->id]) }}">{{ $comment->user->profile->username }}</a>
@@ -108,7 +104,6 @@
             @endforeach 
                         </div>
                 
-            {{--ページネーション  2ページ目にどのpost_idかを知らせる為にappendsを使用--}}
             <div class="row d-flex justify-content-center">
                 {{ $comments->appends(request()->query())->links() }}
             </div>

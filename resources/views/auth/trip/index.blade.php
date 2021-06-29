@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+
 @section('title', '旅行リスト一覧/Trirec')
 
 @section('content')

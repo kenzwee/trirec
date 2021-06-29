@@ -42,10 +42,4 @@ class Profile extends Model
         ];
     }
     
-
-        
-            
-    
-
-        
 }

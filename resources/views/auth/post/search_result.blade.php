@@ -68,26 +68,18 @@
                 <div class="card w-100 h-100">
                     {{-- 目のアイコンを画像に重ねる--}}
                     <div class="card_image">
-                      {{-- directionがnorth_americaの場合 --}}
                         @if ($post->direction === 'north_america')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
-                      {{-- directionがsouth_americaの場合 --}}
                         @elseif ($post->direction === 'south_america')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
-                      {{-- directionがasiaの場合 --}}
                         @elseif ($post->direction === 'asia')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
-                      {{-- directionがeuropeの場合 --}}
                         @elseif ($post->direction === 'europe')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
-                      {{-- directionがafricaの場合 --}}
                         @elseif ($post->direction === 'africa')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
-                      {{-- directionがmiddle_eastの場合 --}}
                         @elseif ($post->direction === 'middle_east')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
-
-                      {{-- directionがoceaniaの場合 --}}
                         @elseif ($post->direction === 'oceania')
                             <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
                         @endif
@@ -109,7 +101,6 @@
                                 <a href="{{ action('Auth\PostController@edit', ['id' => $post->id]) }}"><button type="button" class="edit_btn btn btn-sm">編集</button></a>
                                 <!-- 削除選択時の警告文を表示するボタン -->
                                 <button type="button" class="delete_btn btn btn-sm" data-toggle="modal" data-target="#auth_post_search_result_Modal-{{$post->id}}" value="['id'=>{{ $post->id }}]">削除</button> 
-                                {{-- <a href="{{ action('Auth\PostController@delete',['id' => $post->id]) }}" type="button" class="btn btn-primary btn-sm">削除</a> --}}
                             </div>
                         @endif
                     </div>
@@ -152,5 +143,4 @@
             <a href="{{ action('Auth\PostController@index') }}"><button class="btn btn-primary btn-lg btn-block" type="button">投稿一覧に戻る</button></a>
         </div>
     </div>
-
 @endsection

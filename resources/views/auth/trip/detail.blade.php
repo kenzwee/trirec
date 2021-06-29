@@ -45,7 +45,6 @@
                         </div>
                     </div>
                 </div>
-                {{--ここからtable--}}
                 <table class="table table-hover mt-3 mb-3 text-center">
                     <thead class="thead">
                         <tr>
@@ -56,9 +55,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- TripController@showで定義した$tripの中の???からItemControllerで定義した$itemを１つ１つ取り出してる--}}
-            　　          {{--$postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
-                        {{-- @foreach($trip->items as $item) --}}
                         @foreach($items as $item)
                             <tr>
                                 {{-- 重要度 --}}
@@ -80,13 +76,11 @@
                         @endforeach
                     </tbody>
                 </table>
-                
                 @if(count($items)==0)
                     <div class="no_item d-flex justify-content-center">
                         持ち物の登録はありません
                     </div>
                 @endif
-
                 <div class="row text-left mt-5">
                     <h2 class="middle_title">Add Item</h2>
                 </div>
@@ -98,9 +92,7 @@
                             @endforeach
                         </ul>
                     @endif
-                    
                     <input type="hidden" name="trip_id" value="{{ $trip->id }}"> 
-        
                     <div class="row text-center mt-3">
                         <label class ="col-md-3">重要度</label>
                             <div class="col-md-3">

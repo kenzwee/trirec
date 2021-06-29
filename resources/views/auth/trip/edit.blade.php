@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+
 @section('title', '持ち物リスト編集/Trirec')
 
 @section('content')
@@ -25,12 +26,9 @@
                                 <input type="date" id="trip_end" name="trip_end" value="{{ $trip->trip_end }}" min="2021-05-01" max="2025-12-31">
                         </div>
                         <div class="col-md-2 mt-4">
-                        {{-- 持ち物保存ボタン --}}
                             <button type="submit" class="btn">保存する</button>
                         </div>
-                        
                         <div class="col-md-2 mt-4">
-                        {{-- 持ち物を全て削除するボタン --}}
                             <button type="button" class="delete_btn btn" data-toggle="modal" data-target="#all_item_Modal" >持ち物全削除</button>
                         </div>
                         <!-- 削除選択時の警告文 -->
@@ -67,9 +65,6 @@
                             メモ
                         </div>
                     </div>
-                    {{-- TripController@showで定義した$tripの中の???からItemControllerで定義した$itemを１つ１つ取り出してる--}}
-                    {{--$postデータベースから。comments:hasManyのリレーションを定義したやつ　$commentはforeach(comment as $comment) --}}
-                    {{-- @foreach($trip->items as $item) --}}
                     <div class="add_items row">
                         @php $count = 0 @endphp
                             @foreach($items as $item)

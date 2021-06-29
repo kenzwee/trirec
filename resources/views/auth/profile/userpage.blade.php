@@ -1,4 +1,5 @@
 @extends('layouts.profile')
+
 @section('title', 'ユーザーページ/Trirec')
 
 @section('content')
@@ -32,7 +33,6 @@
                 <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->introduction }}</textarea>
             </div>
         </div>
-        
         <div class="introduce row">
             <div class="col-md-6 mb-2 details">
                     <div class="tags mb-2">
@@ -51,9 +51,6 @@
                 <textarea readonly class="detail_text form-control" name="body" rows="5">{{ $profile->traveled_world  }}</textarea>
             </div>
         </div>
-        
-        
-        
         <div class="introduce row">
             <div class="col-md-6 mb-2 details">
                     <div class="tags mb-2">
@@ -82,7 +79,6 @@
             <header class="text-center w-md-50 mx-auto mb-5">
                 <h2 class="middle_title">My Post</h2>
             </header>
-            <!-- Work Content -->
             <div class="u-portfolio row no-gutters mb-5">
                 @foreach($posts as $post)
                     <figure class="col-sm-6 col-md-4 u-portfolio__item">
@@ -96,7 +92,6 @@
                     </figure>
                 @endforeach
             </div>
-            <!-- End Work Content -->
             <div class="to_my_post col-md-4 mx-auto">
                 <a href="{{ action('Auth\PostController@index',['type'=>'userpage_post', 'id' => $profile ->user_id]) }}"><button type="button" class="btn btn-block">{{ $profile->username }}の投稿一覧</button></a>
             </div>

@@ -1,4 +1,5 @@
 @extends('layouts.top')
+
 @section('title', 'Trirec')
 
 @section('content')
@@ -18,7 +19,6 @@
                                 <div class="offset-md-3 col-md-2 col-sm-6 d-flex justify-content-center">
                                     <a href="{{ route('login') }}"><button type="button" class="top_btns btn ">ログイン</button></a>
                                 </div>
-
                                 @if (Route::has('register'))
                                     <div class="offset-md-2 col-md-2 col-sm-6 d-flex justify-content-center">
                                         <a href="{{ route('register') }}"><button type="button" class="top_btns btn ">新規登録</button></a>
@@ -52,7 +52,6 @@
                         </div>
                     <img class="d-block w-100" src="{{secure_asset('images/top/top2.jpg')}}" alt="Second slide">
                 </div>
-                
                 <div class="carousel-item">
                     <img class="top_logo" src="{{secure_asset('images/top/top_logo2.png')}}" alt="top_logo">
                         <div class="row top_button">
@@ -65,7 +64,6 @@
                                     <div class="offset-md-3 col-md-2 col-sm-6 d-flex justify-content-center">
                                         <a href="{{ route('login') }}"><button type="button" class="top_btns btn ">ログイン</button></a>
                                     </div>
-    
                                     @if (Route::has('register'))
                                         <div class="offset-md-2 col-md-2 col-sm-6 d-flex justify-content-center">
                                             <a href="{{ route('register') }}"><button type="button" class="top_btns btn ">新規登録</button></a>
@@ -73,11 +71,9 @@
                                     @endif
                                 @endauth
                             @endif
-
                         </div>
                     <img class="d-block w-100" src="{{secure_asset('images/top/top3.jpg')}}" alt="Third slide">
                 </div>
-                
                 <div class="carousel-item">
                     <img class="top_logo" src="{{secure_asset('images/top/top_logo2.png')}}" alt="top_logo">
                         <div class="row top_button">
@@ -98,7 +94,6 @@
                                     @endif
                                 @endauth
                             @endif
-
                         </div>
                     <img class="d-block w-100" src="{{secure_asset('images/top/top5.jpg')}}" alt="Fourth slide">
                 </div>
@@ -114,7 +109,6 @@
                                     <div class="offset-md-3 col-md-2 col-sm-6 d-flex justify-content-center">
                                         <a href="{{ route('login') }}"><button type="button" class="top_btns btn ">ログイン</button></a>
                                     </div>
-    
                                     @if (Route::has('register'))
                                         <div class="offset-md-2 col-md-2 col-sm-6 d-flex justify-content-center">
                                             <a href="{{ route('register') }}"><button type="button" class="top_btns btn ">新規登録</button></a>
@@ -122,7 +116,6 @@
                                     @endif
                                 @endauth
                             @endif
-
                         </div>
                     <img class="d-block w-100" src="{{secure_asset('images/top/top4.jpg')}}" alt="fifth slide">
                 </div>

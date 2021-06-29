@@ -1,10 +1,7 @@
-{{-- layouts/auth.blade.phpを読み込む --}}
 @extends('layouts.auth')
 
-{{-- auth.blade.phpの@yield('title')に'投稿新規作成'を埋め込む --}}
 @section('title', '投稿新規作成/Trirec')
 
-{{-- auth.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
     <div class="container">
         <div class="post_create row">
@@ -42,18 +39,15 @@
                         <label class ="col-md mt-2 col-form-label text-md-left">画像<span class="caution">jpeg・jpg・png形式</span></label>
                         <input type="file" class="form-control-file" name="image">
                     </div>
-                    
                     <div class="post-create-form-group row">
                         <label class="col-md mt-2 ol-form-label text-md-left">タイトル</label>
                         <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                     </div>
-                    
                     <div class="post-create-form-group row">
                         <label class="col-md mt-2 ol-form-label text-md-left">本文</label>
                         <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
                     </div>
                         @csrf
-
                     <div class="row">
                         <div class="col-6 mx-auto mt-4">
                             <input type="submit" class="btn btn-block" value="投稿">

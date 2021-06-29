@@ -37,7 +37,6 @@
         <div class="row">
             <div class="text-center col-md-12">
                 <a href="{{ action('Auth\PostController@result', ['direction' => 'middle_east']) }}"><img src="{{secure_asset('images/middle_east.png') }}"  class="direction_img img-fluid" alt="middle_east_image"></a>
-
             </div>
         </div>
         <div class="row">
