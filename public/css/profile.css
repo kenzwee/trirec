@@ -1,3 +1,9 @@
+.page_title {
+  font-family: impact;
+  color: black;
+  font-size: 50px;
+}
+
 .btn {
   background-color: #1F9AF5;
   color: #ffffff;
