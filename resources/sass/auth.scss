@@ -21,6 +21,11 @@ $modal_stop_delete_color: #1F9AF5;
 
 $username_color: #000080;
 
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem;
+}
+
 //全般的に使用
 .btn {
   background-color: $btn_color;

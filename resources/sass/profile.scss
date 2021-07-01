@@ -8,6 +8,11 @@ $btn_color: #1F9AF5;
 $middle_title_color: #000000;
 $middle_title_font: impact;
 
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem;
+}
+
 //全般的に使用
 .page_title {
   font-family: $page_title_font;

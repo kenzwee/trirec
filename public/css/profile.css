@@ -1,3 +1,8 @@
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem;
+}
+
 .page_title {
   font-family: impact;
   color: black;

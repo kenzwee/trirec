@@ -1,3 +1,8 @@
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem;
+}
+
 .btn {
   background-color: #1F9AF5;
   color: #ffffff;
