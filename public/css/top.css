@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.py-4 {
-  padding-bottom: 0;
-}
-
 .body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
@@ -19,6 +15,11 @@
 
 .nav-link {
   color: #fff !important;
+}
+
+.pb-4,
+.py-4 {
+  padding-bottom: 0 !important;
 }
 
 .top_page .carousel {

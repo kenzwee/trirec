@@ -1,9 +1,6 @@
 $btn_word_color: #ffffff;
 $btn_color: #1F9AF5;
 
-.py-4 {
-    padding-bottom : 0;
-}
 
 
 .body {
@@ -26,6 +23,11 @@ $btn_color: #1F9AF5;
 
 .nav-link {
   color: #fff !important;
+}
+
+.pb-4,
+.py-4 {
+  padding-bottom: 0 !important;
 }
 
 //////////////////////////////////////
