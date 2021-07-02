@@ -33,7 +33,8 @@
                     <div class="card w-100 h-100">
                         <div class="card_image">
                         {{-- 目のアイコンを画像に重ねる--}}
-                            <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>
+                            {{--<a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ asset('storage/image/' . $post->image_path) }}" alt="Card image cap"></a>--}}
+                            <a href="{{ action('Auth\PostController@show', ['id' => $post->id]) }}"><img class="card-img-top" src="{{ $post->image_path }}" alt="Card image cap"></a>
                             <div class="eye">
                                 <p class="count-text"><img src="{{secure_asset('images/eye_icon.png') }}" class="eye_icon" alt="eye_icon_image"> {{ $post->count }}</p>
                             </div>

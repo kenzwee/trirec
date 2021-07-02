@@ -8,6 +8,7 @@ use App\Profile;
 use App\Post;
 use App\User;
 use App\Rules\AddImageRule;
+use Storage;
 
 
 class ProfileController extends Controller
@@ -41,11 +42,19 @@ class ProfileController extends Controller
         $form = $request->all();
         
         if(isset($form['profile_image'])) {
-            $path = $request->file('profile_image')->store('public/profile_image');
-            $profile->image_path = basename($path);
+            $path = Storage::disk('s3')->putFile('/', $form['profile_image'], 'public');
+            $profile->image_path = Storage::disk('s3')->url($path);
         }else{
             $profile->image_path = null;
         }
+        
+        
+        // if(isset($form['profile_image'])) {
+        //     $path = $request->file('profile_image')->store('public/profile_image');
+        //     $profile->image_path = basename($path);
+        // }else{
+        //     $profile->image_path = null;
+        // }
         
         $profile->user_id = Auth::id();
         
@@ -85,9 +94,12 @@ class ProfileController extends Controller
             $profile_form['image_path'] = null;
 
         }elseif($request->file('profile_image')){
-            $path = $request->file('profile_image')->store('public/profile_image');
-            $profile_form['image_path'] = basename($path);
+            // $path = $request->file('profile_image')->store('public/profile_image');
+            // $profile_form['image_path'] = basename($path);
+            $path = Storage::disk('s3')->putFile('/',$profile_form['profile_image'],'public');
+            $profile_form->image_path = Storage::disk('s3')->url($path);
         }
+        
 
         unset($profile_form['profile_image']);
         unset($profile_form['remove']);

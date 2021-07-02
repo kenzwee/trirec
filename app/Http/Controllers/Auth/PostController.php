@@ -10,6 +10,7 @@ use App\Comment;
 use App\History;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Storage;
 
 
 class PostController extends Controller
@@ -53,8 +54,10 @@ class PostController extends Controller
         $form = $request->all();
         
         if(isset($form['image'])){
-        $path = $request->file('image')->store('public/image');
-        $post->image_path = basename($path);
+        // $path = $request->file('image')->store('public/image');
+        // $post->image_path = basename($path);
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $post->image_path = Storage::disk('s3')->url($path);
         } else {
             $photo->image_path = null;
         }     
@@ -93,13 +96,16 @@ class PostController extends Controller
             $post_form['image_path'] = null;
         //画像が更新されたら
         }elseif($request->file('image')){
-            $path = $request->file('image')->store('public/image');
-            $post_form['image_path'] = basename($path);
+            // $path = $request->file('image')->store('public/image');
+            // $post_form['image_path'] = basename($path);
+            $path = Storage::disk('s3')->putFile('/',$post_form['image'],'public');
+            $post_form['image_path'] = Storage::disk('s3')->url($path);
         }else{
         //画像は変わってない時
             $post_form['image_path'] = $post->image_path;
         }
         
+
         unset($post_form['image']);
         //削除というチェックボックスからチェックを外す（初期化してる）
         unset($post_form['remove']);

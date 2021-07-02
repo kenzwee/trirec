@@ -46,7 +46,8 @@
                         <input type="file" class="form-control-file" name="profile_image">
                             {{-- ビューに現在設定中のプロフィール画像を表示 --}}
                             @if(isset($profile_form->image_path))
-                            <img src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}" class="profile_round_image mt-5 mx-auto" alt="profile_image">
+                            {{--<img src="{{secure_asset('storage/profile_image/'.$profile_form->image_path)}}" class="profile_round_image mt-5 mx-auto" alt="profile_image">--}}
+                            <img src="{{ $profile_form->image_path }}" class="profile_round_image mt-5 mx-auto" alt="profile_image">
                             @else
                             <img src="{{secure_asset('images/no_image.png') }}" class="profile_round_image mt-5 mx-auto" alt="no_image">
                             @endif                         

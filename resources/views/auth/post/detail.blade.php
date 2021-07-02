@@ -44,7 +44,8 @@
         </div>    
         <div class="detail_body row d-flex justify-content-center">
             {{-- ビューに現在設定中の画像を表示 --}}
-            <img class = "col-md-10" src="{{secure_asset('storage/image/'.$post->image_path)}}">
+            {{--<img class = "col-md-10" src="{{secure_asset('storage/image/'.$post->image_path)}}">--}}
+            <img class = "col-md-10" src="{{ $post->image_path }}">
             {{-- 閲覧数 --}}
             <div class="detail_count col-md-5 d-flex align-items-center justify-content-center mt-2">
                 <img src="{{secure_asset('images/eye_icon_black.png') }}" class="eye_icon" alt="eye_icon_image">{{ $post->count }}views

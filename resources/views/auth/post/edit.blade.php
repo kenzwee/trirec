@@ -24,7 +24,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="d-flex justify-content-center">
-                            <img class = "col-md-10" src="{{secure_asset('storage/image/'.$post_form->image_path)}}">
+                            {{--<img class = "col-md-10" src="{{secure_asset('storage/image/'.$post_form->image_path)}}">--}}
+                            <img class = "col-md-10" src="{{ $post_form->image_path }}">
                         </div>
                         <div class="text-info text-center row col-md-10 mt-3">
                             設定中: {{ $post_form->image_path }}
