@@ -57,11 +57,11 @@
     </div>
     <div class="post_search_result container">
         <div class="row">
-            <div class="no_post col-md-8">
-                @if(count($posts) == 0)
+            @if(count($posts) == 0)
+                <div class="no_post col-md-8">
                     投稿はありません
-                @endif
-            </div>
+                </div>
+            @endif
         @php $count = 1 @endphp
         @foreach($posts as $post)
             <div class="col-md-3">
